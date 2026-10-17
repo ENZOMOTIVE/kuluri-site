@@ -122,7 +122,7 @@ export async function buildWorkHistoryPdf({ worker, jobs, includeHours }) {
   const H = doc.internal.pageSize.getHeight()
   doc.setDrawColor(...LINE).line(M, H - 16, W - M, H - 16)
   doc.setFontSize(8).setTextColor(...MUTED)
-  doc.text('Kuluri prototype - EU Agri-Hackathon 2026 - simulated data, not a legal document', M, H - 10)
+  doc.text('Kuluri - Work history export - not a legally binding document', M, H - 10)
   doc.text(clean(worker.id), W - M, H - 10, { align: 'right' })
   return doc
 }

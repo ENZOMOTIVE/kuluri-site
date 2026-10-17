@@ -1,51 +1,158 @@
 <script setup>
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth.js'
 import KuluriLogo from '../components/KuluriLogo.vue'
+
+const router = useRouter()
+const auth = useAuthStore()
+
+function choose(role) {
+  auth.setRole(role)
+  if (auth.authenticated) {
+    router.push(role === 'farmer' ? '/farm' : '/worker')
+  } else {
+    router.push('/login')
+  }
+}
 </script>
 
 <template>
-  <q-layout view="lHh lpR lFf">
-    <q-page-container>
-      <q-page class="flex flex-center q-pa-lg">
-        <div style="max-width: 760px; width: 100%">
-          <div class="text-center q-mb-xl">
-            <KuluriLogo :size="52" />
-            <div class="text-h6 text-weight-bold q-mt-md">Fair seasonal work for the people who do it.</div>
-            <div class="text-muted">Kuluri helps seasonal farm workers find fair jobs, know their rights and keep their own proof of work and skills.</div>
-            <div class="text-caption text-muted q-mt-sm"><q-icon name="o_shield" class="q-mr-xs" />Two apps on the same confirmed records – each side sees only what it needs and decides what it shares.</div>
-          </div>
+  <div class="rs-screen">
 
-          <div class="row q-col-gutter-lg">
-            <div class="col-12 col-sm-6">
-              <q-card flat bordered class="rounded cursor-pointer full-height role-card" @click="$router.push('/worker')">
-                <q-card-section>
-                  <q-avatar size="52px" rounded class="bg-sage-soft text-accent" icon="o_badge" font-size="28px" />
-                  <q-badge outline color="accent" class="q-ml-sm" style="vertical-align: top"><q-icon name="o_smartphone" class="q-mr-xs" />Worker app · phone</q-badge>
-                  <div class="text-h6 text-weight-bold q-mt-md">I work on farms</div>
-                  <div class="text-muted q-mt-xs">Find fair jobs, prepare and know your rights in your language, and build a work and skills record that is yours.</div>
-                </q-card-section>
-                <q-card-actions class="q-px-md q-pb-md"><q-btn unelevated color="accent" label="Continue as worker" icon-right="arrow_forward" no-caps /></q-card-actions>
-              </q-card>
-            </div>
-            <div class="col-12 col-sm-6">
-              <q-card flat bordered class="rounded cursor-pointer full-height role-card" @click="$router.push('/farm')">
-                <q-card-section>
-                  <q-avatar size="52px" rounded class="bg-sage-soft text-primary" icon="o_agriculture" font-size="28px" />
-                  <q-badge outline color="primary" class="q-ml-sm" style="vertical-align: top"><q-icon name="o_computer" class="q-mr-xs" />Farm dashboard · web</q-badge>
-                  <div class="text-h6 text-weight-bold q-mt-md">I employ seasonal workers</div>
-                  <div class="text-muted q-mt-xs">Find skilled workers, give clear terms and keep records your workers confirm.</div>
-                </q-card-section>
-                <q-card-actions class="q-px-md q-pb-md"><q-btn unelevated color="primary" label="Continue as employer" icon-right="arrow_forward" no-caps /></q-card-actions>
-              </q-card>
-            </div>
-          </div>
-          <div class="text-center text-caption text-muted q-mt-xl">Prototype · EU Agri-Hackathon 2026 · Team 27</div>
+    <div class="rs-logo">
+      <KuluriLogo :size="32" />
+    </div>
+
+    <div class="rs-question">
+      What brings you<br>to Kuluri?
+    </div>
+    <div class="rs-hint">We'll tailor the experience for you</div>
+
+    <div class="rs-tiles">
+
+      <div class="rs-tile" @click="choose('worker')">
+        <div class="rs-tile-icon rs-tile-icon--worker">
+          <q-icon name="o_badge" size="32px" color="primary" />
         </div>
-      </q-page>
-    </q-page-container>
-  </q-layout>
+        <div class="rs-tile-text">
+          <div class="rs-tile-title">I'm a seasonal worker</div>
+          <div class="rs-tile-desc">Find fair jobs, know your rights and keep your own proof of work</div>
+        </div>
+        <q-icon name="arrow_forward_ios" size="13px" color="grey-5" class="rs-tile-arrow" />
+      </div>
+
+      <div class="rs-tile" @click="choose('farmer')">
+        <div class="rs-tile-icon rs-tile-icon--farmer">
+          <q-icon name="o_agriculture" size="32px" color="secondary" />
+        </div>
+        <div class="rs-tile-text">
+          <div class="rs-tile-title">I employ farm workers</div>
+          <div class="rs-tile-desc">Post jobs, find skilled workers and keep clear digital records</div>
+        </div>
+        <q-icon name="arrow_forward_ios" size="13px" color="grey-5" class="rs-tile-arrow" />
+      </div>
+
+    </div>
+
+    <div class="rs-footer">Kuluri · v0.1</div>
+
+  </div>
 </template>
 
 <style scoped>
-.role-card { transition: border-color 0.15s, transform 0.15s; }
-.role-card:hover { border-color: #a9b99e; transform: translateY(-2px); }
+.rs-screen {
+  min-height: 100vh;
+  background: var(--page-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 40px;
+}
+
+/* Logo */
+.rs-logo {
+  margin-top: 72px;
+  margin-bottom: 48px;
+}
+
+/* Headline */
+.rs-question {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 10px;
+}
+.rs-hint {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Option tiles */
+.rs-tiles {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rs-tile {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid transparent;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
+}
+.rs-tile:active {
+  border-color: var(--sage);
+  box-shadow: var(--shadow-md);
+  transform: scale(0.985);
+}
+
+.rs-tile-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.rs-tile-icon--worker { background: var(--sage-soft); }
+.rs-tile-icon--farmer { background: var(--teal-soft); }
+
+.rs-tile-text { flex: 1; min-width: 0; }
+.rs-tile-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.rs-tile-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.rs-tile-arrow { flex-shrink: 0; }
+
+/* Footer */
+.rs-footer {
+  margin-top: auto;
+  padding-top: 32px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
 </style>

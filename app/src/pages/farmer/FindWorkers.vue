@@ -120,7 +120,7 @@ const profile = ref(null)
           <q-item v-if="!matches.length"><q-item-section class="text-muted text-center q-pa-md">No matching workers yet. Try more languages or a longer period.</q-item-section></q-item>
         </q-list>
       </div>
-      <div class="text-caption text-muted q-mt-sm"><q-icon name="o_info" class="q-mr-xs" />Demo – workers are simulated. You only see what each worker chose to share.</div>
+      <div class="text-caption text-muted q-mt-sm"><q-icon name="o_shield" class="q-mr-xs" />You only see what each worker chose to share with employers.</div>
     </template>
 
     <!-- Worker profile -->

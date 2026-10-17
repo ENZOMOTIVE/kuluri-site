@@ -14,7 +14,7 @@ const languages = computed(() => [...new Set(state.jobs.flatMap((j) => j.languag
 const details = computed(() => [
   ['o_badge', 'Farm ID', farm.id],
   ['o_place', 'Region', farm.region],
-  ['o_my_location', 'Farmyard & meeting point', `${farm.location.lat.toFixed(3)}, ${farm.location.lng.toFixed(3)} (approximate in the demo)`],
+  ['o_my_location', 'Farmyard & meeting point', `${farm.location.lat.toFixed(3)}, ${farm.location.lng.toFixed(3)}`],
   ['o_home', 'Worker housing', '~ 600 m from the farmyard'],
   ['o_translate', 'Languages spoken on the farm', languages.value.join(', ')],
   ['o_grass', 'Crops', farm.crops.join(', ')],

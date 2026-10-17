@@ -25,7 +25,7 @@ function report() {
 </script>
 
 <template>
-  <q-page class="column no-wrap" style="height: calc(100vh - 112px)">
+  <q-page class="column no-wrap chat-page">
     <template v-if="chat">
       <div class="row items-center no-wrap q-px-md q-py-sm bg-surface" style="border-bottom: 1px solid var(--line)">
         <q-avatar rounded size="38px" class="bg-sage-soft text-primary q-mr-sm" icon="agriculture" />
@@ -42,3 +42,12 @@ function report() {
     <div v-else class="q-pa-lg text-center text-muted">{{ t('noChats') }}</div>
   </q-page>
 </template>
+
+<style scoped>
+.chat-page {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+</style>

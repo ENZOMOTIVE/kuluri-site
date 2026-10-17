@@ -1,62 +1,128 @@
-/* Calm stone & sage palette. Colours for Quasar components are set in main.js (brand). */
+/* Design system — Wise-inspired: dark forest green + lime accent + clean white */
 :root {
-  --page-bg: #ece8df;
-  --surface: #f5f2eb;
-  --surface-2: #efebe2;
-  --line: #dcd5c8;
-  --text: #3a362f;
-  --muted: #827b6e;
-  --side-bg: #2c332b;
-  --side-active: #3b4439;
-  --side-text: #ece6d8;
-  --side-dim: #b3ad9f;
-  --sage: #5f7556;
-  --sage-soft: #e0e6da;
-  --teal-soft: #dbe6e4;
-  --amber-soft: #f1e3c4;
-  --red-soft: #efd8d0;
+  --page-bg:    #FFFFFF;       /* clean white — like Wise */
+  --surface:    #FFFFFF;       /* card / input surfaces */
+  --surface-2:  #F7F9F7;      /* very light grey-green tint */
+  --line:       #E4EAE4;       /* border / separator */
+  --text:       #1A1A1A;       /* near-black */
+  --muted:      #717171;       /* secondary text */
+  --sage:       #163300;       /* Wise dark forest green — primary */
+  --lime:       #9FE870;       /* Wise lime accent */
+  --lime-soft:  #EBF9E0;      /* light lime tint for icon backgrounds */
+  --teal-soft:  #D4ECE8;
+  --amber-soft: #F5E6C0;
+  --red-soft:   #FADADD;
+  --side-bg:    #163300;       /* Wise dark green header */
+  --side-active:#1F4800;
+  --side-text:  #FFFFFF;
+  --side-dim:   #9ABD7A;
+  /* shadow tokens */
+  --shadow-sm:  0 1px 4px rgba(22,51,0,.06), 0 3px 10px rgba(22,51,0,.04);
+  --shadow-md:  0 4px 20px rgba(22,51,0,.08), 0 1px 4px rgba(22,51,0,.04);
 }
 
-body { background: var(--page-bg); color: var(--text); font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+/* ── Base ──────────────────────────────────────────────────────────────── */
+body {
+  background: var(--page-bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Quasar component overrides ────────────────────────────────────────── */
 .q-card, .q-menu, .q-dialog .q-card { background: var(--surface); color: var(--text); }
-.q-card--bordered, .q-separator { border-color: var(--line); }
+.q-card--bordered { border-color: var(--line); }
 .q-separator { background: var(--line); }
-.q-field--outlined .q-field__control { background: var(--surface); }
-.q-field--outlined .q-field__control:before { border-color: var(--line); }
+.q-field--outlined .q-field__control { background: var(--surface); border-radius: 12px; }
+.q-field--outlined .q-field__control:before { border-color: var(--line); border-radius: 12px; }
+.q-field--outlined .q-field__control:hover:before { border-color: var(--sage); }
 .q-table__container { background: var(--surface); color: var(--text); }
 .q-table thead tr { background: var(--surface-2); }
-.q-table th { font-weight: 700; color: var(--muted); }
-.text-muted { color: var(--muted); }
-.bg-surface { background: var(--surface); }
-.bg-surface-2 { background: var(--surface-2); }
-.bg-sage-soft { background: var(--sage-soft); }
-.rounded { border-radius: 14px; }
+.q-table th { font-weight: 700; color: var(--muted); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
 
-/* Page scaffolding */
+/* Bottom nav */
+.q-tab-panels { background: transparent !important; }
+.q-tabs--not-scrollable .q-tabs__arrow { display: none; }
+.q-tab__label { font-size: 11px; font-weight: 600; letter-spacing: .01em; }
+.q-tab.q-router-link--exact-active .q-tab__label { color: var(--sage); }
+.q-tab.q-router-link--exact-active .q-icon { color: var(--sage); }
+.q-tab-panels > .q-panel { overflow: auto; }
+
+/* ── Utility classes ───────────────────────────────────────────────────── */
+.text-muted       { color: var(--muted); }
+.bg-surface       { background: var(--surface); }
+.bg-surface-2     { background: var(--surface-2); }
+.bg-sage-soft     { background: var(--lime-soft); }
+.verified         { color: var(--sage); }
+.mono             { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .02em; }
+
+/* ── Card component ────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.card-flat {
+  background: var(--surface);
+  border-radius: 18px;
+  border: 1px solid var(--line);
+}
+.rounded { border-radius: 18px; }
+
+/* ── Page scaffolding (web / farmer dashboard) ─────────────────────────── */
 .page { max-width: 1240px; margin: 0 auto; padding: 28px 32px 56px; }
 .page-header { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
-.page-title { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin: 0; line-height: 1.2; }
-.kpi-label { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
-.kpi-value { font-size: 26px; font-weight: 800; line-height: 1.25; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.page-title { font-size: 26px; font-weight: 800; letter-spacing: -.03em; margin: 0; line-height: 1.2; }
+.kpi-label { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.kpi-value { font-size: 28px; font-weight: 800; line-height: 1.2; letter-spacing: -.02em; }
 .chip-soft { background: var(--surface-2) !important; color: var(--text) !important; }
-.verified { color: var(--sage); }
-.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
 
-/* Sidebar */
+/* ── Sidebar (farmer web) ──────────────────────────────────────────────── */
 .side { background: var(--side-bg) !important; color: var(--side-text); }
-.side .q-item { color: var(--side-dim); border-radius: 10px; margin: 2px 10px; font-weight: 600; min-height: 42px; }
-.side .q-item:hover { color: var(--side-text); }
-.side .q-item.q-router-link--exact-active, .side .q-item.active-link { background: var(--side-active); color: var(--side-text); box-shadow: inset 3px 0 0 #90a484; }
-.side .q-item.q-router-link--exact-active .q-icon, .side .q-item.active-link .q-icon { color: #a9b99e; }
-.side .q-separator { background: rgba(236, 230, 216, 0.12); }
+.side .q-item {
+  color: var(--side-dim);
+  border-radius: 12px;
+  margin: 2px 10px;
+  font-weight: 600;
+  min-height: 42px;
+}
+.side .q-item:hover { color: var(--side-text); background: rgba(255,255,255,.07); }
+.side .q-item.q-router-link--exact-active,
+.side .q-item.active-link {
+  background: var(--side-active);
+  color: var(--side-text);
+  box-shadow: inset 3px 0 0 var(--lime);
+}
+.side .q-item.q-router-link--exact-active .q-icon,
+.side .q-item.active-link .q-icon { color: var(--lime); }
+.side .q-separator { background: rgba(255,255,255,.10); }
 
-/* Logo */
-.logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 800; letter-spacing: -0.03em; font-size: 23px; }
+/* ── Logo ──────────────────────────────────────────────────────────────── */
+.logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 800; letter-spacing: -.03em; font-size: 23px; }
 
-/* Worker phone shell */
-.phone-wrap { min-height: 100vh; display: flex; justify-content: center; background: var(--page-bg); }
-.phone { width: 100%; max-width: 440px; min-height: 100vh; background: var(--page-bg); position: relative; box-shadow: 0 0 0 1px var(--line); }
+/* ── Mobile bottom nav ─────────────────────────────────────────────────── */
+.footer-nav {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -4px 20px rgba(22,51,0,.05);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.footer-nav .q-tab.q-router-link--exact-active {
+  color: var(--sage) !important;
+}
+.footer-nav .q-tab.q-router-link--exact-active::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 32px;
+  background: var(--lime-soft);
+  border-radius: 16px;
+  z-index: 0;
+}
+.footer-nav .q-tab__content { z-index: 1; position: relative; }
 
 @media (max-width: 768px) {
   .page { padding: 18px 14px 40px; }

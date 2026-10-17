@@ -146,7 +146,7 @@ export function buildTeamPdf(data) {
     doc.setPage(p)
     doc.setDrawColor(...LINE).line(M, H - 14, W - M, H - 14)
     doc.setFontSize(7.5).setTextColor(...MUTED).setFont('helvetica', 'normal')
-    doc.text('Kuluri prototype - confidential: contains personal data - simulated data', M, H - 9)
+    doc.text('Kuluri - Confidential: contains personal data', M, H - 9)
     doc.text(`${data.farm.id} - page ${p}/${pages}`, W - M, H - 9, { align: 'right' })
   }
   return doc

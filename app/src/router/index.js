@@ -1,50 +1,80 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { useAuthStore } from '../stores/auth.js'
 
 // Hash history: works on static hosting and inside the Android (Capacitor) WebView.
 const routes = [
-  { path: '/', component: () => import('../pages/RoleSelect.vue') },
+  { path: '/', redirect: '/login' },
+  { path: '/login',         component: () => import('../pages/AuthLogin.vue') },
+  { path: '/setup',         component: () => import('../pages/SetupRole.vue'),   meta: { requiresAuth: true } },
+  { path: '/auth/callback', component: () => import('../pages/AuthCallback.vue') },
+  { path: '/select-role',   component: () => import('../pages/RoleSelect.vue') },
   {
     path: '/farm',
+    meta: { requiresAuth: true, role: 'farmer' },
     component: () => import('../layouts/FarmerLayout.vue'),
     children: [
-      { path: '', component: () => import('../pages/farmer/FarmerHome.vue') }, // Dashboard
-      // Hiring
-      { path: 'jobs', component: () => import('../pages/farmer/FarmJobs.vue') }, // Job postings
-      { path: 'candidates', component: () => import('../pages/farmer/FindWorkers.vue') }, // Candidates
-      { path: 'inbox', component: () => import('../pages/farmer/FarmMessages.vue') }, // Inbox
-      { path: 'contracts', component: () => import('../pages/farmer/FarmAgreements.vue') }, // Contracts (job agreements)
-      // Workforce
-      { path: 'team', component: () => import('../pages/farmer/MyFarm.vue') }, // Team
-      { path: 'schedule', component: () => import('../pages/farmer/FarmCalendar.vue') }, // Schedule
-      // Insights & settings
-      { path: 'impact', component: () => import('../pages/farmer/FarmImpact.vue') }, // Impact report
-      { path: 'settings', component: () => import('../pages/farmer/FarmSettings.vue') }, // Farm details · Privacy & sharing
-      // Old addresses
-      { path: 'find', redirect: (to) => ({ path: '/farm/candidates', query: to.query.tab === 'chats' ? {} : to.query }) },
-      { path: 'messages', redirect: '/farm/inbox' },
-      { path: 'agreements', redirect: (to) => ({ path: '/farm/contracts', query: to.query }) },
+      { path: '',           component: () => import('../pages/farmer/FarmerHome.vue') },
+      { path: 'jobs',       component: () => import('../pages/farmer/FarmJobs.vue') },
+      { path: 'candidates', component: () => import('../pages/farmer/FindWorkers.vue') },
+      { path: 'inbox',      component: () => import('../pages/farmer/FarmMessages.vue') },
+      { path: 'contracts',  component: () => import('../pages/farmer/FarmAgreements.vue') },
+      { path: 'team',       component: () => import('../pages/farmer/MyFarm.vue') },
+      { path: 'schedule',   component: () => import('../pages/farmer/FarmCalendar.vue') },
+      { path: 'impact',     component: () => import('../pages/farmer/FarmImpact.vue') },
+      { path: 'settings',   component: () => import('../pages/farmer/FarmSettings.vue') },
+      { path: 'find',       redirect: to => ({ path: '/farm/candidates', query: to.query }) },
+      { path: 'messages',   redirect: '/farm/inbox' },
+      { path: 'agreements', redirect: to => ({ path: '/farm/contracts', query: to.query }) },
       { path: 'availability', redirect: '/farm/schedule' },
-      { path: 'sharing', redirect: '/farm/settings?tab=privacy' },
-      { path: 'profile', redirect: '/farm/settings' },
+      { path: 'sharing',    redirect: '/farm/settings?tab=privacy' },
+      { path: 'profile',    redirect: '/farm/settings' },
     ],
   },
   {
     path: '/worker',
+    meta: { requiresAuth: true, role: 'worker' },
     component: () => import('../layouts/WorkerLayout.vue'),
     children: [
-      { path: '', component: () => import('../pages/worker/WorkerHome.vue') }, // Home
-      { path: 'profile', component: () => import('../pages/worker/WorkerProfile.vue') }, // Profile: CV & skills, privacy, rights & support
-      { path: 'jobs', component: () => import('../pages/worker/WorkerJobs.vue') },
-      { path: 'confirm', redirect: '/worker/earnings?tab=confirm' },
-      { path: 'earnings', component: () => import('../pages/combined/WorkerHoursPay.vue') },
-      { path: 'job/:id', component: () => import('../pages/worker/WorkerJob.vue') },
-      { path: 'farm', redirect: '/worker/job/J-01?tab=location' },
-      { path: 'chat', component: () => import('../pages/worker/WorkerChat.vue') },
-      { path: 'sharing', component: () => import('../pages/worker/WorkerSharing.vue') },
-      { path: 'rights', component: () => import('../pages/worker/WorkerRights.vue') },
-      { path: 'agreement', redirect: '/worker/job/J-01?tab=agreement' },
+      { path: '',           component: () => import('../pages/worker/WorkerHome.vue') },
+      { path: 'profile',    component: () => import('../pages/worker/WorkerProfile.vue') },
+      { path: 'jobs',       component: () => import('../pages/worker/WorkerJobs.vue') },
+      { path: 'identity',   redirect: '/worker/profile' },
+      { path: 'confirm',    redirect: '/worker/earnings?tab=confirm' },
+      { path: 'earnings',   component: () => import('../pages/combined/WorkerHoursPay.vue') },
+      { path: 'job/:id',    component: () => import('../pages/worker/WorkerJob.vue') },
+      { path: 'farm',       redirect: '/worker/job/J-01?tab=location' },
+      { path: 'chat',       component: () => import('../pages/worker/WorkerChat.vue') },
+      { path: 'sharing',    component: () => import('../pages/worker/WorkerSharing.vue') },
+      { path: 'rights',     component: () => import('../pages/worker/WorkerRights.vue') },
+      { path: 'agreement',  redirect: '/worker/job/J-01?tab=agreement' },
     ],
   },
 ]
 
-export default createRouter({ history: createWebHashHistory(), routes })
+const router = createRouter({ history: createWebHashHistory(), routes })
+
+// Auth guard — waits for Privy SDK to finish initialising before deciding.
+router.beforeEach(async (to) => {
+  if (!to.meta.requiresAuth) return true
+
+  const auth = useAuthStore()
+
+  // Wait for Privy to finish its session restore (up to 4 s)
+  if (!auth.ready) {
+    await new Promise((resolve) => {
+      const t = setTimeout(resolve, 4000)
+      const stop = auth.$subscribe(() => {
+        if (auth.ready) { clearTimeout(t); stop(); resolve() }
+      })
+    })
+  }
+
+  if (!auth.authenticated) return '/login'
+
+  // Role not set yet → send to setup (avoid infinite loop)
+  if (!auth.role && to.path !== '/setup') return '/setup'
+
+  return true
+})
+
+export default router

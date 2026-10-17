@@ -87,7 +87,7 @@ export function buildAgreementPdf(a, chat) {
     doc.setPage(p)
     doc.setDrawColor(...LINE).line(M, H - 14, W - M, H - 14)
     doc.setFontSize(7.5).setTextColor(...MUTED).setFont('helvetica', 'normal')
-    doc.text('Kuluri prototype - EU Agri-Hackathon 2026 - simulated data, not legal advice', M, H - 9)
+    doc.text('Kuluri - Agreement summary - not a substitute for a formal employment contract', M, H - 9)
     doc.text(`${a.id} - page ${p}/${pages}`, W - M, H - 9, { align: 'right' })
   }
   return doc

@@ -62,10 +62,6 @@ const sections = [
             <q-item-label caption style="color: var(--side-dim)">Milano (IT)</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable to="/worker" class="q-mb-md">
-          <q-item-section avatar style="min-width: 36px"><q-icon name="o_smartphone" size="20px" /></q-item-section>
-          <q-item-section>Worker app (demo)</q-item-section>
-        </q-item>
       </div>
     </q-drawer>
 
