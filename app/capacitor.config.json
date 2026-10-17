@@ -1,0 +1,8 @@
+{
+  "appId": "eu.kuluri.app",
+  "appName": "Kuluri",
+  "webDir": "dist",
+  "android": {
+    "backgroundColor": "#ece8df"
+  }
+}

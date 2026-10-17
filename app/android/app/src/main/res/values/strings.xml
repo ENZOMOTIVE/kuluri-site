@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Kuluri</string>
+    <string name="title_activity_main">Kuluri</string>
+    <string name="package_name">eu.kuluri.app</string>
+    <string name="custom_url_scheme">eu.kuluri.app</string>
+</resources>
