@@ -1,0 +1,63 @@
+/* Calm stone & sage palette. Colours for Quasar components are set in main.js (brand). */
+:root {
+  --page-bg: #ece8df;
+  --surface: #f5f2eb;
+  --surface-2: #efebe2;
+  --line: #dcd5c8;
+  --text: #3a362f;
+  --muted: #827b6e;
+  --side-bg: #2c332b;
+  --side-active: #3b4439;
+  --side-text: #ece6d8;
+  --side-dim: #b3ad9f;
+  --sage: #5f7556;
+  --sage-soft: #e0e6da;
+  --teal-soft: #dbe6e4;
+  --amber-soft: #f1e3c4;
+  --red-soft: #efd8d0;
+}
+
+body { background: var(--page-bg); color: var(--text); font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+.q-card, .q-menu, .q-dialog .q-card { background: var(--surface); color: var(--text); }
+.q-card--bordered, .q-separator { border-color: var(--line); }
+.q-separator { background: var(--line); }
+.q-field--outlined .q-field__control { background: var(--surface); }
+.q-field--outlined .q-field__control:before { border-color: var(--line); }
+.q-table__container { background: var(--surface); color: var(--text); }
+.q-table thead tr { background: var(--surface-2); }
+.q-table th { font-weight: 700; color: var(--muted); }
+.text-muted { color: var(--muted); }
+.bg-surface { background: var(--surface); }
+.bg-surface-2 { background: var(--surface-2); }
+.bg-sage-soft { background: var(--sage-soft); }
+.rounded { border-radius: 14px; }
+
+/* Page scaffolding */
+.page { max-width: 1240px; margin: 0 auto; padding: 28px 32px 56px; }
+.page-header { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
+.page-title { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin: 0; line-height: 1.2; }
+.kpi-label { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.kpi-value { font-size: 26px; font-weight: 800; line-height: 1.25; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.chip-soft { background: var(--surface-2) !important; color: var(--text) !important; }
+.verified { color: var(--sage); }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+
+/* Sidebar */
+.side { background: var(--side-bg) !important; color: var(--side-text); }
+.side .q-item { color: var(--side-dim); border-radius: 10px; margin: 2px 10px; font-weight: 600; min-height: 42px; }
+.side .q-item:hover { color: var(--side-text); }
+.side .q-item.q-router-link--exact-active, .side .q-item.active-link { background: var(--side-active); color: var(--side-text); box-shadow: inset 3px 0 0 #90a484; }
+.side .q-item.q-router-link--exact-active .q-icon, .side .q-item.active-link .q-icon { color: #a9b99e; }
+.side .q-separator { background: rgba(236, 230, 216, 0.12); }
+
+/* Logo */
+.logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 800; letter-spacing: -0.03em; font-size: 23px; }
+
+/* Worker phone shell */
+.phone-wrap { min-height: 100vh; display: flex; justify-content: center; background: var(--page-bg); }
+.phone { width: 100%; max-width: 440px; min-height: 100vh; background: var(--page-bg); position: relative; box-shadow: 0 0 0 1px var(--line); }
+
+@media (max-width: 768px) {
+  .page { padding: 18px 14px 40px; }
+}

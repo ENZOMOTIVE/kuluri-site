@@ -74,6 +74,12 @@ def main():
     write_profile()
 
 
+def wkt_coords(wkt):
+    """POLYGON((x y, ...)) -> [[x, y], ...] in local metres (schematic, no geographic CRS)."""
+    inner = wkt[wkt.index("((") + 2: wkt.rindex("))")]
+    return [[float(v) for v in pt.split()] for pt in inner.split(",")]
+
+
 def load_parcel_events(pattern, ids):
     frames = []
     for f in sorted((DATA / "synthetic").glob(pattern)):
@@ -88,7 +94,7 @@ def write_profile():
     hold = pd.read_csv(DATA / "synthetic" / "synthetic_holding.csv", dtype=s)
     h = hold[hold.holding_id == FARM].iloc[0]
     parcels = pd.read_csv(DATA / "synthetic" / "synthetic_parcel.csv", dtype=s,
-                          usecols=["parcel_id", "holding_id", "area_ha", "crop_current", "tenure"])
+                          usecols=["parcel_id", "holding_id", "area_ha", "crop_current", "tenure", "shape_wkt"])
     p = parcels[parcels.holding_id == FARM]
     ids, area = set(p.parcel_id), p.set_index("parcel_id").area_ha
     total_area = float(area.sum())
@@ -124,7 +130,8 @@ def write_profile():
         "source": "synthetic_holding, synthetic_parcel, synthetic_fertilisation, synthetic_plant_protection, synthetic_harvest, synthetic_irrigation, synthetic_labour (synthetic)",
         "holding": {"nuts3": h.nuts3, "uaa_ha": float(h.uaa_ha), "organic": int(h.organic), "farm_type_tf8": int(h.farm_type_tf8),
                     "natura2000": int(h.natura2000_flag)},
-        "parcels": [{"id": r.parcel_id, "crop": r.crop_current, "area_ha": float(r.area_ha), "tenure": r.tenure} for _, r in p.iterrows()],
+        "parcels": [{"id": r.parcel_id, "crop": r.crop_current, "area_ha": float(r.area_ha), "tenure": r.tenure,
+                     "shape": wkt_coords(r.shape_wkt)} for _, r in p.iterrows()],
         "yearly": yearly,
         "labour": [{"category": r.worker_category, "annual_hours": int(r.annual_hours), "awu": float(r.awu)} for _, r in lab.iterrows()],
     }

@@ -1,27 +1,32 @@
 {
   "name": "kuluri-app",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "android:sync": "vite build && cap sync android",
+    "android:open": "cap open android"
   },
   "dependencies": {
-    "@mantine/charts": "8.3.18",
-    "@mantine/core": "8.3.18",
-    "@mantine/dropzone": "8.3.18",
-    "@mantine/hooks": "8.3.18",
-    "@mantine/notifications": "8.3.18",
-    "lucide-react": "1.58.0",
-    "react": "19.3.1",
-    "react-dom": "19.3.1",
-    "react-router-dom": "7.18.4",
-    "recharts": "2.15.4"
+    "@capacitor/android": "8.5.3",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/filesystem": "8.1.5",
+    "@capacitor/share": "8.0.3",
+    "@quasar/extras": "2.1.0",
+    "jspdf": "4.2.1",
+    "maplibre-gl": "5.24.0",
+    "quasar": "2.35.1",
+    "vue": "3.5.44",
+    "vue-router": "4.6.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "6.1.2",
+    "@capacitor/cli": "8.5.3",
+    "@quasar/vite-plugin": "2.0.2",
+    "@vitejs/plugin-vue": "6.0.10",
+    "sass-embedded": "1.105.2",
     "vite": "8.3.4"
   }
 }
