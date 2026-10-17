@@ -1,7 +1,7 @@
 // Builds a one-page "verified work history" PDF the worker can share (e.g. with a new farm).
 // Contains only the jobs the worker selected. Text is kept in English for use across Europe.
 import { jsPDF } from 'jspdf'
-import { fingerprint } from '../data/store.js'
+import { fingerprint, skillRecord } from '../data/store.js'
 
 // Standard PDF fonts only cover Western European characters: strip accents/diacritics (ș -> s) and odd punctuation.
 const clean = (s) => String(s ?? '')
@@ -36,10 +36,20 @@ export async function buildWorkHistoryPdf({ worker, jobs, includeHours }) {
   y += 6
   doc.setFont('helvetica', 'normal').setFontSize(10).setTextColor(...MUTED).text(clean(worker.base), M, y)
   y += 8
+  // Skills: confirmed by farms in the selected jobs vs. declared by the worker
+  const inJobs = jobs.filter((j) => j.confirmed).flatMap((j) => j.skills ?? [])
+  const record = skillRecord({ ...worker, history: jobs })
+  const confirmedSkills = record.filter((s) => inJobs.includes(s.skill)).map((s) => `${s.skill} (${s.jobs} job${s.jobs > 1 ? 's' : ''})`)
+  const declared = record.filter((s) => !inJobs.includes(s.skill)).map((s) => s.skill)
   doc.setTextColor(...DARK).setFontSize(10)
-  doc.setFont('helvetica', 'bold').text('Skills:', M, y)
-  doc.setFont('helvetica', 'normal').text(clean(worker.skills.join(', ')), M + 16, y)
+  doc.setFont('helvetica', 'bold').text('Skills confirmed by farms:', M, y)
+  doc.setFont('helvetica', 'normal').text(clean(confirmedSkills.join(', ') || '-'), M + 48, y)
   y += 5.5
+  if (declared.length) {
+    doc.setFont('helvetica', 'bold').text('Other skills (self-declared):', M, y)
+    doc.setFont('helvetica', 'normal').text(clean(declared.join(', ')), M + 48, y)
+    y += 5.5
+  }
   doc.setFont('helvetica', 'bold').text('Languages:', M, y)
   doc.setFont('helvetica', 'normal').text(clean(worker.languages.join(', ')), M + 22, y)
   y += 9
@@ -100,6 +110,7 @@ export async function buildWorkHistoryPdf({ worker, jobs, includeHours }) {
     'A job marked "Confirmed" was confirmed in Kuluri by both the worker and the farm (days, hours and pay).',
     'The fingerprint is a SHA-256 hash of the confirmed record. If anyone changes the record, the fingerprint no longer matches.',
     'Farms are shown by their Kuluri ID. Personal pay amounts are not included.',
+    'Skills confirmed by farms were confirmed by the farm for that job. They can support the recognition of skills learned at work.',
   ]
   notes.forEach((n) => {
     const lines = doc.splitTextToSize('- ' + n, W - 2 * M)

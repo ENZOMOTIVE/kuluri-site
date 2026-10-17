@@ -50,9 +50,9 @@ export const LANGS = ['Italian', 'English', 'Romanian', 'Polish', 'Bulgarian', '
 const pool = [
   { id: 'W-1042', name: 'Andrei P.', base: 'Can travel · based in Iași (RO)', distanceKm: null, languages: ['Romanian', 'Italian', 'English'], skills: ['Combine harvester', 'Tractor driving', 'Grain handling'], available: ['2026-10-01', '2026-12-15'],
     history: [
-      { farm: 'FARM-06127', crop: 'Maize', season: '2025 autumn', hours: 412, confirmed: true },
-      { farm: 'FARM-02408', crop: 'Common wheat', season: '2025 summer', hours: 356, confirmed: true },
-      { farm: 'FARM-06127', crop: 'Maize', season: '2024 autumn', hours: 388, confirmed: true },
+      { farm: 'FARM-06127', crop: 'Maize', season: '2025 autumn', hours: 412, confirmed: true, skills: ['Combine harvester', 'Grain handling'] },
+      { farm: 'FARM-02408', crop: 'Common wheat', season: '2025 summer', hours: 356, confirmed: true, skills: ['Combine harvester', 'Tractor driving'] },
+      { farm: 'FARM-06127', crop: 'Maize', season: '2024 autumn', hours: 388, confirmed: true, skills: ['Grain handling'] },
     ] },
   { id: 'W-2210', name: 'Marta K.', base: 'Lodi (IT) · 38 km', distanceKm: 38, languages: ['Polish', 'Italian'], skills: ['Grain handling', 'Forklift', 'Sorting & packing'], available: ['2026-10-10', '2026-11-30'],
     history: [
@@ -98,10 +98,19 @@ export const state = reactive({
     { id: 'J-01', title: 'Maize harvest – combine & grain handling', crop: 'Maize', tasks: ['Combine harvester', 'Grain handling'], start: '2026-10-20', end: '2026-11-20', positions: 3, payPerHour: 12.5, hoursPerWeek: 40, housing: true, languages: ['Italian', 'Romanian', 'English'], status: 'Open' },
     { id: 'J-02', title: 'Winter wheat sowing – tractor operator', crop: 'Common wheat', tasks: ['Tractor driving', 'Sowing'], start: '2026-10-25', end: '2026-11-30', positions: 1, payPerHour: 13, hoursPerWeek: 38, housing: false, languages: ['Italian'], status: 'Open' },
   ],
-  workers: pool.map((w) => ({ looking: true, ...w })),
+  // Each job in the history lists the skills the farm confirmed for it (simulated: first two declared skills if not set)
+  // `share`: what the worker lets farms see (the worker decides; see farmView below)
+  workers: pool.map((w) => ({
+    looking: true, ...w,
+    history: w.history.map((h) => ({ skills: w.skills.slice(0, 2), ...h })),
+    share: { audience: 'region', history: true, hidden: [], hours: true, skills: true, languages: true, availability: true },
+  })),
+  // What this farm lets workers see (the farm decides). Pay, hours and housing yes/no of a job are always shown.
+  farmShare: { fairRecord: true, housing: true, returning: true, location: true },
   invitations: { 'J-01:W-1042': 'Accepted' }, // `${jobId}:${workerId}` -> 'Invited' | 'Accepted' | 'Declined'
   // Worker app persona (W-1042) – invitation & weekly confirmation
   me: 'W-1042',
+  onboarding: {}, // "Before you go" checklist ticks of the worker (key -> true)
   // Current week waiting for the worker's confirmation (previous short job at FARM-06127, before the maize harvest)
   week: {
     label: 'Week 41 · 5–11 Oct 2026', weekNo: 41, farm: 'FARM-06127', job: 'Grain drying & handling', crop: 'Maize',
@@ -127,6 +136,7 @@ export const state = reactive({
     { id: 'W-3175', name: 'Luca B.', type: 'Seasonal', role: 'Tractor operator', period: '01 Jun – 31 Jul 2026', hours: 340, contract: 'Ended', confirmation: 'Confirmed', source: 'simulated' },
     { id: 'S-201', name: 'Nicu R.', type: 'Seasonal', role: 'Grain handling', period: '15 Jun – 31 Jul 2026', hours: 268, contract: 'Ended', confirmation: 'Confirmed', source: 'simulated' },
     { id: 'S-202', name: 'Petra L.', type: 'Seasonal', role: 'Combine operator', period: '15 Jun – 31 Jul 2026', hours: 301, contract: 'Ended', confirmation: 'Disputed', source: 'simulated' },
+    { id: 'W-1042', name: 'Andrei P.', type: 'Seasonal', role: 'Combine operator', period: '20 Oct – 20 Nov 2026', hours: 0, contract: 'Starts soon', confirmation: 'Not started', source: 'simulated' },
     { id: 'S-203', name: 'Ahmed T.', type: 'Seasonal', role: 'Grain handling', period: '01 Oct – 20 Nov 2026', hours: 96, contract: 'Ends soon', confirmation: 'Pending', source: 'simulated' },
     { id: 'S-204', name: 'Kasia W.', type: 'Seasonal', role: 'Sorting', period: '05 Oct – 20 Nov 2026', hours: 72, contract: 'Missing', confirmation: 'Pending', source: 'simulated' },
   ],
@@ -158,33 +168,65 @@ export const fairRecord = computed(() => {
   }
 })
 
+// ---- Sharing: what a farm sees of a worker ------------------------------------------------
+// Only what the worker chose to share. `audience: 'applied'` = only farms the worker is in contact with.
+export const inContact = (w) => Object.keys(state.invitations).some((k) => k.endsWith(`:${w.id}`))
+export function farmView(w) {
+  const s = w.share
+  const shown = s.history ? w.history.filter((_, i) => !s.hidden.includes(i)) : []
+  return {
+    ...w,
+    visible: w.looking !== false && (s.audience === 'region' || inContact(w)),
+    history: shown.map((h) => (s.hours ? h : { ...h, hours: null })),
+    hiddenJobs: w.history.length - shown.length,
+    skills: s.skills ? w.skills : [],
+    languages: s.languages ? w.languages : [],
+    available: s.availability ? w.available : null,
+    share: s,
+  }
+}
+
 // ---- Matching -----------------------------------------------------------------------------
 const overlaps = (aStart, aEnd, bStart, bEnd) => aStart <= bEnd && bStart <= aEnd
 
 export function matchWorkers(job) {
   return state.workers
+    .map(farmView)
+    .filter((w) => w.visible || inContact(w))
     .map((w) => {
       const skillHits = job.tasks.filter((t) => w.skills.includes(t))
       const langHits = job.languages.filter((l) => w.languages.includes(l))
-      const available = overlaps(w.available[0], w.available[1], job.start, job.end)
+      const available = !!w.available && overlaps(w.available[0], w.available[1], job.start, job.end)
+      const availability = !available ? null : w.available[0] <= job.start && w.available[1] >= job.end ? 'full' : 'part'
       const verified = w.history.filter((h) => h.confirmed)
-      const hours = verified.reduce((a, h) => a + h.hours, 0)
+      const hours = w.share.hours ? verified.reduce((a, h) => a + h.hours, 0) : null
       const near = w.distanceKm !== null && w.distanceKm <= 60
       let score = 0
       score += (skillHits.length / Math.max(job.tasks.length, 1)) * 45
       score += langHits.length ? 20 : 0
-      score += available ? 20 : 0
+      score += availability === 'full' ? 20 : availability === 'part' ? 10 : 0
       score += Math.min(verified.length, 3) * 5
       const reasons = []
       if (skillHits.length) reasons.push(`Skills: ${skillHits.join(', ')}`)
       if (langHits.length) reasons.push(`Speaks ${langHits.join(', ')}`)
-      if (available) reasons.push('Available for the whole job')
+      if (availability) reasons.push(availability === 'full' ? 'Available for the whole job' : 'Available for part of the job')
       if (verified.length) reasons.push(`${verified.length} verified job${verified.length > 1 ? 's' : ''}`)
       if (near) reasons.push('Lives nearby')
-      return { worker: w, score: Math.round(score), reasons, available, verifiedCount: verified.length, verifiedHours: hours }
+      return { worker: w, score: Math.round(score), reasons, available, availability, verifiedCount: verified.length, verifiedHours: hours }
     })
-    .filter((m) => m.score >= 40 && m.worker.looking !== false)
+    .filter((m) => m.score >= 40)
     .sort((a, b) => b.score - a.score)
+}
+
+// ---- Skills record -------------------------------------------------------------------------
+// Skills confirmed by farms in confirmed jobs (evidence of skills learned at work), vs. skills the worker only declared.
+export function skillRecord(worker) {
+  const confirmed = worker.history.filter((h) => h.confirmed)
+  const all = [...new Set([...worker.skills, ...confirmed.flatMap((h) => h.skills ?? [])])]
+  return all.map((skill) => {
+    const jobs = confirmed.filter((h) => h.skills?.includes(skill))
+    return { skill, jobs: jobs.length, farms: new Set(jobs.map((h) => h.farm)).size, hours: jobs.reduce((a, h) => a + h.hours, 0), verified: jobs.length > 0 }
+  }).sort((a, b) => b.jobs - a.jobs || b.hours - a.hours)
 }
 
 export const fmtDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })

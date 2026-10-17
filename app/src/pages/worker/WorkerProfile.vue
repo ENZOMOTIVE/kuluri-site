@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { t } from '../../data/i18n.js'
-import { state, shortHash, fmtShort } from '../../data/store.js'
+import { state, shortHash, fmtShort, skillRecord } from '../../data/store.js'
 import { buildWorkHistoryPdf } from '../../utils/workHistoryPdf.js'
 import { sharePdf } from '../../utils/share.js'
 
@@ -11,6 +11,7 @@ const $q = useQuasar()
 const me = computed(() => state.workers.find((w) => w.id === state.me))
 const verified = computed(() => me.value.history.filter((h) => h.confirmed))
 const hours = computed(() => verified.value.reduce((a, h) => a + h.hours, 0))
+const skills = computed(() => skillRecord(me.value))
 
 // ---- Availability: the worker decides when farms can see them as available
 const showAvail = ref(false)
@@ -101,8 +102,17 @@ async function createPdf() {
     </div>
 
     <div class="card q-pa-md q-mb-md">
-      <div class="text-subtitle2 text-weight-bold">{{ t('skills') }}</div>
-      <div class="row q-gutter-xs q-mt-xs q-mb-sm"><q-chip v-for="s in me.skills" :key="s" dense square class="bg-sage-soft text-primary">{{ s }}</q-chip></div>
+      <div class="text-subtitle2 text-weight-bold">{{ t('skillRecord') }}</div>
+      <div class="text-caption text-muted q-mb-xs">{{ t('skillRecordNote') }}</div>
+      <q-list dense class="q-mb-sm">
+        <q-item v-for="s in skills" :key="s.skill" class="q-px-none">
+          <q-item-section avatar style="min-width: 30px"><q-icon :name="s.verified ? 'verified' : 'o_person'" :color="s.verified ? 'primary' : 'grey-6'" size="20px" /></q-item-section>
+          <q-item-section>
+            <q-item-label class="text-weight-medium">{{ s.skill }}</q-item-label>
+            <q-item-label caption :class="s.verified ? 'verified' : ''">{{ s.verified ? t('skillConfirmed').replace('{j}', s.jobs).replace('{f}', s.farms).replace('{h}', s.hours.toLocaleString('en')) : t('skillDeclared') }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
       <div class="text-subtitle2 text-weight-bold">{{ t('languages') }}</div>
       <div class="row q-gutter-xs q-mt-xs q-mb-sm"><q-chip v-for="l in me.languages" :key="l" dense square class="chip-soft" icon="o_translate">{{ l }}</q-chip></div>
       <div class="row items-center">
@@ -116,10 +126,26 @@ async function createPdf() {
       </div>
     </div>
 
-    <div class="card q-pa-md bg-surface-2">
-      <div class="text-subtitle2 text-weight-bold"><q-icon name="o_shield" class="q-mr-xs" />{{ t('whoSees') }}</div>
-      <div class="text-caption text-muted q-mt-xs">{{ t('whoSeesText') }}</div>
-      <div class="text-caption text-muted q-mt-sm">{{ t('proofOwn') }}</div>
+    <!-- Settings: privacy and rights & support -->
+    <div class="card">
+      <q-list separator>
+        <q-item clickable to="/worker/sharing">
+          <q-item-section avatar><q-icon name="o_visibility" color="primary" /></q-item-section>
+          <q-item-section>
+            <q-item-label class="text-weight-medium">{{ t('mySharing') }}</q-item-label>
+            <q-item-label caption>{{ t('sharingSummary').replace('{a}', me.share.audience === 'region' ? t('aud_region') : t('aud_applied')) }}</q-item-label>
+          </q-item-section>
+          <q-item-section side><q-icon name="chevron_right" color="grey-6" /></q-item-section>
+        </q-item>
+        <q-item clickable to="/worker/rights">
+          <q-item-section avatar><q-icon name="o_shield" color="primary" /></q-item-section>
+          <q-item-section>
+            <q-item-label class="text-weight-medium">{{ t('rightsSupport') }}</q-item-label>
+            <q-item-label caption>{{ t('rightsSupportSub') }}</q-item-label>
+          </q-item-section>
+          <q-item-section side><q-icon name="chevron_right" color="grey-6" /></q-item-section>
+        </q-item>
+      </q-list>
     </div>
 
     <q-dialog v-model="showAvail" position="bottom">

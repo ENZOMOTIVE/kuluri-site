@@ -9,29 +9,32 @@ import KuluriLogo from '../components/KuluriLogo.vue'
         <div style="max-width: 760px; width: 100%">
           <div class="text-center q-mb-xl">
             <KuluriLogo :size="52" />
-            <div class="text-h6 text-weight-bold q-mt-md">Fair seasonal work, verified.</div>
-            <div class="text-muted">Kuluri connects farms and seasonal workers through work records the workers confirm themselves.</div>
+            <div class="text-h6 text-weight-bold q-mt-md">Fair seasonal work for the people who do it.</div>
+            <div class="text-muted">Kuluri helps seasonal farm workers find fair jobs, know their rights and keep their own proof of work and skills.</div>
+            <div class="text-caption text-muted q-mt-sm"><q-icon name="o_shield" class="q-mr-xs" />Two apps on the same confirmed records – each side sees only what it needs and decides what it shares.</div>
           </div>
 
           <div class="row q-col-gutter-lg">
             <div class="col-12 col-sm-6">
-              <q-card flat bordered class="rounded cursor-pointer full-height role-card" @click="$router.push('/farm')">
-                <q-card-section>
-                  <q-avatar size="52px" rounded class="bg-sage-soft text-primary" icon="o_agriculture" font-size="28px" />
-                  <div class="text-h6 text-weight-bold q-mt-md">I run a farm</div>
-                  <div class="text-muted q-mt-xs">Find reliable workers, keep work records, and answer buyers’ labour questions with proof.</div>
-                </q-card-section>
-                <q-card-actions class="q-px-md q-pb-md"><q-btn unelevated color="primary" label="Continue as farm" icon-right="arrow_forward" no-caps /></q-card-actions>
-              </q-card>
-            </div>
-            <div class="col-12 col-sm-6">
               <q-card flat bordered class="rounded cursor-pointer full-height role-card" @click="$router.push('/worker')">
                 <q-card-section>
                   <q-avatar size="52px" rounded class="bg-sage-soft text-accent" icon="o_badge" font-size="28px" />
+                  <q-badge outline color="accent" class="q-ml-sm" style="vertical-align: top"><q-icon name="o_smartphone" class="q-mr-xs" />Worker app · phone</q-badge>
                   <div class="text-h6 text-weight-bold q-mt-md">I work on farms</div>
-                  <div class="text-muted q-mt-xs">See fair jobs, keep your own proof of hours and pay, and build a verified work history.</div>
+                  <div class="text-muted q-mt-xs">Find fair jobs, prepare and know your rights in your language, and build a work and skills record that is yours.</div>
                 </q-card-section>
                 <q-card-actions class="q-px-md q-pb-md"><q-btn unelevated color="accent" label="Continue as worker" icon-right="arrow_forward" no-caps /></q-card-actions>
+              </q-card>
+            </div>
+            <div class="col-12 col-sm-6">
+              <q-card flat bordered class="rounded cursor-pointer full-height role-card" @click="$router.push('/farm')">
+                <q-card-section>
+                  <q-avatar size="52px" rounded class="bg-sage-soft text-primary" icon="o_agriculture" font-size="28px" />
+                  <q-badge outline color="primary" class="q-ml-sm" style="vertical-align: top"><q-icon name="o_computer" class="q-mr-xs" />Farm dashboard · web</q-badge>
+                  <div class="text-h6 text-weight-bold q-mt-md">I employ seasonal workers</div>
+                  <div class="text-muted q-mt-xs">Find skilled workers, give clear terms and keep records your workers confirm.</div>
+                </q-card-section>
+                <q-card-actions class="q-px-md q-pb-md"><q-btn unelevated color="primary" label="Continue as employer" icon-right="arrow_forward" no-caps /></q-card-actions>
               </q-card>
             </div>
           </div>

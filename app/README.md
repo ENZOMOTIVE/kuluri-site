@@ -30,11 +30,10 @@ npm run android:open   # opens the android/ project in Android Studio -> Run ▶
 | `#/farm` | farm | Overview: open jobs, matches, team, confirmations, fair-employer record |
 | `#/farm/find` | farm | Post a job, matching workers with verified history, invite |
 | `#/farm/availability` | farm | Season planner: skills × weeks heatmap of available workers (Oct 2026 – Jul 2027) with your open jobs outlined (green = enough, red = not enough), "only within 60 km" filter, per-job insights (available for the whole job / part / needed), and a timeline of who is available when; click a skill to filter |
-| `#/farm/team` | farm | My workers: contract status, worker confirmations |
+| `#/farm/team` | farm | **My farm** in two tabs: **Team** (workers, contract status, worker confirmations, send confirmation links) and **Farm profile** (area, parcels, crops, land tenure, certificate, staff – real records of FARM-13079) |
 | `#/farm/messages` | farm | Messages with workers; seeded messages shown translated (Romanian/Italian/English) with "show original" |
 | `#/farm/agreements` | farm | Manage agreements: filter (drafts / waiting / agreed / closed), new agreement from a chat + job, edit draft terms, **agree & send** (posts an agreement card into the worker's chat), withdraw, mark completed, cancel with reason. Terms drafted from the job offer + chat, both confirmations with a SHA-256 fingerprint, a compact "Intent" label (like the match %) from the chat analysis; the full analysis (quotes, extracted points, agreement-vs-chat check) is stored with the agreement and included in the agreement PDF |
-| `#/farm/requests` | farm | Buyer requests: suggested answers (farm data + worker-confirmed labour), use / edit, share |
-| `#/farm/profile` | farm | Farm data (real records of FARM-13079) |
+| `#/farm/impact` | farm | **Social impact**: anonymous indicators grouped by ESF+ objectives (access to work, skills learned at work, inclusion, integration of workers from outside the EU, fair working conditions); export as CSV |
 | `#/worker` | worker (phone) | Profile with verified work history; **availability** (looking for work on/off + from/to dates, feeds the farm planner); **Export PDF**: the worker picks which jobs to include, the PDF lists them with SHA-256 fingerprints (no pay amounts) and opens the Android share sheet (Capacitor Share), Web Share, or downloads |
 | `#/worker/chat` | worker | Chat only: messages in the worker's language, agreement cards (open the job's Agreement tab), link to the job, report button |
 | `#/worker/jobs` | worker | Compact list of my jobs/invitations (status chip) and other open jobs; tap a job to open it |
@@ -43,6 +42,20 @@ npm run android:open   # opens the android/ project in Android Studio -> Run ▶
 | `#/worker/confirm` | worker | Opened from Earnings: confirm the week's days, hours and pay – or report a problem. Confirmed records get a SHA-256 fingerprint |
 
 The worker app is available in English and Romanian (toggle in the header).
+
+## ESF+ alignment
+
+Kuluri is built to fit the European Social Fund Plus (ESF+, [Regulation (EU) 2021/1057](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R1057), Art. 4(1)):
+
+| ESF+ objective | In Kuluri |
+|---|---|
+| (a)(b) Access to employment, labour-market matching and mobility | Matching and season planner by skills, availability, languages, distance |
+| (e)(g) Skills learned at work, lifelong learning | **Skills record**: skills confirmed by farms per job, on the worker profile and in the work-history PDF |
+| (h) Active inclusion, equal opportunities, non-discrimination | Free for workers; matching never uses nationality, age or gender |
+| (i) Socio-economic integration of non-EU workers | Worker app and chat in the worker's language |
+| (d) Healthy working environment | Weekly worker confirmations, disputes, fair-employer record |
+
+The **Social impact** page (`#/farm/impact`) reports these as anonymous indicators. Funding goes to projects through national/regional ESF+ programmes; eligibility is decided by the managing authority.
 
 ## Data
 

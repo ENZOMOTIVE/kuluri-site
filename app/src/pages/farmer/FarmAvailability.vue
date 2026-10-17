@@ -1,10 +1,13 @@
 <script setup>
 // Season planner: when are workers with which skills available, compared with what the farm needs.
 // Based on the availability workers set themselves (simulated pool).
+import { QPage } from 'quasar'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import SimulatedNote from '../../components/SimulatedNote.vue'
-import { state, SKILLS } from '../../data/store.js'
+import { state, SKILLS, farmView } from '../../data/store.js'
+
+defineProps({ embedded: Boolean }) // shown inside a TabbedPage
 
 const router = useRouter()
 
@@ -21,7 +24,8 @@ const overlaps = (a1, a2, b1, b2) => a1 <= b2 && b1 <= a2
 // ---- Filters
 const nearOnly = ref(false)
 const skill = ref(null) // null = all skills (rows), otherwise timeline for that skill
-const pool = computed(() => state.workers.filter((w) => w.looking !== false && (!nearOnly.value || (w.distanceKm !== null && w.distanceKm <= 60))))
+// Only workers who share their availability with farms (see farmView)
+const pool = computed(() => state.workers.map(farmView).filter((w) => w.visible && w.available && (!nearOnly.value || (w.distanceKm !== null && w.distanceKm <= 60))))
 const skillsInUse = computed(() => SKILLS.filter((s) => state.workers.some((w) => w.skills.includes(s)) || state.jobs.some((j) => j.tasks.includes(s))))
 
 const availableIn = (w, wk) => overlaps(w.available[0], w.available[1], wk.start, wk.end)
@@ -64,13 +68,13 @@ const months = computed(() => weeks.filter((w) => w.firstOfMonth))
 </script>
 
 <template>
-  <q-page class="page">
+  <component :is="embedded ? 'div' : QPage" class="page">
     <div class="page-header row items-end justify-between q-gutter-y-sm">
       <div>
         <h1 class="page-title">Availability</h1>
         <div class="text-muted q-mt-xs">When are workers with the skills you need available? Plan who to hire, and when, for the season.</div>
       </div>
-      <q-btn unelevated color="primary" icon="o_person_search" label="Find workers" no-caps to="/farm/find" />
+      <q-btn unelevated color="primary" icon="o_person_search" label="Find workers" no-caps to="/farm/candidates" />
     </div>
     <SimulatedNote text="Based on the availability workers set in their app (simulated pool of workers). Workers can switch their visibility off at any time." />
 
@@ -148,7 +152,7 @@ const months = computed(() => weeks.filter((w) => w.firstOfMonth))
               </div>
             </div>
             <div class="tl-track">
-              <div class="bar worker" :style="{ left: (r.from / WEEKS) * 100 + '%', width: (r.span / WEEKS) * 100 + '%' }" @click="router.push('/farm/find')">
+              <div class="bar worker" :style="{ left: (r.from / WEEKS) * 100 + '%', width: (r.span / WEEKS) * 100 + '%' }" @click="router.push('/farm/candidates')">
                 <span class="ellipsis">{{ r.w.skills.join(' · ') }}</span>
                 <q-tooltip>{{ r.w.name }} · available {{ r.w.available[0] }} → {{ r.w.available[1] }} · click to invite</q-tooltip>
               </div>
@@ -158,7 +162,7 @@ const months = computed(() => weeks.filter((w) => w.firstOfMonth))
         </div>
       </div>
     </div>
-  </q-page>
+  </component>
 </template>
 
 <style scoped>

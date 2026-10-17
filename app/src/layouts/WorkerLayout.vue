@@ -22,16 +22,17 @@ const unread = unreadFor('worker', state.me)
 
         <q-footer class="bg-surface" style="border-top: 1px solid var(--line)">
           <q-tabs dense no-caps active-color="primary" indicator-color="primary" class="text-grey-7" align="justify">
-            <q-route-tab to="/worker" exact icon="o_badge" :label="t('profile')" />
+            <q-route-tab to="/worker" exact icon="o_home" :label="t('home')" />
             <q-route-tab to="/worker/jobs" icon="o_work_outline" :label="t('jobs')">
               <q-badge v-if="Object.entries(state.invitations).some(([k, v]) => k.endsWith(state.me) && v === 'Invited')" color="negative" floating rounded>1</q-badge>
             </q-route-tab>
-            <q-route-tab to="/worker/chat" icon="o_chat_bubble_outline" :label="t('chat')">
+            <q-route-tab to="/worker/chat" icon="o_forum" :label="t('inbox')">
               <q-badge v-if="unread" color="negative" floating rounded>{{ unread }}</q-badge>
             </q-route-tab>
-            <q-route-tab to="/worker/earnings" icon="o_account_balance_wallet" :label="t('earnings')">
+            <q-route-tab to="/worker/earnings" icon="o_schedule" :label="t('timesheets')">
               <q-badge v-if="state.week.status === 'Pending'" color="warning" floating rounded>1</q-badge>
             </q-route-tab>
+            <q-route-tab to="/worker/profile" icon="o_badge" :label="t('profile')" />
           </q-tabs>
         </q-footer>
 

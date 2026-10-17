@@ -5,6 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { Capacitor } from '@capacitor/core'
 import FarmMap from '../../components/FarmMap.vue'
+import WorkerRights from './WorkerRights.vue'
 import AgreementView from '../../components/AgreementView.vue'
 import { t, lang } from '../../data/i18n.js'
 import { state, farm, fairRecord, fmtShort } from '../../data/store.js'
@@ -52,7 +53,8 @@ function directions() {
     <q-tabs v-model="tab" dense no-caps align="justify" active-color="primary" indicator-color="primary" class="text-grey-7 card q-mb-md">
       <q-tab name="details" icon="o_info" :label="t('details')" />
       <q-tab name="location" icon="o_place" :label="t('location')" />
-      <q-tab v-if="agreement" name="agreement" icon="o_handshake" :label="t('agreement')">
+      <q-tab v-if="invitation === 'Accepted'" name="prepare" icon="o_shield" :label="t('prepare')" />
+      <q-tab v-if="agreement" name="agreement" icon="o_handshake" :label="t('tabContract')">
         <q-badge v-if="agreement.state === 'sent'" color="warning" floating rounded>1</q-badge>
       </q-tab>
     </q-tabs>
@@ -74,7 +76,9 @@ function directions() {
 
         <div class="card q-pa-md">
           <div class="text-caption text-weight-bold"><q-icon name="verified" color="primary" class="q-mr-xs" />{{ t('fairRecord') }}</div>
-          <div class="text-body2 q-mt-xs"><b>{{ fairRecord.confirmedShare }}%</b> {{ t('confirmedByWorkers') }} · <b>{{ fairRecord.writtenTerms }}%</b> {{ t('writtenTerms') }}</div>
+          <div v-if="state.farmShare.fairRecord" class="text-body2 q-mt-xs"><b>{{ fairRecord.confirmedShare }}%</b> {{ t('confirmedByWorkers') }} · <b>{{ fairRecord.writtenTerms }}%</b> {{ t('writtenTerms') }}</div>
+          <div v-if="state.farmShare.returning" class="text-body2 q-mt-xs"><b>{{ fairRecord.returning }}</b> {{ t('returningWorkers') }}</div>
+          <div v-if="!state.farmShare.fairRecord && !state.farmShare.returning" class="text-body2 text-muted q-mt-xs"><q-icon name="o_visibility_off" class="q-mr-xs" />{{ t('farmNotShared') }}</div>
         </div>
 
         <q-banner v-if="agreement" rounded class="bg-sage-soft cursor-pointer" @click="tab = 'agreement'">
@@ -90,18 +94,29 @@ function directions() {
           {{ invitation === 'Accepted' ? t('accepted') : t('declined') }}
         </q-banner>
 
+        <q-btn v-if="invitation === 'Accepted'" unelevated color="primary" no-caps icon="o_shield" :label="t('stepPrepare')" @click="tab = 'prepare'" />
         <q-btn outline color="primary" no-caps icon="o_chat_bubble_outline" :label="t('messageFarm')" to="/worker/chat" />
       </q-tab-panel>
 
       <!-- Location -->
       <q-tab-panel name="location" class="q-pa-none">
-        <FarmMap v-if="tab === 'location'" :location="loc" :housing="housing" :region="milano" />
+        <template v-if="state.farmShare.location">
+        <FarmMap v-if="tab === 'location'" :location="loc" :housing="state.farmShare.housing ? housing : null" :region="milano" />
         <q-btn unelevated color="primary" no-caps icon="o_directions" :label="t('directions')" class="full-width q-mt-md" size="lg" @click="directions" />
+        </template>
+        <div v-else class="card q-pa-lg text-center text-muted"><q-icon name="o_visibility_off" size="28px" /><div class="q-mt-sm">{{ t('farmNotShared') }}</div></div>
         <div class="card q-pa-md q-mt-md">
           <div class="row items-center q-mb-sm"><q-icon name="agriculture" color="primary" size="20px" class="q-mr-sm" /><span class="text-weight-bold">{{ t('yard') }}</span></div>
-          <div class="row items-center"><q-icon name="home" color="accent" size="20px" class="q-mr-sm" /><span class="text-weight-bold">{{ t('housingPin') }}</span><span class="text-caption text-muted q-ml-sm">~ 600 m</span></div>
+          <div class="row items-center"><q-icon name="home" color="accent" size="20px" class="q-mr-sm" /><span class="text-weight-bold">{{ t('housingPin') }}</span>
+            <span v-if="state.farmShare.housing" class="text-caption text-muted q-ml-sm">~ 600 m</span>
+            <span v-else class="text-caption text-muted q-ml-sm">{{ t('farmNotShared') }}</span></div>
         </div>
         <div class="text-caption text-muted q-mt-sm"><q-icon name="o_info" /> {{ t('approx') }}</div>
+      </q-tab-panel>
+
+      <!-- Prepare: the "before you go" checklist and rights, combined from the Rights screen -->
+      <q-tab-panel v-if="invitation === 'Accepted'" name="prepare" class="q-pa-none">
+        <WorkerRights embedded class="q-pa-none" />
       </q-tab-panel>
 
       <!-- Agreement -->
