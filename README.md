@@ -1,9 +1,97 @@
-# kuluri-site
+# Kuluri
 
-Project site, diagrams and deck assets for [Kuluri](https://github.com/lindangulopez/kuluri), Team 27, EU Agri-Hackathon 2026
+**Record once, share with control.**
 
-- Site: https://lindangulopez.github.io/kuluri-site/
-- `diagrams/`: interactive HTML diagrams (Archify) and their exports
-- `deck/`: images used in the pitch deck
+Kuluri connects farms and seasonal workers through agreements and work records that the workers confirm themselves. Buyers' requests and public administrations' reports are answered from that evidence, with totals only and never personal data.
 
-Licence: [CC BY 4.0](LICENSE).
+The app was built by Team 27 at the [EU Agri-Hackathon 2026](https://agrihackathon.iservice-europa.eu/) (DG AGRI), Challenge 3 "Flowing data, empowered collaboration".
+
+- Project site: <https://lindangulopez.github.io/kuluri-site/>
+- Task board: [Kuluri, EU Agri-Hackathon](https://github.com/users/lindangulopez/projects/17)
+- Status: **prototype**, using synthetic and simulated data. Read the [terms of use](TERMS.md) before using it.
+
+## What is in this repository
+
+| Path | What |
+| --- | --- |
+| [`app/`](app/) | The app: Vue 3 + Quasar, a web app plus an Android app through Capacitor. Screen-by-screen guide in [`app/README.md`](app/README.md) |
+| [`app/scripts/`](app/scripts/) | `extract_farm.py` (farm data from the organisers' dataset) and `fetch_nuts.sh` (NUTS region outlines) |
+| [`deck/`](deck/) | Pitch deck |
+| [`diagrams/`](diagrams/) | Architecture diagrams (Archify) |
+| `index.md`, `_config.yml` | The project site (GitHub Pages, Jekyll) |
+| [`TERMS.md`](TERMS.md) | Terms of use and disclaimer |
+| [`AUTHORS.md`](AUTHORS.md), [`CITATION.cff`](CITATION.cff), [`codemeta.json`](codemeta.json) | Who made it, how to cite it, metadata |
+
+## Run it on your computer
+
+You need **Node.js 22** or later and Git. Vite 8 needs at least 20.19, and the Capacitor CLI needs 22. To check your version, run `node --version`. To install Node 22 with [nvm](https://github.com/nvm-sh/nvm):
+
+```bash
+nvm install 22 && nvm use 22
+```
+
+Then:
+
+```bash
+git clone https://github.com/lindangulopez/kuluri-site.git
+cd kuluri-site/app
+npm install
+npm run dev          # open http://localhost:5173
+```
+
+At `http://localhost:5173`, choose **Farm** to open the farmer dashboard, or **Worker** to open the worker app (best in a phone-sized window).
+
+```bash
+npm run build        # production build in app/dist
+npm run preview      # serve the build locally
+```
+
+### Android
+
+You need [Android Studio](https://developer.android.com/studio) with an Android SDK. The app targets API 36, and the minimum is API 24.
+
+```bash
+cd app
+npm run android:sync   # build the web app and copy it into android/
+npm run android:open   # open the project in Android Studio, then Run ▶ on a device or emulator
+```
+
+### Refreshing the data (optional)
+
+The farm data in `app/src/data/` was already extracted from the organisers' synthetic dataset, so you do not need the dataset to run the app. To extract it again, place the dataset in `dg-agri-hackathon-datasets/` at the repository root (it is git-ignored, about 12 GB), then run:
+
+```bash
+python app/scripts/extract_farm.py
+bash app/scripts/fetch_nuts.sh      # NUTS 2024 outlines from Eurostat GISCO
+```
+
+## Data
+
+- **From the synthetic dataset**: the farm FARM-13079 (Milano, NUTS3 ITC4C), with its parcels, inputs, certificate, sales and regular workers' hours.
+- **Simulated**: job posts, the worker pool, seasonal workers, chats, agreements and confirmations. The dataset has no seasonal workers or jobs.
+- No real personal data is used.
+
+## AI in the product
+
+- The "chat analysis" that drafts agreement terms is **rule-based** in this prototype (`app/src/data/agreements.js`).
+- Planned: transcription and translation of voice messages by an AI service, always shown next to the original, which is what counts.
+- AI tools (coding assistants, Archify diagrams) helped develop the prototype.
+
+## Agreements, fingerprints and blockchain
+
+- Each confirmed agreement or week of work gets a SHA-256 fingerprint. If anyone changes the record, the fingerprint no longer matches.
+- Writing fingerprints to a blockchain is **simulated** in this prototype. Only salted hashes, never personal data, will go on the chain.
+- An agreement in Kuluri records the agreed terms and the intention to work together. **It is not an employment contract, and Kuluri does not guarantee that either party respects it.** See the [terms of use](TERMS.md), section 3.
+
+## Contribute
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md). In short: pick or open an issue, work on a branch, make a small pull request, and never commit the dataset, keys or real personal data.
+
+## Cite
+
+See [`CITATION.cff`](CITATION.cff); GitHub shows a "Cite this repository" button. The metadata is also in [`codemeta.json`](codemeta.json).
+
+## Licence
+
+- Code in [`app/`](app/): [MIT](app/LICENSE).
+- Text, diagrams and the deck: [CC BY 4.0](LICENSE).

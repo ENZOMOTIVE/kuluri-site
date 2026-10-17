@@ -1,0 +1,76 @@
+{
+  "@context": "https://w3id.org/codemeta/3.0",
+  "type": "SoftwareSourceCode",
+  "name": "Kuluri",
+  "description": "Prototype app that connects farms and seasonal workers through agreements and work records the workers confirm themselves. Confirmed records are fingerprinted and can answer buyers' and public administrations' requests with totals only. Built at the EU Agri-Hackathon 2026 (DG AGRI), Challenge 3, on the organisers' synthetic dataset.",
+  "version": "0.2.0",
+  "dateCreated": "2026-10-16",
+  "codeRepository": "https://github.com/lindangulopez/kuluri-site",
+  "url": "https://lindangulopez.github.io/kuluri-site/",
+  "issueTracker": "https://github.com/lindangulopez/kuluri-site/issues",
+  "license": [
+    "https://spdx.org/licenses/MIT",
+    "https://spdx.org/licenses/CC-BY-4.0"
+  ],
+  "developmentStatus": "https://www.repostatus.org/#wip",
+  "applicationCategory": "Agriculture",
+  "keywords": [
+    "agriculture",
+    "seasonal workers",
+    "fair working conditions",
+    "CAP social conditionality",
+    "data sovereignty",
+    "work records"
+  ],
+  "programmingLanguage": [
+    "JavaScript",
+    "Vue",
+    "Python"
+  ],
+  "runtimePlatform": "Node.js >= 22",
+  "operatingSystem": [
+    "Web browser",
+    "Android"
+  ],
+  "softwareRequirements": [
+    "vue 3.5",
+    "quasar 2.35",
+    "vite 8",
+    "@capacitor/core 8.5",
+    "maplibre-gl 5",
+    "jspdf 4"
+  ],
+  "readme": "https://github.com/lindangulopez/kuluri-site/blob/main/README.md",
+  "author": [
+    {
+      "type": "Person",
+      "givenName": "Linda",
+      "familyName": "Angulo Lopez",
+      "id": "https://github.com/lindangulopez"
+    },
+    {
+      "type": "Person",
+      "givenName": "Aayushman",
+      "familyName": "Bhaba Padhy",
+      "id": "https://github.com/ENZOMOTIVE"
+    },
+    {
+      "type": "Person",
+      "givenName": "Juan",
+      "familyName": "Zotes Orcajo",
+      "id": "https://github.com/juanzotes"
+    },
+    {
+      "type": "Person",
+      "givenName": "Maria",
+      "familyName": "Filippou",
+      "id": "https://github.com/filippoumaria"
+    }
+  ],
+  "maintainer": {
+    "type": "Person",
+    "givenName": "Linda",
+    "familyName": "Angulo Lopez",
+    "id": "https://github.com/lindangulopez"
+  }
+}
