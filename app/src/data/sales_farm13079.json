@@ -1,0 +1,4097 @@
+{
+ "farm": "FARM-13079",
+ "source": "combined_challenge3_sales_certification_ready, synthetic_traceability, synthetic_market_price (synthetic)",
+ "sales": [
+  {
+   "id": 231849,
+   "date": "2017-06-12",
+   "year": 2017,
+   "product": "RAPE",
+   "volume_t": 93.76,
+   "price_eur_t": 529.63,
+   "value_eur": 49658.11,
+   "ref_price_eur_t": 510.16,
+   "price_dev_pct": 3.82,
+   "buyer": "BUYER-007",
+   "grade": "A",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231851,
+   "date": "2018-04-02",
+   "year": 2018,
+   "product": "BARL",
+   "volume_t": 285.22,
+   "price_eur_t": 204.73,
+   "value_eur": 58393.09,
+   "ref_price_eur_t": 201.26,
+   "price_dev_pct": 1.72,
+   "buyer": "BUYER-022",
+   "grade": "B",
+   "contract": "COOPERATIVE",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231853,
+   "date": "2018-04-04",
+   "year": 2018,
+   "product": "RAPE",
+   "volume_t": 111.34,
+   "price_eur_t": 474.75,
+   "value_eur": 52858.67,
+   "ref_price_eur_t": 484.7,
+   "price_dev_pct": -2.05,
+   "buyer": "BUYER-007",
+   "grade": "B",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231852,
+   "date": "2018-07-22",
+   "year": 2018,
+   "product": "MAIZ",
+   "volume_t": 575.69,
+   "price_eur_t": 234.74,
+   "value_eur": 135137.47,
+   "ref_price_eur_t": 229.88,
+   "price_dev_pct": 2.11,
+   "buyer": "BUYER-034",
+   "grade": "B",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231850,
+   "date": "2018-10-28",
+   "year": 2018,
+   "product": "SUNF",
+   "volume_t": 155.87,
+   "price_eur_t": 394.94,
+   "value_eur": 61559.3,
+   "ref_price_eur_t": 388.77,
+   "price_dev_pct": 1.59,
+   "buyer": "BUYER-032",
+   "grade": "A",
+   "contract": "SPOT",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231855,
+   "date": "2019-11-26",
+   "year": 2019,
+   "product": "RAPE",
+   "volume_t": 101.78,
+   "price_eur_t": 451.9,
+   "value_eur": 45994.38,
+   "ref_price_eur_t": 443.88,
+   "price_dev_pct": 1.81,
+   "buyer": "BUYER-037",
+   "grade": "A",
+   "contract": "COOPERATIVE",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231854,
+   "date": "2019-12-17",
+   "year": 2019,
+   "product": "BARL",
+   "volume_t": 481.37,
+   "price_eur_t": 184.05,
+   "value_eur": 88596.15,
+   "ref_price_eur_t": 186.5,
+   "price_dev_pct": -1.31,
+   "buyer": "BUYER-023",
+   "grade": "A",
+   "contract": "COOPERATIVE",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231856,
+   "date": "2020-07-03",
+   "year": 2020,
+   "product": "RAPE",
+   "volume_t": 67.98,
+   "price_eur_t": 473.15,
+   "value_eur": 32164.74,
+   "ref_price_eur_t": 483.17,
+   "price_dev_pct": -2.07,
+   "buyer": "BUYER-023",
+   "grade": "B",
+   "contract": "SPOT",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231857,
+   "date": "2020-11-11",
+   "year": 2020,
+   "product": "SUNF",
+   "volume_t": 149.12,
+   "price_eur_t": 375.61,
+   "value_eur": 56010.96,
+   "ref_price_eur_t": 367.27,
+   "price_dev_pct": 2.27,
+   "buyer": "BUYER-025",
+   "grade": "B",
+   "contract": "COOPERATIVE",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231859,
+   "date": "2021-03-26",
+   "year": 2021,
+   "product": "BARL",
+   "volume_t": 392.83,
+   "price_eur_t": 212.85,
+   "value_eur": 83613.87,
+   "ref_price_eur_t": 216.02,
+   "price_dev_pct": -1.47,
+   "buyer": "BUYER-004",
+   "grade": "B",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231860,
+   "date": "2021-07-25",
+   "year": 2021,
+   "product": "MAIZ",
+   "volume_t": 711.03,
+   "price_eur_t": 238.87,
+   "value_eur": 169843.74,
+   "ref_price_eur_t": 236.09,
+   "price_dev_pct": 1.18,
+   "buyer": "BUYER-024",
+   "grade": "A",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231861,
+   "date": "2021-09-11",
+   "year": 2021,
+   "product": "SUNF",
+   "volume_t": 107.46,
+   "price_eur_t": 446.39,
+   "value_eur": 47969.07,
+   "ref_price_eur_t": 440.72,
+   "price_dev_pct": 1.29,
+   "buyer": "BUYER-030",
+   "grade": "A",
+   "contract": "SPOT",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231858,
+   "date": "2021-11-23",
+   "year": 2021,
+   "product": "COWT",
+   "volume_t": 1018.27,
+   "price_eur_t": 206.26,
+   "value_eur": 210028.37,
+   "ref_price_eur_t": 212.94,
+   "price_dev_pct": -3.14,
+   "buyer": "BUYER-033",
+   "grade": "B",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231863,
+   "date": "2022-02-26",
+   "year": 2022,
+   "product": "RAPE",
+   "volume_t": 83.46,
+   "price_eur_t": 598.57,
+   "value_eur": 49956.65,
+   "ref_price_eur_t": 594.88,
+   "price_dev_pct": 0.62,
+   "buyer": "BUYER-034",
+   "grade": "B",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231864,
+   "date": "2022-05-18",
+   "year": 2022,
+   "product": "BARL",
+   "volume_t": 407.79,
+   "price_eur_t": 270.67,
+   "value_eur": 110376.52,
+   "ref_price_eur_t": 278.98,
+   "price_dev_pct": -2.98,
+   "buyer": "BUYER-006",
+   "grade": "B",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231862,
+   "date": "2022-05-26",
+   "year": 2022,
+   "product": "SUNF",
+   "volume_t": 134.22,
+   "price_eur_t": 575.5,
+   "value_eur": 77243.61,
+   "ref_price_eur_t": 572.12,
+   "price_dev_pct": 0.59,
+   "buyer": "BUYER-011",
+   "grade": "A",
+   "contract": "COOPERATIVE",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231867,
+   "date": "2023-05-06",
+   "year": 2023,
+   "product": "RAPE",
+   "volume_t": 94.99,
+   "price_eur_t": 614.94,
+   "value_eur": 58413.15,
+   "ref_price_eur_t": 601.95,
+   "price_dev_pct": 2.16,
+   "buyer": "BUYER-036",
+   "grade": "A",
+   "contract": "COOPERATIVE",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231868,
+   "date": "2023-06-16",
+   "year": 2023,
+   "product": "COWT",
+   "volume_t": 565.32,
+   "price_eur_t": 282.5,
+   "value_eur": 159702.9,
+   "ref_price_eur_t": 288.05,
+   "price_dev_pct": -1.93,
+   "buyer": "BUYER-035",
+   "grade": "C",
+   "contract": "FORWARD",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231866,
+   "date": "2023-09-19",
+   "year": 2023,
+   "product": "SUNF",
+   "volume_t": 131.0,
+   "price_eur_t": 474.68,
+   "value_eur": 62183.08,
+   "ref_price_eur_t": 493.05,
+   "price_dev_pct": -3.73,
+   "buyer": "BUYER-019",
+   "grade": "B",
+   "contract": "COOPERATIVE",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231865,
+   "date": "2023-10-09",
+   "year": 2023,
+   "product": "BARL",
+   "volume_t": 464.96,
+   "price_eur_t": 221.85,
+   "value_eur": 103151.38,
+   "ref_price_eur_t": 226.78,
+   "price_dev_pct": -2.17,
+   "buyer": "BUYER-025",
+   "grade": "A",
+   "contract": "COOPERATIVE",
+   "certified": false,
+   "cert_status": "no_date_valid_holding_certificate"
+  },
+  {
+   "id": 231869,
+   "date": "2024-02-04",
+   "year": 2024,
+   "product": "RAPE",
+   "volume_t": 92.81,
+   "price_eur_t": 507.61,
+   "value_eur": 47111.28,
+   "ref_price_eur_t": 489.54,
+   "price_dev_pct": 3.69,
+   "buyer": "BUYER-014",
+   "grade": "B",
+   "contract": "FORWARD",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231870,
+   "date": "2024-07-03",
+   "year": 2024,
+   "product": "COWT",
+   "volume_t": 561.63,
+   "price_eur_t": 248.65,
+   "value_eur": 139649.3,
+   "ref_price_eur_t": 251.55,
+   "price_dev_pct": -1.15,
+   "buyer": "BUYER-034",
+   "grade": "B",
+   "contract": "COOPERATIVE",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231872,
+   "date": "2025-01-24",
+   "year": 2025,
+   "product": "MAIZ",
+   "volume_t": 533.97,
+   "price_eur_t": 192.06,
+   "value_eur": 102554.28,
+   "ref_price_eur_t": 186.68,
+   "price_dev_pct": 2.88,
+   "buyer": "BUYER-007",
+   "grade": "A",
+   "contract": "SPOT",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231874,
+   "date": "2025-01-24",
+   "year": 2025,
+   "product": "SUNF",
+   "volume_t": 120.21,
+   "price_eur_t": 362.03,
+   "value_eur": 43519.63,
+   "ref_price_eur_t": 369.43,
+   "price_dev_pct": -2.0,
+   "buyer": "BUYER-017",
+   "grade": "A",
+   "contract": "COOPERATIVE",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231871,
+   "date": "2025-10-07",
+   "year": 2025,
+   "product": "RAPE",
+   "volume_t": 93.72,
+   "price_eur_t": 426.8,
+   "value_eur": 39999.7,
+   "ref_price_eur_t": 441.96,
+   "price_dev_pct": -3.43,
+   "buyer": "BUYER-016",
+   "grade": "A",
+   "contract": "SPOT",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231873,
+   "date": "2025-11-15",
+   "year": 2025,
+   "product": "BARL",
+   "volume_t": 515.57,
+   "price_eur_t": 185.85,
+   "value_eur": 95818.68,
+   "ref_price_eur_t": 179.89,
+   "price_dev_pct": 3.31,
+   "buyer": "BUYER-020",
+   "grade": "A",
+   "contract": "SPOT",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231877,
+   "date": "2026-03-20",
+   "year": 2026,
+   "product": "COWT",
+   "volume_t": 774.69,
+   "price_eur_t": 218.06,
+   "value_eur": 168928.9,
+   "ref_price_eur_t": 221.13,
+   "price_dev_pct": -1.39,
+   "buyer": "BUYER-007",
+   "grade": "A",
+   "contract": "COOPERATIVE",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231876,
+   "date": "2026-05-26",
+   "year": 2026,
+   "product": "MAIZ",
+   "volume_t": 596.5,
+   "price_eur_t": 232.07,
+   "value_eur": 138429.76,
+   "ref_price_eur_t": 232.31,
+   "price_dev_pct": -0.1,
+   "buyer": "BUYER-013",
+   "grade": "A",
+   "contract": "SPOT",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231875,
+   "date": "2026-07-10",
+   "year": 2026,
+   "product": "BARL",
+   "volume_t": 454.25,
+   "price_eur_t": 224.66,
+   "value_eur": 102051.81,
+   "ref_price_eur_t": 218.95,
+   "price_dev_pct": 2.61,
+   "buyer": "BUYER-027",
+   "grade": "B",
+   "contract": "FORWARD",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  },
+  {
+   "id": 231878,
+   "date": "2026-09-22",
+   "year": 2026,
+   "product": "RAPE",
+   "volume_t": 72.52,
+   "price_eur_t": 465.6,
+   "value_eur": 33765.31,
+   "ref_price_eur_t": 479.28,
+   "price_dev_pct": -2.85,
+   "buyer": "BUYER-033",
+   "grade": "B",
+   "contract": "SPOT",
+   "certified": true,
+   "cert_status": "holding_certificate_context_only"
+  }
+ ],
+ "certificates": [
+  {
+   "scheme": "ORGANIC",
+   "body": "CB-FR-02",
+   "from": "2024-01-01",
+   "to": "2026-12-31",
+   "lot_prefix": "ORG-13079"
+  }
+ ],
+ "reference_prices": [
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 1,
+   "price_eur_t": 194.74
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 2,
+   "price_eur_t": 212.4
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 3,
+   "price_eur_t": 217.3
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 4,
+   "price_eur_t": 217.93
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 5,
+   "price_eur_t": 224.56
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 6,
+   "price_eur_t": 237.86
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 7,
+   "price_eur_t": 229.46
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 8,
+   "price_eur_t": 226.45
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 9,
+   "price_eur_t": 218.47
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 10,
+   "price_eur_t": 203.18
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 11,
+   "price_eur_t": 202.74
+  },
+  {
+   "product": "COWT",
+   "year": 2017,
+   "month": 12,
+   "price_eur_t": 193.63
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 1,
+   "price_eur_t": 207.96
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 2,
+   "price_eur_t": 209.07
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 3,
+   "price_eur_t": 215.5
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 4,
+   "price_eur_t": 225.09
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 5,
+   "price_eur_t": 233.44
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 6,
+   "price_eur_t": 231.84
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 7,
+   "price_eur_t": 234.04
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 8,
+   "price_eur_t": 222.41
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 9,
+   "price_eur_t": 224.17
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 10,
+   "price_eur_t": 215.01
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 11,
+   "price_eur_t": 206.89
+  },
+  {
+   "product": "COWT",
+   "year": 2018,
+   "month": 12,
+   "price_eur_t": 200.03
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 1,
+   "price_eur_t": 200.97
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 2,
+   "price_eur_t": 203.17
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 3,
+   "price_eur_t": 213.85
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 4,
+   "price_eur_t": 231.61
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 5,
+   "price_eur_t": 234.54
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 6,
+   "price_eur_t": 236.97
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 7,
+   "price_eur_t": 235.09
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 8,
+   "price_eur_t": 224.81
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 9,
+   "price_eur_t": 212.59
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 10,
+   "price_eur_t": 203.2
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 11,
+   "price_eur_t": 200.52
+  },
+  {
+   "product": "COWT",
+   "year": 2019,
+   "month": 12,
+   "price_eur_t": 200.81
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 1,
+   "price_eur_t": 195.77
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 2,
+   "price_eur_t": 197.22
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 3,
+   "price_eur_t": 205.21
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 4,
+   "price_eur_t": 216.26
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 5,
+   "price_eur_t": 220.7
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 6,
+   "price_eur_t": 224.25
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 7,
+   "price_eur_t": 219.29
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 8,
+   "price_eur_t": 217.57
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 9,
+   "price_eur_t": 204.73
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 10,
+   "price_eur_t": 203.04
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 11,
+   "price_eur_t": 192.0
+  },
+  {
+   "product": "COWT",
+   "year": 2020,
+   "month": 12,
+   "price_eur_t": 189.63
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 1,
+   "price_eur_t": 215.92
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 2,
+   "price_eur_t": 222.06
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 3,
+   "price_eur_t": 239.81
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 4,
+   "price_eur_t": 247.23
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 5,
+   "price_eur_t": 256.94
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 6,
+   "price_eur_t": 257.3
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 7,
+   "price_eur_t": 250.4
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 8,
+   "price_eur_t": 244.31
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 9,
+   "price_eur_t": 235.97
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 10,
+   "price_eur_t": 219.09
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 11,
+   "price_eur_t": 212.94
+  },
+  {
+   "product": "COWT",
+   "year": 2021,
+   "month": 12,
+   "price_eur_t": 210.29
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 1,
+   "price_eur_t": 270.21
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 2,
+   "price_eur_t": 274.17
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 3,
+   "price_eur_t": 296.51
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 4,
+   "price_eur_t": 300.44
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 5,
+   "price_eur_t": 299.48
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 6,
+   "price_eur_t": 319.99
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 7,
+   "price_eur_t": 299.58
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 8,
+   "price_eur_t": 292.73
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 9,
+   "price_eur_t": 296.5
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 10,
+   "price_eur_t": 279.46
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 11,
+   "price_eur_t": 268.08
+  },
+  {
+   "product": "COWT",
+   "year": 2022,
+   "month": 12,
+   "price_eur_t": 262.68
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 1,
+   "price_eur_t": 247.98
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 2,
+   "price_eur_t": 247.68
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 3,
+   "price_eur_t": 269.41
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 4,
+   "price_eur_t": 279.92
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 5,
+   "price_eur_t": 275.12
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 6,
+   "price_eur_t": 288.05
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 7,
+   "price_eur_t": 277.66
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 8,
+   "price_eur_t": 270.68
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 9,
+   "price_eur_t": 264.16
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 10,
+   "price_eur_t": 254.18
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 11,
+   "price_eur_t": 239.49
+  },
+  {
+   "product": "COWT",
+   "year": 2023,
+   "month": 12,
+   "price_eur_t": 244.78
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 1,
+   "price_eur_t": 222.85
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 2,
+   "price_eur_t": 224.43
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 3,
+   "price_eur_t": 243.05
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 4,
+   "price_eur_t": 244.41
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 5,
+   "price_eur_t": 259.71
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 6,
+   "price_eur_t": 254.45
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 7,
+   "price_eur_t": 251.55
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 8,
+   "price_eur_t": 255.7
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 9,
+   "price_eur_t": 235.84
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 10,
+   "price_eur_t": 237.05
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 11,
+   "price_eur_t": 220.42
+  },
+  {
+   "product": "COWT",
+   "year": 2024,
+   "month": 12,
+   "price_eur_t": 218.64
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 1,
+   "price_eur_t": 196.78
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 2,
+   "price_eur_t": 203.35
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 3,
+   "price_eur_t": 217.91
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 4,
+   "price_eur_t": 221.27
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 5,
+   "price_eur_t": 229.07
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 6,
+   "price_eur_t": 236.86
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 7,
+   "price_eur_t": 236.44
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 8,
+   "price_eur_t": 221.58
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 9,
+   "price_eur_t": 219.4
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 10,
+   "price_eur_t": 204.75
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 11,
+   "price_eur_t": 201.27
+  },
+  {
+   "product": "COWT",
+   "year": 2025,
+   "month": 12,
+   "price_eur_t": 201.45
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 1,
+   "price_eur_t": 209.55
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 2,
+   "price_eur_t": 215.79
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 3,
+   "price_eur_t": 221.13
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 4,
+   "price_eur_t": 223.65
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 5,
+   "price_eur_t": 233.13
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 6,
+   "price_eur_t": 240.37
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 7,
+   "price_eur_t": 242.51
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 8,
+   "price_eur_t": 233.73
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 9,
+   "price_eur_t": 215.92
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 10,
+   "price_eur_t": 212.43
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 11,
+   "price_eur_t": 208.93
+  },
+  {
+   "product": "COWT",
+   "year": 2026,
+   "month": 12,
+   "price_eur_t": 202.32
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 1,
+   "price_eur_t": 181.46
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 2,
+   "price_eur_t": 184.27
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 3,
+   "price_eur_t": 199.72
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 4,
+   "price_eur_t": 198.89
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 5,
+   "price_eur_t": 203.98
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 6,
+   "price_eur_t": 210.48
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 7,
+   "price_eur_t": 213.91
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 8,
+   "price_eur_t": 206.47
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 9,
+   "price_eur_t": 192.75
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 10,
+   "price_eur_t": 186.31
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 11,
+   "price_eur_t": 179.13
+  },
+  {
+   "product": "BARL",
+   "year": 2017,
+   "month": 12,
+   "price_eur_t": 177.31
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 1,
+   "price_eur_t": 188.13
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 2,
+   "price_eur_t": 186.73
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 3,
+   "price_eur_t": 195.65
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 4,
+   "price_eur_t": 201.26
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 5,
+   "price_eur_t": 216.91
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 6,
+   "price_eur_t": 210.53
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 7,
+   "price_eur_t": 211.8
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 8,
+   "price_eur_t": 206.54
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 9,
+   "price_eur_t": 197.95
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 10,
+   "price_eur_t": 191.66
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 11,
+   "price_eur_t": 187.33
+  },
+  {
+   "product": "BARL",
+   "year": 2018,
+   "month": 12,
+   "price_eur_t": 179.01
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 1,
+   "price_eur_t": 188.11
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 2,
+   "price_eur_t": 189.67
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 3,
+   "price_eur_t": 199.6
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 4,
+   "price_eur_t": 207.57
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 5,
+   "price_eur_t": 208.24
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 6,
+   "price_eur_t": 207.84
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 7,
+   "price_eur_t": 210.66
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 8,
+   "price_eur_t": 204.77
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 9,
+   "price_eur_t": 193.93
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 10,
+   "price_eur_t": 185.79
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 11,
+   "price_eur_t": 184.38
+  },
+  {
+   "product": "BARL",
+   "year": 2019,
+   "month": 12,
+   "price_eur_t": 186.5
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 1,
+   "price_eur_t": 175.94
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 2,
+   "price_eur_t": 181.66
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 3,
+   "price_eur_t": 189.22
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 4,
+   "price_eur_t": 194.3
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 5,
+   "price_eur_t": 200.6
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 6,
+   "price_eur_t": 198.34
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 7,
+   "price_eur_t": 198.93
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 8,
+   "price_eur_t": 197.21
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 9,
+   "price_eur_t": 194.42
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 10,
+   "price_eur_t": 176.2
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 11,
+   "price_eur_t": 172.3
+  },
+  {
+   "product": "BARL",
+   "year": 2020,
+   "month": 12,
+   "price_eur_t": 170.2
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 1,
+   "price_eur_t": 197.59
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 2,
+   "price_eur_t": 200.7
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 3,
+   "price_eur_t": 216.02
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 4,
+   "price_eur_t": 223.1
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 5,
+   "price_eur_t": 223.92
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 6,
+   "price_eur_t": 232.49
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 7,
+   "price_eur_t": 226.83
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 8,
+   "price_eur_t": 215.12
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 9,
+   "price_eur_t": 208.6
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 10,
+   "price_eur_t": 200.68
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 11,
+   "price_eur_t": 192.61
+  },
+  {
+   "product": "BARL",
+   "year": 2021,
+   "month": 12,
+   "price_eur_t": 196.03
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 1,
+   "price_eur_t": 242.4
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 2,
+   "price_eur_t": 256.19
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 3,
+   "price_eur_t": 259.89
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 4,
+   "price_eur_t": 269.5
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 5,
+   "price_eur_t": 278.98
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 6,
+   "price_eur_t": 288.17
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 7,
+   "price_eur_t": 275.75
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 8,
+   "price_eur_t": 268.72
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 9,
+   "price_eur_t": 262.84
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 10,
+   "price_eur_t": 253.2
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 11,
+   "price_eur_t": 243.45
+  },
+  {
+   "product": "BARL",
+   "year": 2022,
+   "month": 12,
+   "price_eur_t": 236.32
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 1,
+   "price_eur_t": 226.1
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 2,
+   "price_eur_t": 228.19
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 3,
+   "price_eur_t": 240.86
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 4,
+   "price_eur_t": 243.02
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 5,
+   "price_eur_t": 251.93
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 6,
+   "price_eur_t": 262.99
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 7,
+   "price_eur_t": 256.27
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 8,
+   "price_eur_t": 253.62
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 9,
+   "price_eur_t": 245.61
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 10,
+   "price_eur_t": 226.78
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 11,
+   "price_eur_t": 226.49
+  },
+  {
+   "product": "BARL",
+   "year": 2023,
+   "month": 12,
+   "price_eur_t": 216.66
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 1,
+   "price_eur_t": 201.41
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 2,
+   "price_eur_t": 213.85
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 3,
+   "price_eur_t": 218.75
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 4,
+   "price_eur_t": 226.24
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 5,
+   "price_eur_t": 228.17
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 6,
+   "price_eur_t": 233.31
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 7,
+   "price_eur_t": 229.51
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 8,
+   "price_eur_t": 231.45
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 9,
+   "price_eur_t": 222.91
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 10,
+   "price_eur_t": 207.12
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 11,
+   "price_eur_t": 206.9
+  },
+  {
+   "product": "BARL",
+   "year": 2024,
+   "month": 12,
+   "price_eur_t": 197.25
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 1,
+   "price_eur_t": 185.36
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 2,
+   "price_eur_t": 190.56
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 3,
+   "price_eur_t": 197.24
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 4,
+   "price_eur_t": 198.68
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 5,
+   "price_eur_t": 204.13
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 6,
+   "price_eur_t": 204.34
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 7,
+   "price_eur_t": 209.07
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 8,
+   "price_eur_t": 197.68
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 9,
+   "price_eur_t": 191.04
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 10,
+   "price_eur_t": 190.18
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 11,
+   "price_eur_t": 179.89
+  },
+  {
+   "product": "BARL",
+   "year": 2025,
+   "month": 12,
+   "price_eur_t": 180.45
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 1,
+   "price_eur_t": 190.19
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 2,
+   "price_eur_t": 188.28
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 3,
+   "price_eur_t": 201.2
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 4,
+   "price_eur_t": 212.72
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 5,
+   "price_eur_t": 212.31
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 6,
+   "price_eur_t": 219.94
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 7,
+   "price_eur_t": 218.95
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 8,
+   "price_eur_t": 206.99
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 9,
+   "price_eur_t": 202.32
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 10,
+   "price_eur_t": 187.65
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 11,
+   "price_eur_t": 183.96
+  },
+  {
+   "product": "BARL",
+   "year": 2026,
+   "month": 12,
+   "price_eur_t": 185.64
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 1,
+   "price_eur_t": 191.35
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 2,
+   "price_eur_t": 199.42
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 3,
+   "price_eur_t": 205.28
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 4,
+   "price_eur_t": 215.98
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 5,
+   "price_eur_t": 215.86
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 6,
+   "price_eur_t": 216.25
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 7,
+   "price_eur_t": 213.65
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 8,
+   "price_eur_t": 219.53
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 9,
+   "price_eur_t": 208.13
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 10,
+   "price_eur_t": 197.33
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 11,
+   "price_eur_t": 188.74
+  },
+  {
+   "product": "MAIZ",
+   "year": 2017,
+   "month": 12,
+   "price_eur_t": 191.81
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 1,
+   "price_eur_t": 192.26
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 2,
+   "price_eur_t": 198.46
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 3,
+   "price_eur_t": 211.1
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 4,
+   "price_eur_t": 213.46
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 5,
+   "price_eur_t": 218.75
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 6,
+   "price_eur_t": 223.09
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 7,
+   "price_eur_t": 229.88
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 8,
+   "price_eur_t": 215.86
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 9,
+   "price_eur_t": 210.24
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 10,
+   "price_eur_t": 201.89
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 11,
+   "price_eur_t": 194.59
+  },
+  {
+   "product": "MAIZ",
+   "year": 2018,
+   "month": 12,
+   "price_eur_t": 186.79
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 1,
+   "price_eur_t": 197.61
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 2,
+   "price_eur_t": 199.75
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 3,
+   "price_eur_t": 201.18
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 4,
+   "price_eur_t": 209.28
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 5,
+   "price_eur_t": 219.45
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 6,
+   "price_eur_t": 229.9
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 7,
+   "price_eur_t": 221.33
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 8,
+   "price_eur_t": 218.29
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 9,
+   "price_eur_t": 206.4
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 10,
+   "price_eur_t": 200.71
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 11,
+   "price_eur_t": 197.93
+  },
+  {
+   "product": "MAIZ",
+   "year": 2019,
+   "month": 12,
+   "price_eur_t": 194.14
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 1,
+   "price_eur_t": 189.05
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 2,
+   "price_eur_t": 190.99
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 3,
+   "price_eur_t": 193.51
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 4,
+   "price_eur_t": 206.25
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 5,
+   "price_eur_t": 207.75
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 6,
+   "price_eur_t": 220.17
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 7,
+   "price_eur_t": 211.93
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 8,
+   "price_eur_t": 207.63
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 9,
+   "price_eur_t": 202.63
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 10,
+   "price_eur_t": 196.48
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 11,
+   "price_eur_t": 185.64
+  },
+  {
+   "product": "MAIZ",
+   "year": 2020,
+   "month": 12,
+   "price_eur_t": 179.79
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 1,
+   "price_eur_t": 214.07
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 2,
+   "price_eur_t": 208.46
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 3,
+   "price_eur_t": 219.07
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 4,
+   "price_eur_t": 226.15
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 5,
+   "price_eur_t": 244.71
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 6,
+   "price_eur_t": 247.11
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 7,
+   "price_eur_t": 236.09
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 8,
+   "price_eur_t": 233.98
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 9,
+   "price_eur_t": 223.16
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 10,
+   "price_eur_t": 211.23
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 11,
+   "price_eur_t": 201.91
+  },
+  {
+   "product": "MAIZ",
+   "year": 2021,
+   "month": 12,
+   "price_eur_t": 210.38
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 1,
+   "price_eur_t": 262.2
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 2,
+   "price_eur_t": 259.57
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 3,
+   "price_eur_t": 271.15
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 4,
+   "price_eur_t": 281.19
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 5,
+   "price_eur_t": 299.96
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 6,
+   "price_eur_t": 302.1
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 7,
+   "price_eur_t": 297.4
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 8,
+   "price_eur_t": 286.27
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 9,
+   "price_eur_t": 269.42
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 10,
+   "price_eur_t": 256.08
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 11,
+   "price_eur_t": 258.78
+  },
+  {
+   "product": "MAIZ",
+   "year": 2022,
+   "month": 12,
+   "price_eur_t": 247.41
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 1,
+   "price_eur_t": 239.98
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 2,
+   "price_eur_t": 245.37
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 3,
+   "price_eur_t": 251.61
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 4,
+   "price_eur_t": 264.92
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 5,
+   "price_eur_t": 269.58
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 6,
+   "price_eur_t": 273.28
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 7,
+   "price_eur_t": 262.95
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 8,
+   "price_eur_t": 261.3
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 9,
+   "price_eur_t": 244.87
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 10,
+   "price_eur_t": 236.9
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 11,
+   "price_eur_t": 232.89
+  },
+  {
+   "product": "MAIZ",
+   "year": 2023,
+   "month": 12,
+   "price_eur_t": 237.19
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 1,
+   "price_eur_t": 212.08
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 2,
+   "price_eur_t": 223.8
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 3,
+   "price_eur_t": 228.98
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 4,
+   "price_eur_t": 244.06
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 5,
+   "price_eur_t": 238.48
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 6,
+   "price_eur_t": 242.56
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 7,
+   "price_eur_t": 250.04
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 8,
+   "price_eur_t": 240.09
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 9,
+   "price_eur_t": 232.37
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 10,
+   "price_eur_t": 217.13
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 11,
+   "price_eur_t": 217.98
+  },
+  {
+   "product": "MAIZ",
+   "year": 2024,
+   "month": 12,
+   "price_eur_t": 213.4
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 1,
+   "price_eur_t": 186.68
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 2,
+   "price_eur_t": 190.9
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 3,
+   "price_eur_t": 199.1
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 4,
+   "price_eur_t": 218.94
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 5,
+   "price_eur_t": 213.11
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 6,
+   "price_eur_t": 219.37
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 7,
+   "price_eur_t": 222.07
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 8,
+   "price_eur_t": 217.43
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 9,
+   "price_eur_t": 208.09
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 10,
+   "price_eur_t": 199.49
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 11,
+   "price_eur_t": 196.47
+  },
+  {
+   "product": "MAIZ",
+   "year": 2025,
+   "month": 12,
+   "price_eur_t": 187.68
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 1,
+   "price_eur_t": 191.52
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 2,
+   "price_eur_t": 201.88
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 3,
+   "price_eur_t": 206.09
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 4,
+   "price_eur_t": 218.51
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 5,
+   "price_eur_t": 232.31
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 6,
+   "price_eur_t": 231.92
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 7,
+   "price_eur_t": 219.42
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 8,
+   "price_eur_t": 223.16
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 9,
+   "price_eur_t": 214.97
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 10,
+   "price_eur_t": 207.49
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 11,
+   "price_eur_t": 194.09
+  },
+  {
+   "product": "MAIZ",
+   "year": 2026,
+   "month": 12,
+   "price_eur_t": 193.69
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 1,
+   "price_eur_t": 422.52
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 2,
+   "price_eur_t": 443.3
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 3,
+   "price_eur_t": 466.65
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 4,
+   "price_eur_t": 472.13
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 5,
+   "price_eur_t": 479.39
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 6,
+   "price_eur_t": 510.16
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 7,
+   "price_eur_t": 504.85
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 8,
+   "price_eur_t": 488.69
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 9,
+   "price_eur_t": 461.06
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 10,
+   "price_eur_t": 449.27
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 11,
+   "price_eur_t": 420.7
+  },
+  {
+   "product": "RAPE",
+   "year": 2017,
+   "month": 12,
+   "price_eur_t": 412.97
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 1,
+   "price_eur_t": 434.37
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 2,
+   "price_eur_t": 445.25
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 3,
+   "price_eur_t": 478.52
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 4,
+   "price_eur_t": 484.7
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 5,
+   "price_eur_t": 494.72
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 6,
+   "price_eur_t": 501.18
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 7,
+   "price_eur_t": 502.25
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 8,
+   "price_eur_t": 486.57
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 9,
+   "price_eur_t": 470.62
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 10,
+   "price_eur_t": 446.1
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 11,
+   "price_eur_t": 427.67
+  },
+  {
+   "product": "RAPE",
+   "year": 2018,
+   "month": 12,
+   "price_eur_t": 419.89
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 1,
+   "price_eur_t": 437.56
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 2,
+   "price_eur_t": 449.51
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 3,
+   "price_eur_t": 452.44
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 4,
+   "price_eur_t": 480.34
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 5,
+   "price_eur_t": 492.78
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 6,
+   "price_eur_t": 512.34
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 7,
+   "price_eur_t": 489.08
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 8,
+   "price_eur_t": 477.22
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 9,
+   "price_eur_t": 452.87
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 10,
+   "price_eur_t": 444.07
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 11,
+   "price_eur_t": 443.88
+  },
+  {
+   "product": "RAPE",
+   "year": 2019,
+   "month": 12,
+   "price_eur_t": 435.49
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 1,
+   "price_eur_t": 405.13
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 2,
+   "price_eur_t": 428.71
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 3,
+   "price_eur_t": 434.53
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 4,
+   "price_eur_t": 454.07
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 5,
+   "price_eur_t": 488.38
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 6,
+   "price_eur_t": 488.98
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 7,
+   "price_eur_t": 483.17
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 8,
+   "price_eur_t": 475.32
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 9,
+   "price_eur_t": 435.79
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 10,
+   "price_eur_t": 430.09
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 11,
+   "price_eur_t": 426.73
+  },
+  {
+   "product": "RAPE",
+   "year": 2020,
+   "month": 12,
+   "price_eur_t": 415.86
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 1,
+   "price_eur_t": 456.81
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 2,
+   "price_eur_t": 472.85
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 3,
+   "price_eur_t": 512.78
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 4,
+   "price_eur_t": 520.79
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 5,
+   "price_eur_t": 533.28
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 6,
+   "price_eur_t": 530.36
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 7,
+   "price_eur_t": 527.26
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 8,
+   "price_eur_t": 508.43
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 9,
+   "price_eur_t": 496.08
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 10,
+   "price_eur_t": 485.78
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 11,
+   "price_eur_t": 464.44
+  },
+  {
+   "product": "RAPE",
+   "year": 2021,
+   "month": 12,
+   "price_eur_t": 471.2
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 1,
+   "price_eur_t": 580.65
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 2,
+   "price_eur_t": 594.88
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 3,
+   "price_eur_t": 603.6
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 4,
+   "price_eur_t": 642.04
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 5,
+   "price_eur_t": 663.11
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 6,
+   "price_eur_t": 646.49
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 7,
+   "price_eur_t": 640.96
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 8,
+   "price_eur_t": 629.31
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 9,
+   "price_eur_t": 619.37
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 10,
+   "price_eur_t": 593.88
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 11,
+   "price_eur_t": 568.81
+  },
+  {
+   "product": "RAPE",
+   "year": 2022,
+   "month": 12,
+   "price_eur_t": 577.95
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 1,
+   "price_eur_t": 526.58
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 2,
+   "price_eur_t": 535.1
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 3,
+   "price_eur_t": 559.4
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 4,
+   "price_eur_t": 598.33
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 5,
+   "price_eur_t": 601.95
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 6,
+   "price_eur_t": 617.55
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 7,
+   "price_eur_t": 588.74
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 8,
+   "price_eur_t": 594.8
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 9,
+   "price_eur_t": 567.9
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 10,
+   "price_eur_t": 533.36
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 11,
+   "price_eur_t": 516.23
+  },
+  {
+   "product": "RAPE",
+   "year": 2023,
+   "month": 12,
+   "price_eur_t": 529.87
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 1,
+   "price_eur_t": 481.89
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 2,
+   "price_eur_t": 489.54
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 3,
+   "price_eur_t": 529.78
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 4,
+   "price_eur_t": 527.14
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 5,
+   "price_eur_t": 544.46
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 6,
+   "price_eur_t": 571.8
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 7,
+   "price_eur_t": 547.53
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 8,
+   "price_eur_t": 546.14
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 9,
+   "price_eur_t": 500.21
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 10,
+   "price_eur_t": 495.35
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 11,
+   "price_eur_t": 480.79
+  },
+  {
+   "product": "RAPE",
+   "year": 2024,
+   "month": 12,
+   "price_eur_t": 471.55
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 1,
+   "price_eur_t": 428.21
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 2,
+   "price_eur_t": 432.44
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 3,
+   "price_eur_t": 448.24
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 4,
+   "price_eur_t": 472.33
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 5,
+   "price_eur_t": 490.26
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 6,
+   "price_eur_t": 502.44
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 7,
+   "price_eur_t": 500.09
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 8,
+   "price_eur_t": 482.87
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 9,
+   "price_eur_t": 459.7
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 10,
+   "price_eur_t": 441.96
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 11,
+   "price_eur_t": 439.69
+  },
+  {
+   "product": "RAPE",
+   "year": 2025,
+   "month": 12,
+   "price_eur_t": 429.7
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 1,
+   "price_eur_t": 428.05
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 2,
+   "price_eur_t": 457.86
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 3,
+   "price_eur_t": 461.37
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 4,
+   "price_eur_t": 483.45
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 5,
+   "price_eur_t": 508.45
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 6,
+   "price_eur_t": 501.94
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 7,
+   "price_eur_t": 501.36
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 8,
+   "price_eur_t": 495.29
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 9,
+   "price_eur_t": 479.28
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 10,
+   "price_eur_t": 453.24
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 11,
+   "price_eur_t": 436.24
+  },
+  {
+   "product": "RAPE",
+   "year": 2026,
+   "month": 12,
+   "price_eur_t": 432.61
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 1,
+   "price_eur_t": 364.93
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 2,
+   "price_eur_t": 373.54
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 3,
+   "price_eur_t": 401.61
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 4,
+   "price_eur_t": 413.81
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 5,
+   "price_eur_t": 434.1
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 6,
+   "price_eur_t": 425.12
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 7,
+   "price_eur_t": 433.45
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 8,
+   "price_eur_t": 406.85
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 9,
+   "price_eur_t": 390.74
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 10,
+   "price_eur_t": 380.61
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 11,
+   "price_eur_t": 366.19
+  },
+  {
+   "product": "SUNF",
+   "year": 2017,
+   "month": 12,
+   "price_eur_t": 359.78
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 1,
+   "price_eur_t": 378.47
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 2,
+   "price_eur_t": 386.21
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 3,
+   "price_eur_t": 404.35
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 4,
+   "price_eur_t": 419.14
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 5,
+   "price_eur_t": 429.93
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 6,
+   "price_eur_t": 444.55
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 7,
+   "price_eur_t": 446.13
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 8,
+   "price_eur_t": 431.62
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 9,
+   "price_eur_t": 402.52
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 10,
+   "price_eur_t": 388.77
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 11,
+   "price_eur_t": 378.33
+  },
+  {
+   "product": "SUNF",
+   "year": 2018,
+   "month": 12,
+   "price_eur_t": 381.23
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 1,
+   "price_eur_t": 375.83
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 2,
+   "price_eur_t": 392.17
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 3,
+   "price_eur_t": 406.59
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 4,
+   "price_eur_t": 422.79
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 5,
+   "price_eur_t": 444.02
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 6,
+   "price_eur_t": 432.58
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 7,
+   "price_eur_t": 441.11
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 8,
+   "price_eur_t": 409.7
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 9,
+   "price_eur_t": 402.25
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 10,
+   "price_eur_t": 384.79
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 11,
+   "price_eur_t": 381.3
+  },
+  {
+   "product": "SUNF",
+   "year": 2019,
+   "month": 12,
+   "price_eur_t": 369.35
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 1,
+   "price_eur_t": 359.48
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 2,
+   "price_eur_t": 383.02
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 3,
+   "price_eur_t": 378.3
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 4,
+   "price_eur_t": 410.49
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 5,
+   "price_eur_t": 405.46
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 6,
+   "price_eur_t": 423.81
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 7,
+   "price_eur_t": 426.44
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 8,
+   "price_eur_t": 394.09
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 9,
+   "price_eur_t": 391.44
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 10,
+   "price_eur_t": 363.83
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 11,
+   "price_eur_t": 367.27
+  },
+  {
+   "product": "SUNF",
+   "year": 2020,
+   "month": 12,
+   "price_eur_t": 361.47
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 1,
+   "price_eur_t": 401.74
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 2,
+   "price_eur_t": 430.83
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 3,
+   "price_eur_t": 444.01
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 4,
+   "price_eur_t": 463.0
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 5,
+   "price_eur_t": 461.95
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 6,
+   "price_eur_t": 466.4
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 7,
+   "price_eur_t": 468.59
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 8,
+   "price_eur_t": 448.87
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 9,
+   "price_eur_t": 440.72
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 10,
+   "price_eur_t": 428.51
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 11,
+   "price_eur_t": 411.03
+  },
+  {
+   "product": "SUNF",
+   "year": 2021,
+   "month": 12,
+   "price_eur_t": 400.68
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 1,
+   "price_eur_t": 493.74
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 2,
+   "price_eur_t": 520.52
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 3,
+   "price_eur_t": 538.95
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 4,
+   "price_eur_t": 543.89
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 5,
+   "price_eur_t": 572.12
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 6,
+   "price_eur_t": 566.73
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 7,
+   "price_eur_t": 584.28
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 8,
+   "price_eur_t": 557.69
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 9,
+   "price_eur_t": 531.08
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 10,
+   "price_eur_t": 519.11
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 11,
+   "price_eur_t": 490.66
+  },
+  {
+   "product": "SUNF",
+   "year": 2022,
+   "month": 12,
+   "price_eur_t": 491.97
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 1,
+   "price_eur_t": 469.7
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 2,
+   "price_eur_t": 460.04
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 3,
+   "price_eur_t": 495.57
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 4,
+   "price_eur_t": 504.17
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 5,
+   "price_eur_t": 512.75
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 6,
+   "price_eur_t": 521.17
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 7,
+   "price_eur_t": 540.99
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 8,
+   "price_eur_t": 515.24
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 9,
+   "price_eur_t": 493.05
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 10,
+   "price_eur_t": 478.29
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 11,
+   "price_eur_t": 469.65
+  },
+  {
+   "product": "SUNF",
+   "year": 2023,
+   "month": 12,
+   "price_eur_t": 440.83
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 1,
+   "price_eur_t": 410.52
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 2,
+   "price_eur_t": 432.27
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 3,
+   "price_eur_t": 455.65
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 4,
+   "price_eur_t": 454.77
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 5,
+   "price_eur_t": 476.56
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 6,
+   "price_eur_t": 484.91
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 7,
+   "price_eur_t": 468.99
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 8,
+   "price_eur_t": 460.42
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 9,
+   "price_eur_t": 436.5
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 10,
+   "price_eur_t": 429.04
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 11,
+   "price_eur_t": 418.79
+  },
+  {
+   "product": "SUNF",
+   "year": 2024,
+   "month": 12,
+   "price_eur_t": 415.81
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 1,
+   "price_eur_t": 369.43
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 2,
+   "price_eur_t": 387.22
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 3,
+   "price_eur_t": 403.07
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 4,
+   "price_eur_t": 412.14
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 5,
+   "price_eur_t": 423.27
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 6,
+   "price_eur_t": 443.19
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 7,
+   "price_eur_t": 425.27
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 8,
+   "price_eur_t": 417.24
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 9,
+   "price_eur_t": 393.59
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 10,
+   "price_eur_t": 390.03
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 11,
+   "price_eur_t": 367.35
+  },
+  {
+   "product": "SUNF",
+   "year": 2025,
+   "month": 12,
+   "price_eur_t": 377.79
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 1,
+   "price_eur_t": 379.21
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 2,
+   "price_eur_t": 392.84
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 3,
+   "price_eur_t": 405.93
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 4,
+   "price_eur_t": 418.75
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 5,
+   "price_eur_t": 427.97
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 6,
+   "price_eur_t": 442.56
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 7,
+   "price_eur_t": 431.71
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 8,
+   "price_eur_t": 423.84
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 9,
+   "price_eur_t": 407.05
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 10,
+   "price_eur_t": 400.98
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 11,
+   "price_eur_t": 385.39
+  },
+  {
+   "product": "SUNF",
+   "year": 2026,
+   "month": 12,
+   "price_eur_t": 387.6
+  }
+ ]
+}
