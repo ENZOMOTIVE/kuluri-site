@@ -1,14 +1,56 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useQuasar } from 'quasar'
+import { useRoute, useRouter } from 'vue-router'
 import ChatThread from '../../components/ChatThread.vue'
 import { t, lang } from '../../data/i18n.js'
 import { state } from '../../data/store.js'
-import { chats } from '../../data/chats.js'
+import { chats, sendMessage } from '../../data/chats.js'
 import { agreements, visibleToWorker } from '../../data/agreements.js'
+import { chatService } from '../../services/chat.service.js'
+import { useAuthStore } from '../../stores/auth.js'
 
 const $q = useQuasar()
-const chat = computed(() => chats.find((c) => c.workerId === state.me))
+const route = useRoute()
+const router = useRouter()
+const auth = useAuthStore()
+
+// Real Supabase messages for real users (keyed by chatId)
+const realMessages = ref([])
+const realtimeSub = ref(null)
+
+// Support ?id=C-1 from inbox rows and Home quick-action; fallback to first worker chat
+const chat = computed(() => {
+  const id = route.query.id
+  return id
+    ? chats.find((c) => c.id === id)
+    : chats.find((c) => c.workerId === state.me)
+})
+
+// If no mock chat found, try Supabase (real user chat)
+const realChatId = computed(() => route.query.id && !chat.value ? route.query.id : null)
+
+onMounted(async () => {
+  const chatId = route.query.id
+  if (!chatId) return
+  // Load real messages from Supabase
+  const msgs = await chatService.getMessages(chatId)
+  realMessages.value = msgs
+  // Subscribe to new messages
+  realtimeSub.value = chatService.subscribe(chatId, (msg) => {
+    realMessages.value.push(msg)
+  })
+})
+
+onUnmounted(() => {
+  if (realtimeSub.value) chatService.unsubscribe(realtimeSub.value)
+})
+
+async function sendReal(text) {
+  const chatId = route.query.id
+  if (!chatId || !auth.user?.id) return
+  await chatService.send(chatId, auth.user.id, 'worker', text, lang.value)
+}
 const labels = computed(() => ({
   placeholder: t('typeMessage'), send: t('send'), translatedFrom: t('translatedFrom'),
   showOriginal: t('showOriginal'), showTranslation: t('showTranslation'), noTranslation: t('noTranslation'),
@@ -28,6 +70,7 @@ function report() {
   <q-page class="column no-wrap chat-page">
     <template v-if="chat">
       <div class="row items-center no-wrap q-px-md q-py-sm bg-surface" style="border-bottom: 1px solid var(--line)">
+        <q-btn flat round dense icon="arrow_back" color="grey-7" class="q-mr-xs" @click="router.push('/worker/inbox')" />
         <q-avatar rounded size="38px" class="bg-sage-soft text-primary q-mr-sm" icon="agriculture" />
         <div class="col">
           <div class="text-weight-bold">{{ chat.farmId }}</div>

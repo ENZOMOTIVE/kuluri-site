@@ -68,12 +68,20 @@ async function saveEdit() {
   $q.notify({ type: 'positive', message: 'Terms updated.' })
 }
 
-// Opened from Messages: ?chat=C-x (open or start an agreement) or ?id=AG-x (open it)
+// Opened from Messages: ?chat=C-x or ?id=AG-x
+// Opened from Candidates: ?worker=<privyDid>&job=<jobId>
 watch(() => route.query, (q) => {
   if (q.id) { filter.value = 'all'; openId.value = q.id }
   else if (q.chat) {
     const existing = forChat(q.chat)
     if (existing) { filter.value = 'all'; openId.value = existing.id } else openNew(q.chat)
+  } else if (q.worker && q.job) {
+    // Pre-fill from Candidates "Send contract" button
+    newJob.value = q.job
+    // Find a chat for this worker+job if one exists, otherwise open the dialog
+    const existingChat = chats.find((c) => c.workerId === q.worker)
+    newChat.value = existingChat?.id ?? chatOptions.value[0]?.value ?? null
+    showNew.value = true
   }
 }, { immediate: true })
 </script>

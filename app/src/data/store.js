@@ -48,48 +48,94 @@ export const LANGS = ['Italian', 'English', 'Romanian', 'Polish', 'Bulgarian', '
 // Matching uses skills, availability, languages and distance only. Never nationality, age or gender.
 // `available`: the period the worker says they can work; `looking`: worker is visible to farms as available
 const pool = [
+  // --- Strong matches for J-01 (Maize harvest, Oct–Nov, Combine+Grain, IT/RO/EN) ---
   { id: 'W-1042', name: 'Andrei P.', base: 'Can travel · based in Iași (RO)', distanceKm: null, languages: ['Romanian', 'Italian', 'English'], skills: ['Combine harvester', 'Tractor driving', 'Grain handling'], available: ['2026-10-01', '2026-12-15'],
     history: [
       { farm: 'FARM-06127', crop: 'Maize', season: '2025 autumn', hours: 412, confirmed: true, skills: ['Combine harvester', 'Grain handling'] },
       { farm: 'FARM-02408', crop: 'Common wheat', season: '2025 summer', hours: 356, confirmed: true, skills: ['Combine harvester', 'Tractor driving'] },
       { farm: 'FARM-06127', crop: 'Maize', season: '2024 autumn', hours: 388, confirmed: true, skills: ['Grain handling'] },
     ] },
-  { id: 'W-2210', name: 'Marta K.', base: 'Lodi (IT) · 38 km', distanceKm: 38, languages: ['Polish', 'Italian'], skills: ['Grain handling', 'Forklift', 'Sorting & packing'], available: ['2026-10-10', '2026-11-30'],
-    history: [
-      { farm: 'FARM-09902', crop: 'Barley', season: '2026 summer', hours: 298, confirmed: true },
-      { farm: 'FARM-09902', crop: 'Barley', season: '2025 summer', hours: 305, confirmed: true },
-    ] },
-  { id: 'W-3175', name: 'Luca B.', base: 'Pavia (IT) · 41 km', distanceKm: 41, languages: ['Italian', 'English'], skills: ['Tractor driving', 'Machinery repair', 'Sowing'], available: ['2026-09-01', '2027-04-30'],
-    history: [
-      { farm: 'FARM-13079', crop: 'Common wheat', season: '2026 summer', hours: 340, confirmed: true },
-    ] },
   { id: 'W-4401', name: 'Ion D.', base: 'Can travel · based in Chișinău (MD)', distanceKm: null, languages: ['Romanian', 'English'], skills: ['Combine harvester', 'Grain handling'], available: ['2026-10-15', '2026-11-30'],
     history: [
-      { farm: 'FARM-05649', crop: 'Sunflower', season: '2025 autumn', hours: 260, confirmed: true },
-      { farm: 'FARM-05649', crop: 'Maize', season: '2025 autumn', hours: 140, confirmed: false },
+      { farm: 'FARM-05649', crop: 'Sunflower', season: '2025 autumn', hours: 260, confirmed: true, skills: ['Combine harvester'] },
+      { farm: 'FARM-05649', crop: 'Maize', season: '2025 autumn', hours: 140, confirmed: false, skills: ['Grain handling'] },
     ] },
-  { id: 'W-5120', name: 'Sara M.', base: 'Milano (IT) · 12 km', distanceKm: 12, languages: ['Italian', 'Arabic', 'English'], skills: ['Sorting & packing', 'Grain handling'], available: ['2026-10-01', '2026-10-31'],
+  { id: 'W-8562', name: 'Radu T.', base: 'Can travel · based in Brașov (RO)', distanceKm: null, languages: ['Romanian', 'Italian'], skills: ['Combine harvester', 'Grain handling', 'Tractor driving'], available: ['2026-10-01', '2026-11-25'],
+    history: [
+      { farm: 'FARM-05649', crop: 'Sunflower', season: '2026 summer', hours: 300, confirmed: true, skills: ['Combine harvester', 'Grain handling'] },
+      { farm: 'FARM-11203', crop: 'Maize', season: '2025 autumn', hours: 270, confirmed: true, skills: ['Combine harvester'] },
+    ] },
+  { id: 'W-2210', name: 'Marta K.', base: 'Lodi (IT) · 38 km', distanceKm: 38, languages: ['Polish', 'Italian'], skills: ['Grain handling', 'Forklift', 'Sorting & packing'], available: ['2026-10-10', '2026-11-30'],
+    history: [
+      { farm: 'FARM-09902', crop: 'Barley', season: '2026 summer', hours: 298, confirmed: true, skills: ['Grain handling', 'Forklift'] },
+      { farm: 'FARM-09902', crop: 'Barley', season: '2025 summer', hours: 305, confirmed: true, skills: ['Grain handling'] },
+    ] },
+  { id: 'W-8341', name: 'Giulia R.', base: 'Abbiategrasso (IT) · 9 km', distanceKm: 9, languages: ['Italian', 'English'], skills: ['Grain handling', 'Forklift', 'Machinery repair'], available: ['2026-10-15', '2027-02-28'],
     history: [] },
+
+  // --- Good matches for J-02 (Winter wheat sowing, Oct–Nov, Tractor+Sowing, IT) ---
+  { id: 'W-3175', name: 'Luca B.', base: 'Pavia (IT) · 41 km', distanceKm: 41, languages: ['Italian', 'English'], skills: ['Tractor driving', 'Machinery repair', 'Sowing'], available: ['2026-09-01', '2027-04-30'],
+    history: [
+      { farm: 'FARM-13079', crop: 'Common wheat', season: '2026 summer', hours: 340, confirmed: true, skills: ['Tractor driving', 'Sowing'] },
+    ] },
   { id: 'W-6033', name: 'Gurpreet S.', base: 'Cremona (IT) · 64 km', distanceKm: 64, languages: ['Punjabi', 'Italian', 'English'], skills: ['Tractor driving', 'Irrigation', 'Spraying (certified)'], available: ['2026-10-01', '2027-03-31'],
     history: [
-      { farm: 'FARM-15904', crop: 'Maize', season: '2026 summer', hours: 420, confirmed: true },
-      { farm: 'FARM-15904', crop: 'Maize', season: '2025 summer', hours: 401, confirmed: true },
-      { farm: 'FARM-03306', crop: 'Common wheat', season: '2024 summer', hours: 310, confirmed: true },
+      { farm: 'FARM-15904', crop: 'Maize', season: '2026 summer', hours: 420, confirmed: true, skills: ['Tractor driving', 'Irrigation'] },
+      { farm: 'FARM-15904', crop: 'Maize', season: '2025 summer', hours: 401, confirmed: true, skills: ['Tractor driving'] },
+      { farm: 'FARM-03306', crop: 'Common wheat', season: '2024 summer', hours: 310, confirmed: true, skills: ['Tractor driving', 'Sowing'] },
     ] },
-  { id: 'W-7088', name: 'Elena V.', base: 'Can travel · based in Plovdiv (BG)', distanceKm: null, languages: ['Bulgarian', 'English'], skills: ['Hand harvest', 'Sorting & packing'], available: ['2027-06-01', '2027-08-31'],
+  { id: 'W-8233', name: 'Paweł N.', base: 'Can travel · based in Poznań (PL)', distanceKm: null, languages: ['Polish', 'English'], skills: ['Tractor driving', 'Sowing', 'Spraying (certified)'], available: ['2026-10-20', '2026-12-15'],
     history: [
-      { farm: 'FARM-09536', crop: 'Rapeseed', season: '2026 summer', hours: 220, confirmed: true },
+      { farm: 'FARM-02408', crop: 'Barley', season: '2026 spring', hours: 290, confirmed: true, skills: ['Tractor driving', 'Sowing'] },
+      { farm: 'FARM-07712', crop: 'Common wheat', season: '2025 autumn', hours: 320, confirmed: true, skills: ['Sowing', 'Spraying (certified)'] },
     ] },
-  { id: 'W-8120', name: 'Mihai C.', base: 'Can travel · based in Cluj (RO)', distanceKm: null, languages: ['Romanian', 'Italian'], skills: ['Combine harvester', 'Tractor driving'], available: ['2027-06-15', '2027-08-15'],
-    history: [{ farm: 'FARM-06629', crop: 'Common wheat', season: '2026 summer', hours: 380, confirmed: true }] },
-  { id: 'W-8233', name: 'Paweł N.', base: 'Can travel · based in Poznań (PL)', distanceKm: null, languages: ['Polish', 'English'], skills: ['Tractor driving', 'Sowing', 'Spraying (certified)'], available: ['2027-03-01', '2027-04-30'],
-    history: [{ farm: 'FARM-02408', crop: 'Barley', season: '2026 spring', hours: 290, confirmed: true }] },
-  { id: 'W-8341', name: 'Giulia R.', base: 'Abbiategrasso (IT) · 9 km', distanceKm: 9, languages: ['Italian', 'English'], skills: ['Grain handling', 'Forklift', 'Machinery repair'], available: ['2026-11-01', '2027-02-28'],
+  { id: 'W-9014', name: 'Vasile M.', base: 'Can travel · based in Timișoara (RO)', distanceKm: null, languages: ['Romanian', 'Italian'], skills: ['Tractor driving', 'Sowing', 'Grain handling'], available: ['2026-10-10', '2026-12-01'],
+    history: [
+      { farm: 'FARM-06127', crop: 'Maize', season: '2026 autumn', hours: 350, confirmed: true, skills: ['Tractor driving', 'Grain handling'] },
+      { farm: 'FARM-04421', crop: 'Common wheat', season: '2025 autumn', hours: 290, confirmed: true, skills: ['Sowing', 'Tractor driving'] },
+    ] },
+
+  // --- Partial / limited matches ---
+  { id: 'W-5120', name: 'Sara M.', base: 'Milano (IT) · 12 km', distanceKm: 12, languages: ['Italian', 'Arabic', 'English'], skills: ['Sorting & packing', 'Grain handling'], available: ['2026-10-01', '2026-10-31'],
     history: [] },
-  { id: 'W-8455', name: 'Arben H.', base: 'Can travel · based in Tirana (AL)', distanceKm: null, languages: ['Albanian', 'Italian'], skills: ['Hand harvest', 'Grain handling', 'Irrigation'], available: ['2027-05-15', '2027-09-15'],
-    history: [{ farm: 'FARM-09902', crop: 'Maize', season: '2026 summer', hours: 410, confirmed: true }] },
-  { id: 'W-8562', name: 'Radu T.', base: 'Can travel · based in Brașov (RO)', distanceKm: null, languages: ['Romanian'], skills: ['Combine harvester', 'Grain handling'], available: ['2026-10-01', '2026-11-10'],
-    history: [{ farm: 'FARM-05649', crop: 'Sunflower', season: '2026 summer', hours: 300, confirmed: true }] },
+  { id: 'W-8455', name: 'Arben H.', base: 'Can travel · based in Tirana (AL)', distanceKm: null, languages: ['Albanian', 'Italian'], skills: ['Hand harvest', 'Grain handling', 'Irrigation'], available: ['2026-11-01', '2026-12-31'],
+    history: [{ farm: 'FARM-09902', crop: 'Maize', season: '2026 summer', hours: 410, confirmed: true, skills: ['Grain handling'] }] },
+  { id: 'W-9201', name: 'Oksana B.', base: 'Can travel · based in Lviv (UA)', distanceKm: null, languages: ['English'], skills: ['Grain handling', 'Sorting & packing', 'Forklift'], available: ['2026-10-15', '2026-12-15'],
+    history: [
+      { farm: 'FARM-10293', crop: 'Sunflower', season: '2026 summer', hours: 240, confirmed: true, skills: ['Grain handling', 'Sorting & packing'] },
+    ] },
+  { id: 'W-9340', name: 'Dimitar G.', base: 'Can travel · based in Sofia (BG)', distanceKm: null, languages: ['Bulgarian', 'Italian', 'English'], skills: ['Combine harvester', 'Tractor driving'], available: ['2026-11-05', '2026-12-31'],
+    history: [
+      { farm: 'FARM-08811', crop: 'Sunflower', season: '2025 autumn', hours: 310, confirmed: true, skills: ['Combine harvester'] },
+    ] },
+  { id: 'W-9412', name: 'Fatima O.', base: 'Brescia (IT) · 55 km', distanceKm: 55, languages: ['Arabic', 'Italian'], skills: ['Hand harvest', 'Sorting & packing'], available: ['2026-10-01', '2026-11-30'],
+    history: [] },
+  { id: 'W-9530', name: 'Jakub W.', base: 'Can travel · based in Kraków (PL)', distanceKm: null, languages: ['Polish', 'English', 'Romanian'], skills: ['Tractor driving', 'Grain handling', 'Machinery repair'], available: ['2026-09-15', '2026-11-30'],
+    history: [
+      { farm: 'FARM-02408', crop: 'Common wheat', season: '2026 spring', hours: 360, confirmed: true, skills: ['Tractor driving', 'Grain handling'] },
+      { farm: 'FARM-07712', crop: 'Barley', season: '2025 spring', hours: 280, confirmed: true, skills: ['Machinery repair'] },
+    ] },
+
+  // --- Not available for current jobs (future availability / wrong season) ---
+  { id: 'W-7088', name: 'Elena V.', base: 'Can travel · based in Plovdiv (BG)', distanceKm: null, languages: ['Bulgarian', 'English'], skills: ['Hand harvest', 'Sorting & packing'], available: ['2027-06-01', '2027-08-31'],
+    history: [{ farm: 'FARM-09536', crop: 'Rapeseed', season: '2026 summer', hours: 220, confirmed: true, skills: ['Hand harvest'] }] },
+  { id: 'W-8120', name: 'Mihai C.', base: 'Can travel · based in Cluj (RO)', distanceKm: null, languages: ['Romanian', 'Italian'], skills: ['Combine harvester', 'Tractor driving', 'Sowing'], available: ['2027-06-15', '2027-08-15'],
+    history: [
+      { farm: 'FARM-06629', crop: 'Common wheat', season: '2026 summer', hours: 380, confirmed: true, skills: ['Combine harvester', 'Tractor driving'] },
+      { farm: 'FARM-06629', crop: 'Barley', season: '2025 summer', hours: 290, confirmed: true, skills: ['Sowing'] },
+    ] },
+  { id: 'W-9611', name: 'Tomáš H.', base: 'Can travel · based in Brno (CZ)', distanceKm: null, languages: ['English'], skills: ['Combine harvester', 'Grain handling', 'Spraying (certified)'], available: ['2027-07-01', '2027-09-30'],
+    history: [
+      { farm: 'FARM-03901', crop: 'Common wheat', season: '2026 summer', hours: 445, confirmed: true, skills: ['Combine harvester', 'Grain handling'] },
+      { farm: 'FARM-03901', crop: 'Barley', season: '2025 summer', hours: 390, confirmed: true, skills: ['Spraying (certified)'] },
+      { farm: 'FARM-03901', crop: 'Rapeseed', season: '2024 spring', hours: 310, confirmed: true, skills: ['Combine harvester'] },
+    ] },
+  { id: 'W-9720', name: 'Cristina L.', base: 'Can travel · based in București (RO)', distanceKm: null, languages: ['Romanian', 'English', 'Spanish'], skills: ['Hand harvest', 'Irrigation', 'Sorting & packing'], available: ['2027-04-01', '2027-07-31'],
+    history: [
+      { farm: 'FARM-12045', crop: 'Rapeseed', season: '2026 spring', hours: 200, confirmed: true, skills: ['Hand harvest', 'Irrigation'] },
+    ] },
+  { id: 'W-9881', name: 'Nadir B.', base: 'Bergamo (IT) · 48 km', distanceKm: 48, languages: ['Arabic', 'Italian', 'English'], skills: ['Forklift', 'Grain handling', 'Machinery repair'], available: ['2027-01-15', '2027-04-30'],
+    history: [] },
 ]
 
 // ---- Shared reactive state ---------------------------------------------------------------
@@ -187,34 +233,82 @@ export function farmView(w) {
 }
 
 // ---- Matching -----------------------------------------------------------------------------
-const overlaps = (aStart, aEnd, bStart, bEnd) => aStart <= bEnd && bStart <= aEnd
+const daysBetween = (a, b) => Math.max(0, (new Date(b) - new Date(a)) / 86400000)
 
 export function matchWorkers(job) {
+  const jobDays = daysBetween(job.start, job.end)
+
   return state.workers
     .map(farmView)
     .filter((w) => w.visible || inContact(w))
     .map((w) => {
+      // ── 1. Skill match (0–40 pts) ────────────────────────────────────────
       const skillHits = job.tasks.filter((t) => w.skills.includes(t))
+      const skillRatio = skillHits.length / Math.max(job.tasks.length, 1)
+      // Depth bonus: extra pts per skill confirmed in past work history
+      const confirmedSkills = new Set(w.history.filter((h) => h.confirmed).flatMap((h) => h.skills ?? []))
+      const depthBonus = skillHits.filter((s) => confirmedSkills.has(s)).length * 4
+      const skillScore = Math.min(skillRatio * 36 + depthBonus, 40)
+
+      // ── 2. Availability quality (0–25 pts) ───────────────────────────────
+      let availability = null
+      let availScore = 0
+      if (w.available) {
+        const [wStart, wEnd] = w.available
+        const overlapStart = wStart <= job.end && wEnd >= job.start
+        if (overlapStart) {
+          const coverStart = wStart <= job.start ? job.start : wStart
+          const coverEnd = wEnd >= job.end ? job.end : wEnd
+          const coverDays = daysBetween(coverStart, coverEnd)
+          const coverRatio = jobDays > 0 ? coverDays / jobDays : 0
+          availability = coverRatio >= 0.95 ? 'full' : 'part'
+          // Penalise partial coverage quadratically — 60% coverage = 36% of full score
+          availScore = Math.round(coverRatio ** 1.5 * 25)
+        }
+      }
+
+      // ── 3. Language fit (0–15 pts) ───────────────────────────────────────
       const langHits = job.languages.filter((l) => w.languages.includes(l))
-      const available = !!w.available && overlaps(w.available[0], w.available[1], job.start, job.end)
-      const availability = !available ? null : w.available[0] <= job.start && w.available[1] >= job.end ? 'full' : 'part'
+      // Primary language (first in job list) worth more
+      const primaryLang = job.languages[0]
+      const langScore = langHits.includes(primaryLang) ? 15 : langHits.length ? 8 : 0
+
+      // ── 4. Verified reputation (0–12 pts) ────────────────────────────────
       const verified = w.history.filter((h) => h.confirmed)
-      const hours = w.share.hours ? verified.reduce((a, h) => a + h.hours, 0) : null
-      const near = w.distanceKm !== null && w.distanceKm <= 60
-      let score = 0
-      score += (skillHits.length / Math.max(job.tasks.length, 1)) * 45
-      score += langHits.length ? 20 : 0
-      score += availability === 'full' ? 20 : availability === 'part' ? 10 : 0
-      score += Math.min(verified.length, 3) * 5
+      // Diminishing returns: 1→5, 2→8, 3→10, 4+→12
+      const repScore = [0, 5, 8, 10, 12][Math.min(verified.length, 4)]
+
+      // ── 5. Proximity (0–8 pts) ────────────────────────────────────────────
+      // Exponential decay; housing offered removes the distance barrier
+      let proxScore = 0
+      if (job.housing) {
+        proxScore = 8 // housing = distance irrelevant
+      } else if (w.distanceKm !== null) {
+        proxScore = Math.round(Math.exp(-w.distanceKm / 60) * 8)
+      }
+
+      const score = Math.round(skillScore + availScore + langScore + repScore + proxScore)
+
+      // ── Hard filter ───────────────────────────────────────────────────────────
+      // Must be available. Skill coverage: 1 task needed → must match it; 2+ tasks → must match at least half
+      const minSkillsRequired = job.tasks.length <= 1 ? 1 : Math.ceil(job.tasks.length / 2)
+      if (skillHits.length < minSkillsRequired || !availability) return null
+      // Minimum total score — keeps list to ~5-6 strong matches
+      if (score < 38) return null
+
+      const hours = w.share.hours ? verified.reduce((a, h) => a + (h.hours ?? 0), 0) : null
       const reasons = []
       if (skillHits.length) reasons.push(`Skills: ${skillHits.join(', ')}`)
-      if (langHits.length) reasons.push(`Speaks ${langHits.join(', ')}`)
-      if (availability) reasons.push(availability === 'full' ? 'Available for the whole job' : 'Available for part of the job')
+      if (langHits.length) reasons.push(`Speaks ${langHits.join(' & ')}`)
+      if (availability === 'full') reasons.push('Available the whole period')
+      else if (availability === 'part') reasons.push('Available for part of the job')
       if (verified.length) reasons.push(`${verified.length} verified job${verified.length > 1 ? 's' : ''}`)
-      if (near) reasons.push('Lives nearby')
-      return { worker: w, score: Math.round(score), reasons, available, availability, verifiedCount: verified.length, verifiedHours: hours }
+      if (proxScore >= 6) reasons.push('Lives nearby')
+      else if (job.housing) reasons.push('Housing provided')
+
+      return { worker: w, score, reasons, availability, verifiedCount: verified.length, verifiedHours: hours }
     })
-    .filter((m) => m.score >= 40)
+    .filter(Boolean)
     .sort((a, b) => b.score - a.score)
 }
 

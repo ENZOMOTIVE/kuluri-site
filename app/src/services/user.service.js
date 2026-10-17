@@ -29,4 +29,14 @@ export const userService = {
     if (error) throw error
     return data
   },
+
+  // Fetch all registered workers to show alongside mock candidates
+  async getWorkers() {
+    const { data, error } = await supabase
+      .from('users')
+      .select('privy_did, email, wallet_address, role, skills, availability_start, availability_end, location_country, languages')
+      .eq('role', 'worker')
+    if (error) return [] // fail silently — mock data still shows
+    return data ?? []
+  },
 }

@@ -27,7 +27,7 @@ const routes = [
       { path: 'agreements', redirect: to => ({ path: '/farm/contracts', query: to.query }) },
       { path: 'availability', redirect: '/farm/schedule' },
       { path: 'sharing',    redirect: '/farm/settings?tab=privacy' },
-      { path: 'profile',    redirect: '/farm/settings' },
+      { path: 'profile',    component: () => import('../pages/farmer/FarmerProfile.vue') },
     ],
   },
   {
@@ -43,6 +43,7 @@ const routes = [
       { path: 'earnings',   component: () => import('../pages/combined/WorkerHoursPay.vue') },
       { path: 'job/:id',    component: () => import('../pages/worker/WorkerJob.vue') },
       { path: 'farm',       redirect: '/worker/job/J-01?tab=location' },
+      { path: 'inbox',       component: () => import('../pages/worker/WorkerInbox.vue') },
       { path: 'chat',       component: () => import('../pages/worker/WorkerChat.vue') },
       { path: 'history',    component: () => import('../pages/worker/WorkerHistory.vue') },
       { path: 'sharing',    component: () => import('../pages/worker/WorkerSharing.vue') },

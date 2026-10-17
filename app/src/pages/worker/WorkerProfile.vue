@@ -7,6 +7,31 @@ import { useRouter } from 'vue-router'
 const auth = useAuthStore()
 const router = useRouter()
 const { logout } = usePrivy()
+import { useQuasar } from 'quasar'
+const $quasar = useQuasar()
+
+const EU_COUNTRIES = [
+  'Austria','Belgium','Bulgaria','Croatia','Cyprus','Czech Republic','Denmark',
+  'Estonia','Finland','France','Germany','Greece','Hungary','Ireland','Italy',
+  'Latvia','Lithuania','Luxembourg','Malta','Netherlands','Poland','Portugal',
+  'Romania','Slovakia','Slovenia','Spain','Sweden','India','Ukraine','Moldova',
+]
+
+function editLocation() {
+  $quasar.dialog({
+    title: 'Your base location',
+    message: 'Where are you based? This helps farms find workers near them.',
+    options: {
+      type: 'radio',
+      model: auth.location?.country ?? '',
+      items: EU_COUNTRIES.map((c) => ({ label: c, value: c })),
+    },
+    cancel: { flat: true, noCaps: true, label: 'Cancel' },
+    ok: { unelevated: true, noCaps: true, color: 'primary', label: 'Save' },
+  }).onOk((country) => {
+    if (country) auth.setLocation({ country })
+  })
+}
 
 // Extract email from any linked account structure Privy may return
 const email = computed(() => {
@@ -58,6 +83,14 @@ async function doLogout() {
         <div class="pf-stacked-value">{{ email || '—' }}</div>
       </div>
       <div class="pf-sep" />
+      <div class="pf-row pf-row--tap" @click="editLocation">
+        <div class="pf-row-label">Location</div>
+        <div class="pf-row-value pf-row-value--link">
+          {{ auth.location?.country ?? 'Not set' }}
+          <q-icon name="chevron_right" size="14px" color="grey-5" />
+        </div>
+      </div>
+      <div class="pf-sep" />
       <div class="pf-row pf-row--tap" @click="router.push('/setup')">
         <div class="pf-row-label">Account type</div>
         <div class="pf-row-value pf-row-value--link">{{ roleLabel }} <q-icon name="chevron_right" size="14px" color="grey-5" /></div>
@@ -72,17 +105,13 @@ async function doLogout() {
     <!-- Wallet group -->
     <div class="pf-group-label">Wallet</div>
     <div class="pf-group">
-      <div v-if="auth.walletAddress" class="pf-row pf-row--wallet">
-        <div class="pf-wallet-top">
-          <div class="pf-row-label">Address</div>
-          <q-btn flat dense round icon="o_copy" size="xs" color="grey-5"
-            @click.stop="$q.copyToClipboard(auth.walletAddress)" />
+      <div class="pf-row pf-row--tap" @click="auth.walletAddress && $quasar.copyToClipboard(auth.walletAddress) && $quasar.notify({ message: 'Address copied', icon: 'o_copy', timeout: 1500 })">
+        <div class="pf-row-label">Wallet</div>
+        <div class="pf-row-value pf-row-value--link" v-if="auth.walletAddress">
+          <span class="pf-wallet-short">{{ auth.shortAddress }}</span>
+          <q-icon name="o_copy" size="13px" color="grey-5" />
         </div>
-        <div class="pf-wallet-addr">{{ auth.walletAddress }}</div>
-      </div>
-      <div v-else class="pf-row">
-        <div class="pf-row-label">Address</div>
-        <div class="pf-row-value pf-row-value--muted">Setting up…</div>
+        <div class="pf-row-value pf-row-value--muted" v-else>Setting up…</div>
       </div>
       <div class="pf-sep" />
       <div class="pf-row">
@@ -102,6 +131,14 @@ async function doLogout() {
       <div class="pf-row pf-row--tap" @click="router.push('/worker/rights')">
         <div class="pf-row-label">Your rights &amp; support</div>
         <q-icon name="chevron_right" size="16px" color="grey-4" />
+      </div>
+    </div>
+
+    <!-- Switch role -->
+    <div class="pf-group pf-group--mt">
+      <div class="pf-row pf-row--tap" @click="auth.setRole('farmer'); router.replace('/farm')">
+        <div class="pf-row-label">Switch to Farm view</div>
+        <q-icon name="o_agriculture" size="18px" color="grey-5" />
       </div>
     </div>
 
@@ -154,11 +191,11 @@ async function doLogout() {
 
 /* Group label */
 .pf-group-label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: #8e8e93;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   padding: 18px 20px 6px;
 }
 
@@ -183,6 +220,8 @@ async function doLogout() {
 }
 .pf-row--tap {
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0,0,0,0.04);
 }
 .pf-row--tap:active {
   background: #f0f0f0;
@@ -226,34 +265,21 @@ async function doLogout() {
   padding-bottom: 13px;
 }
 .pf-stacked-value {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
   word-break: break-all;
   line-height: 1.4;
 }
-.pf-row--wallet {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  padding-bottom: 14px;
-}
-.pf-wallet-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-.pf-wallet-addr {
+.pf-wallet-short {
   font-family: 'SF Mono', 'Courier New', monospace;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
-  word-break: break-all;
-  line-height: 1.5;
+  margin-right: 4px;
 }
 
 .pf-version {
   text-align: center;
-  font-size: 11px;
+  font-size: 13px;
   color: #bbb;
   padding: 28px 0 40px;
 }

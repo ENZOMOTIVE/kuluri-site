@@ -52,7 +52,7 @@ function selectLang(code) {
         <q-route-tab to="/worker/jobs" icon="o_work_outline" :label="t('jobs')">
           <q-badge v-if="Object.entries(state.invitations).some(([k, v]) => k.endsWith(state.me) && v === 'Invited')" color="negative" floating rounded>1</q-badge>
         </q-route-tab>
-        <q-route-tab to="/worker/chat" icon="o_forum" :label="t('inbox')">
+        <q-route-tab to="/worker/inbox" icon="o_forum" :label="t('inbox')">
           <q-badge v-if="unread" color="negative" floating rounded>{{ unread }}</q-badge>
         </q-route-tab>
         <q-route-tab to="/worker/profile" icon="o_person_outline" :label="t('profile')" />

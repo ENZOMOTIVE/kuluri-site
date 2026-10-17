@@ -7,7 +7,7 @@ import { agreements, visibleToWorker } from '../../data/agreements.js'
 
 const key = (j) => `${j.id}:${state.me}`
 const mine = computed(() => state.jobs.filter((j) => state.invitations[key(j)]))
-const others = computed(() => state.jobs.filter((j) => !state.invitations[key(j)]))
+const others = computed(() => state.jobs.filter((j) => !state.invitations[key(j)] && j.status === 'Open'))
 const agreementFor = (j) => agreements.find((a) => a.workerId === state.me && a.jobId === j.id && visibleToWorker(a))
 
 function chip(j) {

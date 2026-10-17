@@ -190,11 +190,12 @@ export const visibleToWorker = (a) => ['sent', 'agreed', 'completed', 'cancelled
 
 export const forChat = (chatId) => agreements.find((a) => a.chatId === chatId && !['withdrawn', 'cancelled'].includes(a.state))
 
-// Seed: AG-001 sent to Andrei in the chat (waiting for him); AG-002 still a draft for Ahmed
+// Seed: AG-001 sent to Andrei (waiting for him to sign); AG-002 draft for Ahmed; AG-003 already fully agreed (for history view)
 export async function seedAgreements() {
   if (agreements.length) return
   const a1 = await createAgreement('C-1', 'J-01')
   await sendToWorker(a1)
+
   const a2 = await createAgreement('C-2', 'J-01')
   a2.terms.job = 'Grain handling – autumn 2026'
   a2.terms.tasks = ['Grain handling']
@@ -202,4 +203,17 @@ export async function seedAgreements() {
   a2.terms.arrival = '2026-10-01'
   a2.terms.housing = false
   a2.hash = await termsHash(a2)
+
+  // AG-003: a completed agreement so History page has a signed card to show
+  const a3 = await createAgreement('C-1', 'J-01')
+  a3.id = 'AG-003'
+  a3.terms.job = 'Maize harvest – combine & grain handling (prev. season)'
+  a3.terms.start = '2026-08-01'
+  a3.terms.end   = '2026-09-15'
+  a3.terms.arrival = '2026-07-31'
+  a3.hash = await termsHash(a3)
+  await agree(a3, 'farm')
+  await agree(a3, 'worker')
+  a3.state = 'completed'
+  a3.updated = new Date().toISOString()
 }

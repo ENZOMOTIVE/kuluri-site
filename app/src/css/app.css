@@ -38,12 +38,15 @@ body {
 .q-field--outlined .q-field__control:hover:before { border-color: var(--sage); }
 .q-table__container { background: var(--surface); color: var(--text); }
 .q-table thead tr { background: var(--surface-2); }
-.q-table th { font-weight: 700; color: var(--muted); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+.q-table th { font-weight: 700; color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+
+/* Override Quasar's text-caption (12px) to be more readable on mobile */
+.text-caption { font-size: 13px !important; }
 
 /* Bottom nav */
 .q-tab-panels { background: transparent !important; }
 .q-tabs--not-scrollable .q-tabs__arrow { display: none; }
-.q-tab__label { font-size: 11px; font-weight: 600; letter-spacing: .01em; }
+.q-tab__label { font-size: 12px; font-weight: 600; letter-spacing: .01em; }
 .q-tab.q-router-link--exact-active .q-tab__label { color: var(--sage); }
 .q-tab.q-router-link--exact-active .q-icon { color: var(--sage); }
 .q-tab-panels > .q-panel { overflow: auto; }

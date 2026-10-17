@@ -1,5 +1,4 @@
 <script setup>
-// Job postings: the farm's jobs – publish, edit, close or reopen, and jump to the candidates for a job.
 import { computed, ref } from 'vue'
 import { useQuasar } from 'quasar'
 import JobFormDialog from '../../components/JobFormDialog.vue'
@@ -38,15 +37,52 @@ function toggle(j) { j.status = j.status === 'Open' ? 'Closed' : 'Open' }
 
 <template>
   <q-page class="page">
-    <div class="page-header row items-end justify-between q-gutter-y-sm">
+    <div class="page-header row items-center justify-between q-gutter-y-sm">
       <div>
         <h1 class="page-title">Job postings</h1>
-        <div class="text-muted q-mt-xs">Publish seasonal jobs. Pay, hours and housing are always visible to workers.</div>
+        <div class="text-muted q-mt-xs">Pay, hours and housing are always visible to workers.</div>
       </div>
-      <q-btn unelevated color="primary" icon="add" label="New job posting" no-caps @click="openNew" />
+      <q-btn unelevated color="primary" icon="add" label="New job" no-caps @click="openNew" />
     </div>
 
-    <div class="card">
+    <!-- Mobile card list -->
+    <div v-if="$q.screen.lt.md" class="q-col-gutter-md">
+      <div v-if="!rows.length" class="text-muted text-center q-pa-xl">No job postings yet.</div>
+      <div v-for="r in rows" :key="r.job.id" class="job-card">
+        <div class="job-card-top">
+          <q-avatar rounded size="40px" class="bg-sage-soft text-primary q-mr-sm" icon="o_grass" />
+          <div class="col">
+            <div class="job-card-title">{{ r.job.title }}</div>
+            <div class="job-card-meta">{{ fmtShort(r.job.start) }} – {{ fmtShort(r.job.end) }}</div>
+          </div>
+          <q-badge :color="r.job.status === 'Open' ? 'primary' : 'grey-6'" :label="r.job.status" class="q-ml-sm" />
+        </div>
+
+        <div class="job-card-pills">
+          <span class="pill">€{{ r.job.payPerHour.toFixed(2) }}/h</span>
+          <span class="pill">{{ r.job.hoursPerWeek }}h/wk</span>
+          <span class="pill">{{ r.job.positions }} pos.</span>
+          <span v-if="r.job.housing" class="pill pill--green">Housing</span>
+        </div>
+
+        <div v-if="r.job.status === 'Open'" class="job-card-stats">
+          <span>{{ r.candidates }} candidates</span>
+          <span>{{ r.invited }} invited</span>
+          <span :class="r.agreed >= r.job.positions ? 'text-positive' : ''">{{ r.agreed }}/{{ r.job.positions }} agreed</span>
+        </div>
+
+        <div class="job-card-actions">
+          <q-btn v-if="r.job.status === 'Open'" unelevated dense no-caps color="primary" label="View candidates" icon-right="chevron_right" class="q-px-sm col" :to="{ path: '/farm/candidates', query: { job: r.job.id } }" />
+          <q-btn flat round dense icon="o_edit" color="grey-7" @click="openEdit(r.job)" />
+          <q-btn flat round dense :icon="r.job.status === 'Open' ? 'o_block' : 'o_replay'" color="grey-7" @click="toggle(r.job)">
+            <q-tooltip>{{ r.job.status === 'Open' ? 'Close posting' : 'Reopen posting' }}</q-tooltip>
+          </q-btn>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop table list -->
+    <div v-else class="card">
       <q-list separator>
         <q-item v-for="r in rows" :key="r.job.id" class="q-py-md">
           <q-item-section avatar><q-avatar rounded size="42px" class="bg-sage-soft text-primary" icon="o_grass" /></q-item-section>
@@ -54,9 +90,9 @@ function toggle(j) { j.status = j.status === 'Open' ? 'Closed' : 'Open' }
             <q-item-label class="text-weight-bold">{{ r.job.title }}</q-item-label>
             <q-item-label caption>{{ fmtShort(r.job.start) }} – {{ fmtShort(r.job.end) }} · {{ r.job.positions }} position{{ r.job.positions > 1 ? 's' : '' }} · €{{ r.job.payPerHour.toFixed(2) }}/h gross · {{ r.job.hoursPerWeek }} h/week<template v-if="r.job.housing"> · housing</template></q-item-label>
           </q-item-section>
-          <q-item-section class="gt-sm" style="max-width: 300px">
+          <q-item-section style="max-width: 300px">
             <q-item-label caption>{{ r.candidates }} candidates · {{ r.invited }} invited · {{ r.accepted }} accepted</q-item-label>
-            <q-item-label caption :class="r.agreed >= r.job.positions ? 'verified' : ''">{{ r.agreed }} of {{ r.job.positions }} contracts agreed</q-item-label>
+            <q-item-label caption :class="r.agreed >= r.job.positions ? 'text-positive' : ''">{{ r.agreed }} of {{ r.job.positions }} contracts agreed</q-item-label>
           </q-item-section>
           <q-item-section side>
             <div class="row items-center no-wrap q-gutter-x-sm">
@@ -80,3 +116,62 @@ function toggle(j) { j.status = j.status === 'Open' ? 'Closed' : 'Open' }
     <JobFormDialog v-model="showForm" :job="editing" @save="save" />
   </q-page>
 </template>
+
+<style scoped>
+.job-card {
+  background: #fff;
+  border-radius: 14px;
+  margin: 0 0 12px;
+  padding: 14px 14px 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.job-card-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.job-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.3;
+}
+.job-card-meta {
+  font-size: 12px;
+  color: #8e8e93;
+  margin-top: 1px;
+}
+.job-card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.pill {
+  font-size: 12px;
+  font-weight: 500;
+  background: #f0f0f5;
+  color: #444;
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+.pill--green {
+  background: #e0f5d5;
+  color: #163300;
+}
+.job-card-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #8e8e93;
+  margin-bottom: 10px;
+}
+.job-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 0.5px solid #f0f0f0;
+  padding-top: 8px;
+  margin-top: 2px;
+}
+</style>

@@ -1,9 +1,14 @@
 <script setup>
 import { QPage } from 'quasar'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
-import { state, matchWorkers, fmtShort } from '../../data/store.js'
+import { state, matchWorkers, fmtShort, farm } from '../../data/store.js'
+import { userService } from '../../services/user.service.js'
+import { chatService } from '../../services/chat.service.js'
+import { useAuthStore } from '../../stores/auth.js'
+
+const auth = useAuthStore()
 
 defineProps({ embedded: Boolean }) // shown inside a TabbedPage
 
@@ -13,8 +18,34 @@ const openJobs = computed(() => state.jobs.filter((j) => j.status === 'Open'))
 const selectedId = ref(route.query.job || openJobs.value[0]?.id)
 watch(() => route.query.job, (id) => { if (id) selectedId.value = id }) // opened from Job postings
 const job = computed(() => state.jobs.find((j) => j.id === selectedId.value))
+
+// Real registered workers from Supabase (merged with mock pool)
+const realWorkers = ref([])
+onMounted(async () => {
+  const rows = await userService.getWorkers()
+  // Convert DB rows to the same shape as mock workers in store.js
+  realWorkers.value = rows.map((r) => ({
+    id: r.privy_did,
+    name: r.email ? r.email.split('@')[0] : 'Registered worker',
+    base: r.location_country ? `Based in ${r.location_country}` : 'Location not set',
+    distanceKm: null,
+    languages: r.languages ?? [],
+    skills: r.skills ?? [],
+    available: r.availability_start && r.availability_end ? [r.availability_start, r.availability_end] : null,
+    history: [],
+    looking: true,
+    share: { audience: 'region', history: true, hidden: [], hours: true, skills: true, languages: true, availability: true },
+    isRealUser: true,
+  }))
+  // Inject real workers into mock pool (avoid duplicates by id)
+  const existingIds = new Set(state.workers.map((w) => w.id))
+  for (const rw of realWorkers.value) {
+    if (!existingIds.has(rw.id)) state.workers.push(rw)
+  }
+})
+
 const all = computed(() => (job.value ? matchWorkers(job.value) : []))
-// Availability filter (replaces the season calendar): whole job / part of it / everyone
+// Availability filter
 const avail = ref('all')
 const matches = computed(() => all.value.filter((m) => avail.value === 'all' || m.availability === avail.value))
 const countBy = (a) => all.value.filter((m) => a === 'all' || m.availability === a).length
@@ -26,9 +57,24 @@ const otherSkills = (m) => m.worker.skills.length - matchedSkills(m).length
 const matchedLangs = (m) => m.worker.languages.filter((l) => job.value.languages.includes(l))
 
 const inviteKey = (w) => `${job.value.id}:${w.id}`
-function invite(w) {
+async function invite(w) {
   state.invitations[inviteKey(w)] = 'Invited'
-  $q.notify({ type: 'positive', icon: 'o_send', message: `Invitation sent to ${w.name}${w.languages[0] ? ` – in ${w.languages[0]}` : ''}, with pay, dates and housing.` })
+  $q.notify({ type: 'positive', icon: 'o_send', message: `Invitation sent to ${w.name} – with pay, dates and housing.` })
+
+  // For real registered workers: create a chat in Supabase and send intro message
+  if (w.isRealUser && auth.walletAddress) {
+    try {
+      const j = job.value
+      const chat = await chatService.getOrCreate(farm.id, w.id, j.id, j.title)
+      const intro = `Hi ${w.name}, we'd like to invite you for: ${j.title}. ` +
+        `Period: ${fmtShort(j.start)} – ${fmtShort(j.end)}, ` +
+        `€${j.payPerHour.toFixed(2)}/h, ${j.hoursPerWeek}h/week` +
+        (j.housing ? ', housing included.' : '.')
+      await chatService.send(chat.id, auth.walletAddress, 'farm', intro, 'en')
+    } catch (e) {
+      console.error('Chat create failed:', e)
+    }
+  }
 }
 
 // ---- Worker profile dialog
@@ -37,12 +83,9 @@ const profile = ref(null)
 
 <template>
   <component :is="embedded ? 'div' : QPage" class="page">
-    <div class="page-header row items-end justify-between q-gutter-y-sm">
-      <div>
-        <h1 class="page-title">Candidates</h1>
-        <div class="text-muted q-mt-xs">Workers matching your open jobs, with experience confirmed by other farms.</div>
-      </div>
-      <q-btn outline color="primary" icon="o_work_outline" label="Job postings" no-caps to="/farm/jobs" />
+    <div class="page-header">
+      <h1 class="page-title">Find workers</h1>
+      <div class="text-muted q-mt-xs">Workers matching your open jobs, ranked by skills and availability.</div>
     </div>
 
     <!-- Job bar: which job you are hiring for -->
@@ -78,8 +121,10 @@ const profile = ref(null)
 
             <!-- who -->
             <q-item-section>
-              <q-item-label class="text-weight-bold">
-                {{ m.worker.name }}<q-icon v-if="m.verifiedCount" name="verified" color="primary" size="16px" class="q-ml-xs" />
+              <q-item-label class="text-weight-bold row items-center no-wrap q-gutter-x-xs">
+                <span>{{ m.worker.name }}</span>
+                <q-icon v-if="m.verifiedCount" name="verified" color="primary" size="16px" />
+                <q-badge v-if="m.worker.isRealUser" color="positive" label="Registered" class="q-ml-xs" style="font-size:10px" />
               </q-item-label>
               <q-item-label caption>{{ m.worker.base }}</q-item-label>
               <q-item-label class="q-mt-xs">
@@ -111,8 +156,18 @@ const profile = ref(null)
                   <div class="text-caption text-muted" style="margin-top: -4px">match</div>
                   <q-tooltip max-width="280px">{{ m.reasons.join(' · ') }}</q-tooltip>
                 </div>
-                <q-btn v-if="!state.invitations[inviteKey(m.worker)]" unelevated color="primary" size="sm" no-caps icon="o_send" label="Invite" @click="invite(m.worker)" />
-                <q-badge v-else color="accent" class="q-pa-sm">{{ state.invitations[inviteKey(m.worker)] }}</q-badge>
+                <template v-if="!state.invitations[inviteKey(m.worker)]">
+                <q-btn unelevated color="primary" size="sm" no-caps icon="o_send" label="Invite" @click="invite(m.worker)" />
+              </template>
+              <template v-else>
+                <div class="column items-end q-gutter-y-xs">
+                  <q-badge color="accent" class="q-pa-sm">{{ state.invitations[inviteKey(m.worker)] }}</q-badge>
+                  <q-btn flat dense size="sm" no-caps color="primary" icon="o_forum" label="Message"
+                    :to="{ path: '/farm/inbox' }" />
+                  <q-btn flat dense size="sm" no-caps color="secondary" icon="o_handshake" label="Send contract"
+                    :to="{ path: '/farm/contracts', query: { worker: m.worker.id, job: job.id } }" />
+                </div>
+              </template>
               </div>
               <q-btn flat dense size="sm" no-caps color="primary" label="View profile" class="q-mt-xs" @click="profile = m.worker" />
             </q-item-section>
