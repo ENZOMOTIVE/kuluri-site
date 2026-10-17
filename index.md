@@ -17,9 +17,11 @@ Farmer and worker agree a deal. The farmer records the work; the worker confirms
 
 ## Links
 
-- Code: [lindangulopez/kuluri](https://github.com/lindangulopez/kuluri)
+- App code and how to run it: [lindangulopez/kuluri-site](https://github.com/lindangulopez/kuluri-site#run-it-on-your-computer) (`app/`)
 - Diagrams: coming soon in [`diagrams/`](https://github.com/lindangulopez/kuluri-site/tree/main/diagrams)
+- [Terms of use](terms/): Kuluri is not a party to the agreements and does not guarantee that they are respected
+- [How to contribute](https://github.com/lindangulopez/kuluri-site/blob/main/CONTRIBUTING.md) · [Authors](https://github.com/lindangulopez/kuluri-site/blob/main/AUTHORS.md) · [Cite](https://github.com/lindangulopez/kuluri-site/blob/main/CITATION.cff)
 
 Prototype built on the synthetic dataset provided by the organisers; no real personal data.
 
-Text and diagrams on this site: [CC BY 4.0](https://github.com/lindangulopez/kuluri-site/blob/main/LICENSE).
+Code: [MIT](https://github.com/lindangulopez/kuluri-site/blob/main/app/LICENSE). Text and diagrams on this site: [CC BY 4.0](https://github.com/lindangulopez/kuluri-site/blob/main/LICENSE).

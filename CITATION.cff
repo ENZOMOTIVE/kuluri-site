@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use or build on Kuluri, please cite it using these metadata."
+type: software
+title: "Kuluri: record once, share with control"
+abstract: >-
+  Prototype app that connects farms and seasonal workers through agreements and
+  work records the workers confirm themselves. Confirmed records are fingerprinted
+  and can answer buyers' and public administrations' requests with totals only.
+  Built at the EU Agri-Hackathon 2026 (DG AGRI), Challenge 3, on the organisers'
+  synthetic dataset.
+version: 0.2.0
+authors:
+  - given-names: Linda
+    family-names: Angulo Lopez
+    alias: lindangulopez
+  - given-names: Aayushman
+    family-names: Bhaba Padhy
+    alias: ENZOMOTIVE
+  - given-names: Juan
+    family-names: Zotes Orcajo
+    alias: juanzotes
+  - given-names: Maria
+    family-names: Filippou
+    alias: filippoumaria
+repository-code: "https://github.com/lindangulopez/kuluri-site"
+url: "https://lindangulopez.github.io/kuluri-site/"
+license:
+  - MIT
+  - CC-BY-4.0
+keywords:
+  - agriculture
+  - seasonal workers
+  - fair working conditions
+  - CAP social conditionality
+  - data sovereignty
+  - work records
+  - Vue
+  - Capacitor
