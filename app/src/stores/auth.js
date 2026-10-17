@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { userService } from '../services/user.service.js'
 
 // Auth store: owns the Privy session, user object, embedded wallet, and role.
 // The Privy client is initialised once in composables/usePrivy.js and its state
@@ -12,13 +13,38 @@ export const useAuthStore = defineStore('auth', () => {
   const loading = ref(false)
 
   // ── Role ────────────────────────────────────────────────────────────────
-  // Stored in localStorage so it survives page refresh.
-  const role = ref(localStorage.getItem('kuluri_role') ?? null) // 'farmer' | 'worker' | null
+  const role = ref(localStorage.getItem('kuluri_role') ?? null)
 
-  function setRole(r) {
+  async function setRole(r) {
     role.value = r
     if (r) localStorage.setItem('kuluri_role', r)
     else localStorage.removeItem('kuluri_role')
+    // Persist role to DB if we have a logged-in user
+    if (user.value?.id) {
+      await _syncToDb(r).catch(console.error)
+    }
+  }
+
+  async function _syncToDb(overrideRole) {
+    if (!user.value?.id) return
+    const linked = user.value.linked_accounts ?? user.value.linkedAccounts ?? []
+    const emailAcc = linked.find((a) => a.type === 'email' || a.type === 'google_oauth')
+    await userService.upsert({
+      privyDid: user.value.id,
+      role: overrideRole ?? role.value,
+      walletAddress: wallet.value?.address ?? null,
+      email: emailAcc?.address ?? user.value.email?.address ?? null,
+    })
+  }
+
+  // ── Location ─────────────────────────────────────────────────────────────
+  // Worker's base location — country + optional region, stored locally.
+  const location = ref(JSON.parse(localStorage.getItem('kuluri_location') ?? 'null'))
+
+  function setLocation(loc) {
+    location.value = loc
+    if (loc) localStorage.setItem('kuluri_location', JSON.stringify(loc))
+    else localStorage.removeItem('kuluri_location')
   }
 
   // ── Derived ─────────────────────────────────────────────────────────────
@@ -54,6 +80,8 @@ export const useAuthStore = defineStore('auth', () => {
     wallet.value = embeddedWallet ?? null
     ready.value = true
     loading.value = false
+    // Sync user record to DB (fire-and-forget; role may still be null on first login)
+    _syncToDb().catch(console.error)
   }
 
   function _onWalletCreated(embeddedWallet) {
@@ -70,9 +98,9 @@ export const useAuthStore = defineStore('auth', () => {
   function _setLoading(val) { loading.value = val }
 
   return {
-    user, wallet, ready, loading, role,
+    user, wallet, ready, loading, role, location,
     authenticated, walletAddress, shortAddress, displayName, avatarInitials,
-    setRole,
+    setRole, setLocation, _syncToDb,
     _onAuthenticated, _onWalletCreated, _onLogout, _setReady, _setLoading,
   }
 })
