@@ -63,8 +63,8 @@ async function doLogout() {
         <div class="pf-row-value pf-row-value--link">{{ roleLabel }} <q-icon name="chevron_right" size="14px" color="grey-5" /></div>
       </div>
       <div class="pf-sep" />
-      <div class="pf-row pf-row--tap" @click="router.push('/worker/job/J-01?tab=agreement')">
-        <div class="pf-row-label">Signed agreements</div>
+      <div class="pf-row pf-row--tap" @click="router.push('/worker/history')">
+        <div class="pf-row-label">History</div>
         <q-icon name="chevron_right" size="16px" color="grey-4" />
       </div>
     </div>

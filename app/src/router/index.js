@@ -44,6 +44,7 @@ const routes = [
       { path: 'job/:id',    component: () => import('../pages/worker/WorkerJob.vue') },
       { path: 'farm',       redirect: '/worker/job/J-01?tab=location' },
       { path: 'chat',       component: () => import('../pages/worker/WorkerChat.vue') },
+      { path: 'history',    component: () => import('../pages/worker/WorkerHistory.vue') },
       { path: 'sharing',    component: () => import('../pages/worker/WorkerSharing.vue') },
       { path: 'rights',     component: () => import('../pages/worker/WorkerRights.vue') },
       { path: 'agreement',  redirect: '/worker/job/J-01?tab=agreement' },
