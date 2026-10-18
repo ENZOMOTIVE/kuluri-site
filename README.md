@@ -67,15 +67,18 @@ bash app/scripts/fetch_nuts.sh      # NUTS 2024 outlines from Eurostat GISCO
 
 ## Data
 
-- **From the synthetic dataset**: the farm FARM-13079 (Milano, NUTS3 ITC4C), with its parcels, inputs, certificate, sales and regular workers' hours.
+- **From the synthetic dataset**: the farm FARM-13079 (Milano, NUTS3 ITC4C) — 371.1 ha across 62 parcels, organic, inside Natura 2000, with ten years of harvests, inputs, irrigation, sales and the regular workers' hours.
 - **Simulated**: job posts, the worker pool, seasonal workers, chats, agreements and confirmations. The dataset has no seasonal workers or jobs.
 - No real personal data is used.
 
+Three findings from that data shaped the product: the dataset records 9,517 hours of labour and **not one seasonal worker**; 20 of its 30 sales have no date-valid holding certificate at the moment of sale; and proof has to reach 22 different buyers. **[DATA.md](DATA.md) sets out every source, figure and simulated element in full**, with the commands to reproduce them.
+
 ## AI in the product
 
-- The "chat analysis" that drafts agreement terms is **rule-based** in this prototype (`app/src/data/agreements.js`).
+- The "chat analysis" that drafts agreement terms is **rule-based** in this prototype (`app/src/data/agreements.js`). No AI model is queried anywhere in the app.
+- AI-generated demo content, illustrative and not verified data: the seeded chats, the worker pool, the job posts and the Romanian interface strings (machine-translated, not reviewed by a native speaker).
 - Planned: transcription and translation of voice messages by an AI service, always shown next to the original, which is what counts.
-- AI tools (coding assistants, Archify diagrams) helped develop the prototype.
+- AI tools (coding assistants, Archify diagrams) helped develop the prototype, its documentation and the pitch deck. Every output was reviewed before merging and is owned by a named team member. Full declaration in [DATA.md](DATA.md) § 5.
 
 ## Agreements, fingerprints and blockchain
 
