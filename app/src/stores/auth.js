@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { userService } from '../services/user.service.js'
+import { demoIdentityFor } from '../data/demo-identities.js'
 
 // Auth store: owns the Privy session, user object, embedded wallet, and role.
 // The Privy client is initialised once in composables/usePrivy.js and its state
@@ -80,6 +81,12 @@ export const useAuthStore = defineStore('auth', () => {
     wallet.value = embeddedWallet ?? null
     ready.value = true
     loading.value = false
+    // Known demo address → land on the right side of the app, no role picker.
+    // Only sets the role; it grants nothing the picker would not have given.
+    if (!role.value) {
+      const identity = demoIdentityFor(privyUser)
+      if (identity) setRole(identity.role).catch(console.error)
+    }
     // Sync user record to DB (fire-and-forget; role may still be null on first login)
     _syncToDb().catch(console.error)
   }

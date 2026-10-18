@@ -1,0 +1,1 @@
+export{n as CapacitorAdapter}from"./esm-BhF-zG1t.js";

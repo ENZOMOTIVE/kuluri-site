@@ -1,1 +1,0 @@
-export{t as WebAdapter}from"./esm-CPNPKD5T.js";
