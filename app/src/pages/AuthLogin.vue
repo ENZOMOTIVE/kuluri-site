@@ -1,4 +1,5 @@
 <script setup>
+import { demoIdentityFor } from '../data/demo-identities.js'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePrivy } from '../composables/usePrivy.js'
@@ -31,7 +32,13 @@ onMounted(async () => {
 })
 
 function _afterAuth() {
-  // Always go to setup after a fresh login so users confirm their role
+  // A known demo address goes straight into its side of the app, so a live
+  // demo does not stop on the role picker. Everyone else confirms their role.
+  const identity = demoIdentityFor(auth.user)
+  if (identity) {
+    router.replace(identity.role === 'farmer' ? '/farm' : '/worker')
+    return
+  }
   router.push('/setup')
 }
 

@@ -8,6 +8,7 @@
 // Call initPrivy(appId) once from main.js AFTER Pinia is ready.
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth.js'
+import { DEMO_IDENTITIES } from '../data/demo-identities.js'
 
 let _privy = null  // Privy singleton
 
@@ -133,7 +134,7 @@ export function usePrivy() {
 
   async function verifyEmailOtp(email, code) {
     error.value = null
-    if (!_privy) return _mockLogin('email', auth)  // Mock: any code works
+    if (!_privy) return _mockLogin('email', auth, email)  // Mock: any code works
     auth._setLoading(true)
     try {
       const result = await _privy.auth.email.loginWithCode(email, code)
@@ -231,12 +232,16 @@ async function _getOrCreateLocalWallet(userId) {
 }
 
 // ── Mock helpers ─────────────────────────────────────────────────────────────
-async function _mockLogin(provider, auth) {
+async function _mockLogin(provider, auth, typedEmail) {
   await new Promise((r) => setTimeout(r, 600))
+  // Keep the address the person actually typed, so demo identities resolve and
+  // the header shows who is signed in.
+  const address = (typedEmail ?? 'demo@kuluri.eu').trim().toLowerCase()
+  const known = DEMO_IDENTITIES[address]
   const mockUser = {
-    id: 'mock-user-1',
-    google: provider === 'google' ? { name: 'Demo User', email: 'demo@kuluri.eu', subject: 'mock' } : undefined,
-    email: provider === 'email' ? { address: 'demo@kuluri.eu' } : undefined,
+    id: `mock-${address}`,
+    google: provider === 'google' ? { name: known?.name ?? 'Demo User', email: address, subject: 'mock' } : undefined,
+    email: provider === 'email' ? { address } : undefined,
     linkedAccounts: [],
   }
   const mockWallet = { address: '0xDeMo0000000000000000000000000000000000FF', chainType: 'ethereum', walletClientType: 'privy' }

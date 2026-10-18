@@ -1,0 +1,1 @@
+export{t as WebAdapter}from"./esm-BhF-zG1t.js";

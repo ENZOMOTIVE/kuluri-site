@@ -1,1 +1,0 @@
-export{n as CapacitorAdapter}from"./esm-CPNPKD5T.js";
