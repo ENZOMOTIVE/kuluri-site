@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
@@ -14,7 +15,7 @@ export default defineConfig({
     // @vue/devtools-api is an optional peer dep not installed in production;
     // stub it so Privy/viem don't generate a bare browser import for it.
     alias: {
-      '@vue/devtools-api': '/Users/apple/Documents/GitHub/kuluri-site/app/src/stubs/devtools-api.js',
+      '@vue/devtools-api': fileURLToPath(new URL('./src/stubs/devtools-api.js', import.meta.url)),
     },
   },
   build: {
