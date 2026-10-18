@@ -1,3 +1,25 @@
 title: Kuluri
 description: Record once, share with control. EU Agri-Hackathon 2026, Team 27.
 theme: minima
+
+# Minima builds the header nav from every page it finds, which turned the README
+# files of app/, contracts/, docs/ and deck/ into navigation items. Keep the nav
+# to the pages a visitor actually wants.
+header_pages:
+  - TERMS.md
+
+# Source directories are not part of the published site. demo/ (the app build),
+# deck/ (the deck and the screenshots) and diagrams/ are deliberately NOT
+# excluded — the site serves them.
+exclude:
+  - app
+  - contracts
+  - docs
+  - deck/README.md
+  - deck/screenshots/README.md
+  - README.md
+  - CONTRIBUTING.md
+  - AUTHORS.md
+  - DATA.md
+  - privacy-policy.html
+  - delete-account.html
