@@ -1,7 +1,12 @@
-import { supabase } from './supabase.js'
+import { supabase, supabaseEnabled } from './supabase.js'
 
 export const userService = {
   async upsert({ privyDid, role, walletAddress, email }) {
+    // Not configured: hand back the same shape from the arguments, so sign-in
+    // works on local mock data.
+    if (!supabaseEnabled) {
+      return { privy_did: privyDid, role, wallet_address: walletAddress ?? null, email: email ?? null }
+    }
     const { data, error } = await supabase
       .from('users')
       .upsert(
@@ -21,6 +26,7 @@ export const userService = {
   },
 
   async getByDid(privyDid) {
+    if (!supabaseEnabled) return null
     const { data, error } = await supabase
       .from('users')
       .select('*')
@@ -32,6 +38,7 @@ export const userService = {
 
   // Fetch all registered workers to show alongside mock candidates
   async getWorkers() {
+    if (!supabaseEnabled) return [] // mock candidates still show
     const { data, error } = await supabase
       .from('users')
       .select('privy_did, email, wallet_address, role, skills, availability_start, availability_end, location_country, languages')

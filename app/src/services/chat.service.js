@@ -1,8 +1,12 @@
-import { supabase } from './supabase.js'
+import { supabase, supabaseEnabled } from './supabase.js'
 
 export const chatService = {
   // Get or create a chat between farm and worker for a job
   async getOrCreate(farmId, workerPrivyDid, jobId, jobTitle) {
+    // Not configured: a local chat object, kept in memory by the caller.
+    if (!supabaseEnabled) {
+      return { id: `C-${farmId}-${workerPrivyDid}-${jobId}`, farm_id: farmId, worker_privy_did: workerPrivyDid, job_id: jobId, job_title: jobTitle, messages: [] }
+    }
     // Try to find existing chat
     const { data: existing } = await supabase
       .from('chats')
@@ -27,6 +31,7 @@ export const chatService = {
 
   // Fetch all chats for a farm
   async getForFarm(farmId) {
+    if (!supabaseEnabled) return []
     const { data, error } = await supabase
       .from('chats')
       .select('*, messages(id, text, created_at, sender_role)')
@@ -38,6 +43,7 @@ export const chatService = {
 
   // Fetch all chats for a worker (by privy_did)
   async getForWorker(workerPrivyDid) {
+    if (!supabaseEnabled) return []
     const { data, error } = await supabase
       .from('chats')
       .select('*, messages(id, text, created_at, sender_role)')
@@ -49,6 +55,7 @@ export const chatService = {
 
   // Fetch messages for a chat
   async getMessages(chatId) {
+    if (!supabaseEnabled) return []
     const { data, error } = await supabase
       .from('messages')
       .select('*')
@@ -60,6 +67,9 @@ export const chatService = {
 
   // Send a message
   async send(chatId, senderPrivyDid, senderRole, text, lang = 'en') {
+    if (!supabaseEnabled) {
+      return { id: `M-${Date.now()}`, chat_id: chatId, sender_id: senderPrivyDid, sender_role: senderRole, text, lang, created_at: new Date().toISOString() }
+    }
     const { data, error } = await supabase
       .from('messages')
       .insert({
@@ -78,6 +88,7 @@ export const chatService = {
 
   // Subscribe to new messages in a chat (real-time)
   subscribe(chatId, onMessage) {
+    if (!supabaseEnabled) return null // no real-time without a backend
     return supabase
       .channel(`chat:${chatId}`)
       .on('postgres_changes', {
@@ -90,6 +101,7 @@ export const chatService = {
   },
 
   unsubscribe(channel) {
+    if (!supabaseEnabled || !channel) return
     supabase.removeChannel(channel)
   },
 }
