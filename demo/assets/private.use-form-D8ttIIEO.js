@@ -1,0 +1,1 @@
+import{v as e}from"./runtime-core.esm-bundler-CqvH_pyu.js";var t={name:String};function n(t){return(n,r,i)=>{n[r](e(`input`,{class:`hidden`+(i||``),...t===void 0?void 0:t()}))}}function r(e){return()=>e.name||e.for}export{r as n,t as r,n as t};

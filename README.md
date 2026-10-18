@@ -6,6 +6,7 @@ Kuluri connects farms and seasonal workers through agreements and work records t
 
 The app was built by Team 27 at the [EU Agri-Hackathon 2026](https://agrihackathon.iservice-europa.eu/) (DG AGRI), Challenge 3 "Flowing data, empowered collaboration".
 
+- **Live demo: <https://lindangulopez.github.io/kuluri-site/demo/>** — runs in the browser, no sign-up; any email and any code will let you in
 - Project site: <https://lindangulopez.github.io/kuluri-site/>
 - Task board: [Kuluri, EU Agri-Hackathon](https://github.com/users/lindangulopez/projects/17)
 - Status: **prototype**, using synthetic and simulated data. Read the [terms of use](TERMS.md) before using it.
@@ -16,6 +17,7 @@ The app was built by Team 27 at the [EU Agri-Hackathon 2026](https://agrihackath
 | --- | --- |
 | [`app/`](app/) | The app: Vue 3 + Quasar, a web app plus an Android app through Capacitor. Screen-by-screen guide in [`app/README.md`](app/README.md) |
 | [`app/scripts/`](app/scripts/) | `extract_farm.py` (farm data from the organisers' dataset) and `fetch_nuts.sh` (NUTS region outlines) |
+| [`demo/`](demo/) | The built web app, published at [/demo/](https://lindangulopez.github.io/kuluri-site/demo/). Regenerate with `cd app && npm run build && cp -r dist/. ../demo/` |
 | [`deck/`](deck/) | Pitch deck |
 | [`diagrams/`](diagrams/) | Architecture diagrams (Archify) |
 | `index.md`, `_config.yml` | The project site (GitHub Pages, Jekyll) |

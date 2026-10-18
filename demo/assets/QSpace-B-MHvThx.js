@@ -1,0 +1,1 @@
+import{v as e}from"./runtime-core.esm-bundler-CqvH_pyu.js";import{_ as t}from"./QIcon-CtSwn_Hk.js";var n=t({name:`QSpace`,setup(){let t=e(`div`,{class:`q-space`});return()=>t}});export{n as t};
