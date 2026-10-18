@@ -161,6 +161,22 @@ Three findings from that data shaped the product: the dataset records 9,517 hour
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md). In short: pick or open an issue, work on a branch, make a small pull request, and never commit the dataset, keys or real personal data.
 
+## Thank you
+
+Kuluri exists because four people gave a weekend to Maria and Nikos's problem. Thank you to:
+
+(i) Aayushman Bhaba Padhy ([@ENZOMOTIVE](https://github.com/ENZOMOTIVE)), who built the app in Vue 3 and Quasar, then worked through the night on authentication, the Supabase backend and the anchoring contracts deployed on Polygon Amoy;
+
+(ii) Maria Filippou ([@filippoumaria](https://github.com/filippoumaria)), who kept the farmer's reality in the room and wrote the first draft of the presentation;
+
+(iii) Juan Zotes Orcajo ([@juanzotes](https://github.com/juanzotes)), who brought the data and maps and built the final pitch deck in Canva.
+
+Thank you also to the mentors who questioned our scope early, and to the EU Agri-Hackathon 2026 organisers at DG AGRI for the challenge and the synthetic dataset that showed us the gap: 9,517 hours of labour and not one seasonal worker.
+
+If you pick up Kuluri from here, read [CONTRIBUTING.md](CONTRIBUTING.md) and add yourself to [AUTHORS.md](AUTHORS.md). What would make the next harvest easier to prove?
+
+Linda Angulo López, 18 October 2026
+
 ## Cite
 
 See [`CITATION.cff`](CITATION.cff); GitHub shows a "Cite this repository" button. The metadata is also in [`codemeta.json`](codemeta.json).
