@@ -2,15 +2,20 @@
 // A team member's CV and their work agreement, opened from My farm → Team.
 // The CV shows only what the worker chose to share (farmView). Team members without a Kuluri profile
 // (e.g. regular staff from the dataset) get a short CV built from their record at this farm.
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { state, farm, farmView, skillRecord } from '../data/store.js'
+import { useQuasar } from 'quasar'
+import { state, farm, farmView, skillRecord, shortHash } from '../data/store.js'
 import { agreements, statusOf, statusColor } from '../data/agreements.js'
 import { chats } from '../data/chats.js'
+import { buildAgreementPdf } from '../utils/agreementPdf.js'
+import { sharePdf } from '../utils/share.js'
 
 const props = defineProps({ member: { type: Object, default: null } }) // a row of state.team
 const emit = defineEmits(['close'])
 const router = useRouter()
+const $q = useQuasar()
+const pdfBusy = ref(false)
 
 const worker = computed(() => {
   const w = props.member && state.workers.find((x) => x.id === props.member.id)
@@ -21,12 +26,34 @@ const history = computed(() => (worker.value
   ? worker.value.history
   : [{ farm: farm.id, crop: props.member?.role, season: props.member?.period, hours: props.member?.hours, confirmed: props.member?.confirmation === 'Confirmed' }]))
 
-const agreement = computed(() => props.member && agreements.find((a) => (a.workerId === props.member.id || a.workerName === props.member.name) && !['withdrawn', 'cancelled'].includes(a.state)))
+const agreement = computed(() => props.member && agreements.find((a) =>
+  (a.workerId === props.member.id || a.workerName === props.member.name || a.workerName?.startsWith(props.member.name?.split(' ')[0])) &&
+  !['withdrawn', 'cancelled'].includes(a.state)
+))
 const chat = computed(() => props.member && chats.find((c) => c.workerId === props.member.id))
 const initials = computed(() => props.member?.name.split(' ').map((s) => s[0]).join('').slice(0, 2).toUpperCase())
 const fmt = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+const verifyUrl = computed(() => agreement.value ? `https://kuluri.eu/verify/?id=${agreement.value.id}&hash=${shortHash(agreement.value.hash)}` : null)
 
 function go(to) { emit('close'); router.push(to) }
+
+async function downloadPdf() {
+  if (!agreement.value) return
+  pdfBusy.value = true
+  try {
+    const chatObj = chats.find((c) => c.id === agreement.value.chatId)
+    const doc = buildAgreementPdf(agreement.value, chatObj)
+    const res = await sharePdf(doc, `Kuluri_agreement_${agreement.value.id}.pdf`, `Kuluri agreement ${agreement.value.id}`)
+    if (res !== 'cancelled') $q.notify({ type: 'positive', message: res === 'shared' ? 'Agreement shared.' : 'Agreement PDF downloaded.' })
+  } finally {
+    pdfBusy.value = false
+  }
+}
+
+function copyVerifyLink() {
+  $q.copyToClipboard(verifyUrl.value)
+    .then(() => $q.notify({ icon: 'o_link', message: 'Verification link copied', timeout: 1500 }))
+}
 </script>
 
 <template>
@@ -84,14 +111,57 @@ function go(to) { emit('close'); router.push(to) }
               </div>
               <q-badge :color="statusColor(agreement)" :label="statusOf(agreement)" class="q-ml-sm" />
             </div>
-            <q-btn flat dense no-caps color="primary" icon-right="chevron_right" label="Open contract" class="q-mt-sm" @click="go({ path: '/farm/contracts', query: { id: agreement.id } })" />
+            <div class="row q-gutter-sm q-mt-sm">
+              <q-btn flat dense no-caps color="primary" icon-right="chevron_right" label="Open contract" @click="go({ path: '/farm/contracts', query: { id: agreement.id } })" />
+              <template v-if="['agreed', 'completed'].includes(agreement.state)">
+                <q-btn flat dense no-caps color="primary" icon="o_picture_as_pdf" label="Download PDF" :loading="pdfBusy" @click="downloadPdf" />
+                <q-btn flat dense no-caps color="primary" icon="o_verified" label="Verify link" @click="copyVerifyLink">
+                  <q-tooltip>{{ verifyUrl }}</q-tooltip>
+                </q-btn>
+              </template>
+            </div>
+            <!-- Verification banner for signed agreements -->
+            <div v-if="['agreed', 'completed'].includes(agreement.state)" class="verify-banner q-mt-sm">
+              <q-icon name="o_verified" color="positive" size="16px" class="q-mr-xs" />
+              <span>Both parties signed · </span>
+              <a :href="verifyUrl" target="_blank" class="verify-link">kuluri.eu/verify/?id={{ agreement.id }}</a>
+              <q-btn flat round dense size="xs" icon="o_copy" color="grey-6" class="q-ml-xs" @click="copyVerifyLink" />
+            </div>
           </div>
-          <div v-else class="card q-pa-md row items-center no-wrap">
-            <div class="col text-body2 text-muted">No contract in Kuluri. Status: <b>{{ member.contract }}</b> (tracked outside Kuluri).</div>
-            <q-btn v-if="chat" unelevated dense no-caps color="primary" icon="o_handshake" label="Create contract" class="q-px-sm" @click="go({ path: '/farm/contracts', query: { chat: chat.id } })" />
+          <div v-else class="card q-pa-md">
+            <div class="row items-center no-wrap q-mb-sm">
+              <q-icon name="o_info" color="grey-5" size="18px" class="q-mr-sm" />
+              <div class="col text-body2 text-muted">
+                Status: <b>{{ member.contract }}</b>
+                <span v-if="member.source === 'synthetic_labour'"> — tracked outside Kuluri</span>
+              </div>
+            </div>
+            <div class="row q-gutter-sm">
+              <q-btn v-if="chat" unelevated dense no-caps color="primary" icon="o_handshake" label="Open contract" class="q-px-sm" @click="go({ path: '/farm/contracts', query: { chat: chat.id } })" />
+              <q-btn unelevated dense no-caps :color="chat ? 'grey-3' : 'primary'" :text-color="chat ? 'dark' : 'white'" icon="o_add" label="Create in Kuluri" class="q-px-sm" @click="go({ path: '/farm/contracts' })" />
+            </div>
           </div>
         </div>
       </q-card-section>
     </q-card>
   </q-dialog>
 </template>
+
+<style scoped>
+.verify-banner {
+  display: flex;
+  align-items: center;
+  background: #f0fff4;
+  border: 1px solid #34c759;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #1a5c30;
+}
+.verify-link {
+  color: #163300;
+  font-weight: 600;
+  text-decoration: underline;
+  word-break: break-all;
+}
+</style>

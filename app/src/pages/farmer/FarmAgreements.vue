@@ -2,7 +2,7 @@
 // Farm side: manage all agreements – draft from a chat, edit terms, agree & send (appears in the worker's chat),
 // withdraw, mark completed, cancel.
 import { QPage } from 'quasar'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import AgreementView from '../../components/AgreementView.vue'
@@ -67,6 +67,30 @@ async function saveEdit() {
   showEdit.value = false
   $q.notify({ type: 'positive', message: 'Terms updated.' })
 }
+
+// Watch for worker confirming an agreement → notify farm + jump to calendar
+const notifiedAgreed = new Set()
+onMounted(() => {
+  // Seed set with already-agreed ones so we only fire for NEW transitions
+  agreements.filter((a) => a.state === 'agreed').forEach((a) => notifiedAgreed.add(a.id))
+})
+watch(agreements, () => {
+  agreements.forEach((a) => {
+    if (a.state === 'agreed' && !notifiedAgreed.has(a.id)) {
+      notifiedAgreed.add(a.id)
+      $q.notify({
+        icon: 'o_event_available',
+        color: 'primary',
+        message: `${a.workerName} confirmed the agreement — it's now on your calendar.`,
+        timeout: 8000,
+        actions: [
+          { label: 'View calendar', color: 'lime', noCaps: true, handler: () => router.push('/farm/schedule') },
+          { label: 'Dismiss', color: 'white', noCaps: true, flat: true },
+        ],
+      })
+    }
+  })
+}, { deep: true })
 
 // Opened from Messages: ?chat=C-x or ?id=AG-x
 // Opened from Candidates: ?worker=<privyDid>&job=<jobId>

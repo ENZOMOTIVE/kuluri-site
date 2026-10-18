@@ -58,7 +58,6 @@ const router = createRouter({ history: createWebHashHistory(), routes })
 // Auth guard — waits for Privy SDK to finish initialising before deciding.
 router.beforeEach(async (to) => {
   if (!to.meta.requiresAuth) return true
-
   const auth = useAuthStore()
 
   // Wait for Privy to finish its session restore (up to 4 s)

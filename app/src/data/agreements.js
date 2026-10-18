@@ -152,6 +152,11 @@ export async function workerAgrees(a) {
   await agree(a, 'worker')
   a.state = 'agreed'
   a.updated = new Date().toISOString()
+  // Simulate on-chain record: derive a deterministic tx hash from the agreement hash
+  // In production this would be a real Gnosis Chain transaction via the factory contract
+  a.txHash = '0x' + a.hash.replace(/-/g, '').slice(0, 64).padEnd(64, '0')
+  a.blockNumber = 38200000 + Math.floor(Math.random() * 50000)
+  a.chainId = 100 // Gnosis Chain mainnet
   post(a, { from: 'worker', type: 'event', event: 'accepted', text: `Agreement ${a.id} accepted`, tr: { ro: `Acord ${a.id} acceptat`, it: `Accordo ${a.id} accettato` } })
 }
 
@@ -204,6 +209,21 @@ export async function seedAgreements() {
   a2.terms.housing = false
   a2.hash = await termsHash(a2)
 
+  // AG-004: a fresh agreement sent to Andrei – shows as new/unread for demo
+  const a4 = await createAgreement('C-1', 'J-01')
+  a4.id = 'AG-004'
+  a4.terms.job = 'Olive harvest – October 2026'
+  a4.terms.crop = 'Olives'
+  a4.terms.tasks = ['Hand picking', 'Sorting']
+  a4.terms.start = '2026-10-20'
+  a4.terms.end = '2026-11-15'
+  a4.terms.arrival = '2026-10-19'
+  a4.terms.payPerHour = 12.5
+  a4.terms.housing = true
+  a4.terms.meeting = 'Main gate, 08:00'
+  a4.hash = await termsHash(a4)
+  await sendToWorker(a4)
+
   // AG-003: a completed agreement so History page has a signed card to show
   const a3 = await createAgreement('C-1', 'J-01')
   a3.id = 'AG-003'
@@ -216,4 +236,7 @@ export async function seedAgreements() {
   await agree(a3, 'worker')
   a3.state = 'completed'
   a3.updated = new Date().toISOString()
+  a3.txHash = '0x' + a3.hash.replace(/-/g, '').slice(0, 64).padEnd(64, '0')
+  a3.blockNumber = 38147821
+  a3.chainId = 100
 }

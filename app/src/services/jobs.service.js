@@ -1,26 +1,67 @@
-// Jobs service — returns real data from the API when VITE_API_BASE is set,
-// otherwise falls back to the local mock dataset.
-import { api } from './api.js'
-import { state } from '../data/store.js'
+import { supabase, supabaseEnabled } from './supabase.js'
 
 export const jobsService = {
   async list() {
-    try { return await api.get('/jobs') } catch (_) {}
-    return state.jobs
+    if (!supabaseEnabled) return [] // the prototype's seeded jobs are used instead
+    const { data, error } = await supabase
+      .from('jobs')
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (error) return []
+    return data ?? []
   },
+
+  async listForFarm(farmerPrivyDid) {
+    if (!supabaseEnabled) return []
+    const { data, error } = await supabase
+      .from('jobs')
+      .select('*')
+      .eq('farmer_privy_did', farmerPrivyDid)
+      .order('created_at', { ascending: false })
+    if (error) return []
+    return data ?? []
+  },
+
   async get(id) {
-    try { return await api.get(`/jobs/${id}`) } catch (_) {}
-    return state.jobs.find((j) => j.id === id) ?? null
+    if (!supabaseEnabled) return null
+    const { data, error } = await supabase
+      .from('jobs')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle()
+    if (error) return null
+    return data
   },
-  async create(payload) {
-    try { return await api.post('/jobs', payload) } catch (_) {}
-    const job = { id: `J-${Date.now()}`, status: 'Open', ...payload }
-    state.jobs.push(job)
-    return job
+
+  async create(farmerPrivyDid, payload) {
+    // Not configured: echo the job back so the farmer flow completes locally.
+    if (!supabaseEnabled) return { id: `J-${Date.now()}`, farmer_privy_did: farmerPrivyDid, ...payload }
+    const { data, error } = await supabase
+      .from('jobs')
+      .insert({
+        farmer_privy_did: farmerPrivyDid,
+        title: payload.title,
+        start_date: payload.start ?? null,
+        end_date: payload.end ?? null,
+        pay_per_hour: payload.payPerHour ?? null,
+        hours_per_week: payload.hoursPerWeek ?? null,
+        housing: payload.housing ?? false,
+        tasks: payload.tasks ?? [],
+        languages: payload.languages ?? [],
+        status: 'Open',
+      })
+      .select()
+      .single()
+    if (error) throw error
+    return data
   },
-  async invite(jobId, workerId) {
-    try { return await api.post(`/jobs/${jobId}/invite`, { workerId }) } catch (_) {}
-    state.invitations[`${jobId}:${workerId}`] = 'Invited'
-    return { jobId, workerId, status: 'Invited' }
+
+  async updateStatus(id, status) {
+    if (!supabaseEnabled) return null
+    const { error } = await supabase
+      .from('jobs')
+      .update({ status })
+      .eq('id', id)
+    if (error) throw error
   },
 }

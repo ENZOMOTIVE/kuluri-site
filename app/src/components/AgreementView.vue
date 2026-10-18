@@ -11,6 +11,8 @@ import { buildAgreementPdf } from '../utils/agreementPdf.js'
 import { sharePdf } from '../utils/share.js'
 import { useBiometric } from '../composables/useBiometric.js'
 
+const GNOSIS_EXPLORER = 'https://gnosisscan.io/tx/'
+
 const props = defineProps({
   agreement: { type: Object, required: true },
   side: { type: String, required: true }, // 'worker' | 'farm'
@@ -60,6 +62,7 @@ const ask = (title, message, okLabel, color = 'primary') => $q.dialog({
 })
 
 const busy = ref(false)
+const blockchainStep = ref(null) // null | 'signing' | 'broadcasting' | 'confirming' | 'done'
 
 // Worker — requires device PIN / biometric before signing
 async function workerAgree() {
@@ -69,10 +72,18 @@ async function workerAgree() {
   if (!confirmed) return
 
   busy.value = true
+  blockchainStep.value = 'signing'
   try {
+    // Simulate the blockchain recording stages with short delays
+    await new Promise((r) => setTimeout(r, 900))
+    blockchainStep.value = 'broadcasting'
     await workerAgrees(a.value)
+    await new Promise((r) => setTimeout(r, 1100))
+    blockchainStep.value = 'confirming'
+    await new Promise((r) => setTimeout(r, 1200))
+    blockchainStep.value = 'done'
+
     $q.notify({ type: 'positive', icon: 'verified', message: props.tr('agreedToast'), timeout: 2500 })
-    // Offer PDF immediately after signing
     $q.notify({
       icon: 'o_picture_as_pdf',
       message: 'Agreement signed. Download your certificate?',
@@ -158,6 +169,44 @@ async function pdf() {
       </div>
       <div class="text-caption text-muted q-mt-sm">{{ tr('fingerprint') }}: <span class="mono">{{ shortHash(a.hash) }}</span></div>
 
+      <!-- Blockchain recording progress (worker side, while signing) -->
+      <div v-if="blockchainStep" class="chain-progress q-mt-md">
+        <div class="chain-step" :class="{ done: ['broadcasting','confirming','done'].includes(blockchainStep), active: blockchainStep === 'signing' }">
+          <q-icon :name="['broadcasting','confirming','done'].includes(blockchainStep) ? 'check_circle' : 'o_draw'" size="18px" />
+          <span>Signing with wallet</span>
+        </div>
+        <div class="chain-connector" />
+        <div class="chain-step" :class="{ done: ['confirming','done'].includes(blockchainStep), active: blockchainStep === 'broadcasting' }">
+          <q-spinner v-if="blockchainStep === 'broadcasting'" size="18px" color="primary" />
+          <q-icon v-else :name="['confirming','done'].includes(blockchainStep) ? 'check_circle' : 'o_broadcast_on_home'" size="18px" />
+          <span>Broadcasting to Gnosis Chain</span>
+        </div>
+        <div class="chain-connector" />
+        <div class="chain-step" :class="{ done: blockchainStep === 'done', active: blockchainStep === 'confirming' }">
+          <q-spinner v-if="blockchainStep === 'confirming'" size="18px" color="primary" />
+          <q-icon v-else :name="blockchainStep === 'done' ? 'check_circle' : 'o_verified'" size="18px" />
+          <span>Confirmed on-chain</span>
+        </div>
+      </div>
+
+      <!-- On-chain record (shown once agreed) -->
+      <div v-if="a.txHash" class="chain-record q-mt-md">
+        <div class="chain-record-header">
+          <q-icon name="link" size="16px" color="primary" class="q-mr-xs" />
+          <span class="text-weight-bold text-caption">Recorded on Gnosis Chain</span>
+          <q-space />
+          <q-badge outline color="primary" :label="`Block #${a.blockNumber}`" />
+        </div>
+        <div class="chain-record-hash">
+          <span class="text-caption text-muted">Tx: </span>
+          <span class="mono text-caption">{{ shortHash(a.txHash) }}</span>
+          <a :href="GNOSIS_EXPLORER + a.txHash" target="_blank" class="chain-explore-link q-ml-sm">
+            <q-icon name="o_open_in_new" size="13px" /> View on Gnosisscan
+          </a>
+        </div>
+        <div class="text-caption text-muted" style="margin-top:4px">Agreement hash anchored permanently. Anyone can verify this record.</div>
+      </div>
+
       <!-- worker actions -->
       <div class="column q-gutter-sm q-mt-md" v-if="side === 'worker' && a.state === 'sent'">
         <q-btn unelevated color="primary" no-caps size="lg" icon="o_handshake" :label="tr('iAgree')" @click="workerAgree" />
@@ -183,3 +232,68 @@ async function pdf() {
     <div class="text-caption text-muted q-px-xs"><q-icon name="o_gavel" class="q-mr-xs" />{{ tr('legalNote') }}</div>
   </div>
 </template>
+
+<style scoped>
+/* Blockchain progress stepper */
+.chain-progress {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #f5f9f2;
+  border: 1px solid #c8dfc0;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.chain-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #aaa;
+  text-align: center;
+  flex: 1;
+  transition: color 0.3s;
+}
+.chain-step.active { color: #163300; font-weight: 700; }
+.chain-step.done { color: #34c759; }
+.chain-step.done .q-icon { color: #34c759; }
+.chain-step.active .q-icon { color: #163300; }
+.chain-connector {
+  width: 24px;
+  height: 1px;
+  background: #c8dfc0;
+  flex-shrink: 0;
+  margin-bottom: 14px;
+}
+
+/* On-chain record card */
+.chain-record {
+  background: #f0fff4;
+  border: 1px solid #34c759;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.chain-record-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.chain-record-hash {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.mono { font-family: 'SF Mono', 'Courier New', monospace; letter-spacing: 0.02em; }
+.chain-explore-link {
+  color: #163300;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.chain-explore-link:hover { text-decoration: underline; }
+</style>
