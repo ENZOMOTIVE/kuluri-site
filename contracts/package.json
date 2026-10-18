@@ -1,0 +1,18 @@
+{
+  "name": "kuluri-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test":   "hardhat test",
+    "deploy:amoy":   "hardhat run scripts/deploy.js --network amoy",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:chiado": "hardhat run scripts/deploy.js --network chiado",
+    "deploy:gnosis": "hardhat run scripts/deploy.js --network gnosis",
+    "verify":        "hardhat verify --network gnosis"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.0",
+    "dotenv": "^16.4.5"
+  }
+}

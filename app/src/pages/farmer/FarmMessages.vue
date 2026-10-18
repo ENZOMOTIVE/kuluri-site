@@ -1,9 +1,12 @@
 <script setup>
+import { QPage } from 'quasar'
 import { computed, ref } from 'vue'
 import ChatThread from '../../components/ChatThread.vue'
 import SimulatedNote from '../../components/SimulatedNote.vue'
 import { chats } from '../../data/chats.js'
 import { forChat } from '../../data/agreements.js'
+
+defineProps({ embedded: Boolean }) // shown inside a TabbedPage
 
 const openId = ref(chats[0]?.id)
 const chat = computed(() => chats.find((c) => c.id === openId.value))
@@ -20,9 +23,9 @@ const labels = {
 </script>
 
 <template>
-  <q-page class="page">
+  <component :is="embedded ? 'div' : QPage" class="page">
     <div class="page-header">
-      <h1 class="page-title">Messages</h1>
+      <h1 class="page-title">Inbox</h1>
       <div class="text-muted q-mt-xs">Talk to workers before and during the job. Messages are translated into each person’s language.</div>
     </div>
     <SimulatedNote text="Conversations are simulated and kept in memory. Seeded messages include translations; live translation of new messages needs a translation service (next step)." />
@@ -52,12 +55,12 @@ const labels = {
               <div class="text-weight-bold">{{ chat.workerName }} <span class="text-caption text-muted">· {{ chat.workerId }}</span></div>
               <div class="text-caption text-muted">{{ chat.job }}</div>
             </div>
-            <q-btn flat dense no-caps color="primary" icon="o_person_search" label="Profile" to="/farm/find" />
-            <q-btn unelevated dense no-caps color="primary" icon="o_handshake" class="q-ml-sm q-px-sm" :label="forChat(chat.id) ? 'Agreement' : 'Create agreement'" :to="{ path: '/farm/agreements', query: { chat: chat.id } }" />
+            <q-btn flat dense no-caps color="primary" icon="o_person_search" label="Profile" to="/farm/candidates" />
+            <q-btn unelevated dense no-caps color="primary" icon="o_handshake" class="q-ml-sm q-px-sm" :label="forChat(chat.id) ? 'Contract' : 'Create contract'" :to="{ path: '/farm/contracts', query: { chat: chat.id } }" />
           </div>
-          <ChatThread class="col" :chat="chat" me="farm" view-lang="en" write-lang="en" :labels="labels" :agreement-to="(id) => ({ path: '/farm/agreements', query: { id } })" />
+          <ChatThread class="col" :chat="chat" me="farm" view-lang="en" write-lang="en" :labels="labels" :agreement-to="(id) => ({ path: '/farm/contracts', query: { id } })" />
         </div>
       </div>
     </div>
-  </q-page>
+  </component>
 </template>

@@ -1,11 +1,14 @@
 <script setup>
 // Earnings, banking-app style: balance header, quick actions, weekly chart, alerts, activity by date.
 // Kuluri does not hold or pay money – these are the hours and pay recorded by the worker and the farm.
+import { QPage } from 'quasar'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { t, lang } from '../../data/i18n.js'
 import { state } from '../../data/store.js'
+
+defineProps({ embedded: Boolean }) // shown inside a TabbedPage
 
 const router = useRouter()
 const $q = useQuasar()
@@ -55,7 +58,7 @@ function askFarm(w) {
 </script>
 
 <template>
-  <q-page class="earn">
+  <component :is="embedded ? 'div' : QPage" class="earn">
     <!-- Balance header -->
     <div class="hero">
       <div class="text-caption hero-dim">{{ t('seasonEarnings') }} · 2026</div>
@@ -158,7 +161,7 @@ function askFarm(w) {
 
       <div class="text-caption text-muted"><q-icon name="o_info" class="q-mr-xs" />{{ t('notWallet') }}</div>
     </div>
-  </q-page>
+  </component>
 </template>
 
 <style scoped>

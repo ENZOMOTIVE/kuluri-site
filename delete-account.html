@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuluri — Delete Your Account</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f7f4ef; color: #1a1a14;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px; line-height: 1.75;
+  padding: 0 16px 64px;
+}
+.wrap { max-width: 680px; margin: 0 auto; }
+header { padding: 48px 0 28px; border-bottom: 1px solid #ddd8ce; margin-bottom: 36px; }
+.logo { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.logo-icon { width: 34px; height: 34px; border-radius: 8px; background: #2c5c1e; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+.logo-name { font-size: 1.2rem; font-weight: 700; color: #2c5c1e; }
+h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 8px; }
+.sub { color: #5a5a4a; font-size: 0.95rem; }
+.step-list { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 16px; }
+.step { display: flex; gap: 16px; align-items: flex-start; background: #fff; border: 1px solid #ddd8ce; border-radius: 12px; padding: 18px 20px; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: #2c5c1e; color: #fff; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.step-body strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+.step-body p { font-size: 0.9rem; color: #5a5a4a; margin: 0; }
+.step-body a { color: #2c5c1e; }
+.data-box { background: #fdf0ee; border: 1px solid #c0392b; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+.data-box h2 { font-size: 1rem; font-weight: 700; color: #c0392b; margin-bottom: 12px; }
+.data-box ul { padding-left: 20px; }
+.data-box li { font-size: 0.9rem; margin-bottom: 6px; }
+.keep-box { background: #e8f0e3; border: 1px solid #2c5c1e; border-radius: 12px; padding: 20px 24px; margin-bottom: 32px; }
+.keep-box h2 { font-size: 1rem; font-weight: 700; color: #2c5c1e; margin-bottom: 12px; }
+.keep-box ul { padding-left: 20px; }
+.keep-box li { font-size: 0.9rem; margin-bottom: 6px; }
+.email-block { background: #fff; border: 1px solid #ddd8ce; border-radius: 12px; padding: 20px 24px; }
+.email-block p { font-size: 0.9rem; color: #5a5a4a; margin-bottom: 8px; }
+.email-block a { color: #2c5c1e; font-weight: 600; font-size: 1rem; }
+footer { border-top: 1px solid #ddd8ce; padding-top: 20px; font-size: 0.82rem; color: #5a5a4a; text-align: center; margin-top: 32px; }
+a { color: #2c5c1e; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🌿</div>
+      <span class="logo-name">kuluri</span>
+    </div>
+    <h1>Delete Your Account</h1>
+    <p class="sub">You can request deletion of your Kuluri account and all associated data at any time.</p>
+  </header>
+
+  <ol class="step-list">
+    <li class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Send a deletion request by email</strong>
+        <p>Email us at <a href="mailto:privacy@kuluri.eu">privacy@kuluri.eu</a> with the subject line <strong>"Account Deletion Request"</strong> and include the email address linked to your account.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>We confirm your identity</strong>
+        <p>We may send a short verification to the email on file to confirm the request is from you.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Deletion completed within 30 days</strong>
+        <p>We will permanently delete your account and personal data within 30 days of your confirmed request.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="data-box">
+    <h2>Data that will be deleted</h2>
+    <ul>
+      <li>Your name and email address</li>
+      <li>Your profile, skills, and work history</li>
+      <li>Your wallet address and authentication data</li>
+      <li>Your messages and inbox</li>
+      <li>Your job applications and listings</li>
+    </ul>
+  </div>
+
+  <div class="keep-box">
+    <h2>Data we may retain</h2>
+    <ul>
+      <li>Signed job agreements — retained for the minimum period required under applicable EU labour law (typically up to 5 years), then permanently deleted.</li>
+      <li>Anonymised usage statistics that cannot be linked back to you.</li>
+      <li>Agreement hashes anchored on a public blockchain — cannot be removed due to the immutable nature of blockchain records, but contain no personal data.</li>
+    </ul>
+  </div>
+
+  <div class="email-block">
+    <p>To submit your deletion request:</p>
+    <a href="mailto:privacy@kuluri.eu?subject=Account%20Deletion%20Request">privacy@kuluri.eu</a>
+    <p style="margin-top:10px;">We respond to all requests within 5 business days.</p>
+  </div>
+
+  <footer>
+    &copy; 2026 Kuluri &nbsp;·&nbsp; eu.kuluri.app &nbsp;·&nbsp; <a href="mailto:privacy@kuluri.eu">privacy@kuluri.eu</a>
+  </footer>
+</div>
+</body>
+</html>

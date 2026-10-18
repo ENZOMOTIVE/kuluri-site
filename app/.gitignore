@@ -1,5 +1,7 @@
 node_modules
 dist
+.env.local
+.env.*.local
 .DS_Store
 .vercel
 # Android build outputs (the android/ project itself is committed)

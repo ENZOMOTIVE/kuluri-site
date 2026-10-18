@@ -1,7 +1,13 @@
-// Agreement PDF: agreed terms, both confirmations with fingerprint, and the AI chat memorandum
-// (intent + findings with the original messages). English, for use across Europe.
+// Agreement PDF: agreed terms, both confirmations with fingerprint, QR verify link, and AI chat memorandum.
 import { jsPDF } from 'jspdf'
+import QRCode from 'qrcode'
 import { statusOf, consistency } from '../data/agreements.js'
+
+const VERIFY_BASE = 'https://kuluri.eu/verify'
+
+async function qrDataUrl(text) {
+  return QRCode.toDataURL(text, { width: 180, margin: 1, color: { dark: '#163300', light: '#FFFFFF' } })
+}
 
 const clean = (s) => String(s ?? '')
   .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -13,7 +19,7 @@ const d = (x) => new Date(x).toLocaleDateString('en-GB', { day: '2-digit', month
 const dt = (x) => new Date(x).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
 const english = (m) => (m.lang === 'en' ? m.text : m.tr?.en) || m.text
 
-export function buildAgreementPdf(a, chat) {
+export async function buildAgreementPdf(a, chat) {
   const doc = new jsPDF({ unit: 'mm', format: 'a4' })
   const W = doc.internal.pageSize.getWidth(), H = doc.internal.pageSize.getHeight(), M = 16
   let y = 0
@@ -81,13 +87,30 @@ export function buildAgreementPdf(a, chat) {
   y += 2
   para(`Analysed ${a.analysis.messages} messages on ${dt(a.analysis.analysedAt)}. Both sides allowed the AI summary of this chat. Prototype: rule-based analysis; the chat messages themselves remain the record.`, 8, MUTED)
 
+  // Verification QR code block
+  const verifyUrl = `${VERIFY_BASE}/${a.id}?h=${a.hash?.slice(0, 16)}`
+  try {
+    const qrImg = await qrDataUrl(verifyUrl)
+    const QR_SIZE = 28
+    need(QR_SIZE + 14)
+    y += 4
+    doc.setFillColor(247, 250, 247).roundedRect(M, y - 2, W - 2 * M, QR_SIZE + 10, 3, 3, 'F')
+    doc.addImage(qrImg, 'PNG', M + 4, y + 1, QR_SIZE, QR_SIZE)
+    doc.setFont('helvetica', 'bold').setFontSize(9.5).setTextColor(...DARK).text('Verify this agreement', M + QR_SIZE + 8, y + 8)
+    doc.setFont('helvetica', 'normal').setFontSize(8).setTextColor(...MUTED)
+    const verifyLines = doc.splitTextToSize('Scan this QR code to confirm this document is genuine and unmodified. Our system checks the fingerprint against the blockchain record — no technical knowledge needed.', W - 2 * M - QR_SIZE - 12)
+    doc.text(verifyLines, M + QR_SIZE + 8, y + 14)
+    doc.setFontSize(7.5).setTextColor(95, 117, 86).text(verifyUrl, M + QR_SIZE + 8, y + QR_SIZE + 4)
+    y += QR_SIZE + 14
+  } catch (_) { /* QR generation failed — skip silently */ }
+
   // Footer on every page
   const pages = doc.getNumberOfPages()
   for (let p = 1; p <= pages; p++) {
     doc.setPage(p)
     doc.setDrawColor(...LINE).line(M, H - 14, W - M, H - 14)
     doc.setFontSize(7.5).setTextColor(...MUTED).setFont('helvetica', 'normal')
-    doc.text('Kuluri prototype - EU Agri-Hackathon 2026 - simulated data, not legal advice', M, H - 9)
+    doc.text('Kuluri - Agreement summary - not a substitute for a formal employment contract', M, H - 9)
     doc.text(`${a.id} - page ${p}/${pages}`, W - M, H - 9, { align: 'right' })
   }
   return doc

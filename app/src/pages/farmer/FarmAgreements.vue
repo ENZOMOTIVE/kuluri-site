@@ -1,6 +1,7 @@
 <script setup>
 // Farm side: manage all agreements – draft from a chat, edit terms, agree & send (appears in the worker's chat),
 // withdraw, mark completed, cancel.
+import { QPage } from 'quasar'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
@@ -10,6 +11,8 @@ import { tIn } from '../../data/i18n.js'
 import { agreements, createAgreement, forChat, statusOf, statusColor, intentLabel, updateTerms } from '../../data/agreements.js'
 import { chats } from '../../data/chats.js'
 import { state, fmtShort } from '../../data/store.js'
+
+defineProps({ embedded: Boolean }) // shown inside a TabbedPage
 
 const route = useRoute()
 const router = useRouter()
@@ -65,22 +68,30 @@ async function saveEdit() {
   $q.notify({ type: 'positive', message: 'Terms updated.' })
 }
 
-// Opened from Messages: ?chat=C-x (open or start an agreement) or ?id=AG-x (open it)
+// Opened from Messages: ?chat=C-x or ?id=AG-x
+// Opened from Candidates: ?worker=<privyDid>&job=<jobId>
 watch(() => route.query, (q) => {
   if (q.id) { filter.value = 'all'; openId.value = q.id }
   else if (q.chat) {
     const existing = forChat(q.chat)
     if (existing) { filter.value = 'all'; openId.value = existing.id } else openNew(q.chat)
+  } else if (q.worker && q.job) {
+    // Pre-fill from Candidates "Send contract" button
+    newJob.value = q.job
+    // Find a chat for this worker+job if one exists, otherwise open the dialog
+    const existingChat = chats.find((c) => c.workerId === q.worker)
+    newChat.value = existingChat?.id ?? chatOptions.value[0]?.value ?? null
+    showNew.value = true
   }
 }, { immediate: true })
 </script>
 
 <template>
-  <q-page class="page">
+  <component :is="embedded ? 'div' : QPage" class="page">
     <div class="page-header row items-end justify-between q-gutter-y-sm">
       <div>
-        <h1 class="page-title">Agreements</h1>
-        <div class="text-muted q-mt-xs">Draft from a chat, check the terms, then agree &amp; send. The worker sees it in the chat only after you send it.</div>
+        <h1 class="page-title">Contracts</h1>
+        <div class="text-muted q-mt-xs">Job agreements with your workers: draft from a chat, check the terms, then agree &amp; send.</div>
       </div>
       <q-btn unelevated color="primary" icon="add" label="New agreement" no-caps @click="openNew()" />
     </div>
@@ -113,7 +124,7 @@ watch(() => route.query, (q) => {
       </div>
       <div class="col-12 col-md-7">
         <AgreementView v-if="open" :key="open.id" :agreement="open" side="farm" :tr="tr" locale="en"
-          @edit="openEdit" @removed="openId = null" @change="router.push('/farm/messages')" />
+          @edit="openEdit" @removed="openId = null" @change="router.push('/farm/inbox')" />
       </div>
     </div>
 
@@ -154,5 +165,5 @@ watch(() => route.query, (q) => {
         </q-card-actions>
       </q-card>
     </q-dialog>
-  </q-page>
+  </component>
 </template>

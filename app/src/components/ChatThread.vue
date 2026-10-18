@@ -94,11 +94,11 @@ watch(() => props.chat.messages.length, () => { props.chat.unread[props.me] = 0;
 .msg-row { display: flex; }
 .msg-row.mine { justify-content: flex-end; }
 .bubble { max-width: 82%; padding: 9px 12px; border-radius: 14px; line-height: 1.5; font-size: 15px; }
-.theirs .bubble { background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
-.mine .bubble { background: #5f7556; color: #f5f2eb; border-bottom-right-radius: 4px; }
+.theirs .bubble { background: var(--surface-2); border: 1px solid var(--line); border-bottom-left-radius: 4px; color: var(--text); }
+.mine .bubble { background: #163300; color: #FFFFFF; border-bottom-right-radius: 4px; }
 .meta { font-size: 11px; opacity: 0.75; margin-top: 4px; }
 .meta a { color: inherit; text-decoration: underline; }
 .event { align-self: center; font-size: 12px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; }
-.agreement-card { width: 82%; max-width: 340px; background: var(--surface); border: 1px solid #a9b99e; border-radius: 14px; padding: 10px 12px; box-shadow: inset 3px 0 0 #5f7556; }
-.composer { display: flex; align-items: flex-end; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--line); background: var(--surface-2); }
+.agreement-card { width: 82%; max-width: 340px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; box-shadow: inset 3px 0 0 #9FE870; }
+.composer { display: flex; align-items: flex-end; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--line); background: var(--surface); }
 </style>
