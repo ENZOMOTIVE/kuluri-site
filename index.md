@@ -15,8 +15,16 @@ Buyers and public administrations increasingly ask farmers to prove fair working
 
 Farmer and worker agree a deal. The farmer records the work; the worker confirms it through their own link, in their own language. Buyers' requests and public-administration reports are filled in from that evidence, with totals only, never personal data. The farmer decides which buyer sees what.
 
+## Try it
+
+**[Open the Kuluri demo](demo/)** — it runs in your browser, with no sign-up:
+choose **Farm** for the farmer side or **Worker** for the worker app (best in a
+phone-sized window). Any email address and any code will let you in; the
+prototype uses synthetic and simulated data only.
+
 ## Links
 
+- The demo: [lindangulopez.github.io/kuluri-site/demo/](demo/)
 - App code and how to run it: [lindangulopez/kuluri-site](https://github.com/lindangulopez/kuluri-site#run-it-on-your-computer) (`app/`)
 - Diagrams: coming soon in [`diagrams/`](https://github.com/lindangulopez/kuluri-site/tree/main/diagrams)
 - [Terms of use](terms/): Kuluri is not a party to the agreements and does not guarantee that they are respected
