@@ -24,37 +24,106 @@ The app was built by Team 27 at the [EU Agri-Hackathon 2026](https://agrihackath
 
 ## Run it on your computer
 
-You need **Node.js 22** or later and Git. Vite 8 needs at least 20.19, and the Capacitor CLI needs 22. To check your version, run `node --version`. To install Node 22 with [nvm](https://github.com/nvm-sh/nvm):
+The app runs with **no configuration at all**: without any keys it starts in
+mock-auth mode (any login is accepted, a demo wallet is created) and serves the
+farm data already committed in `app/src/data/`. That is the mode to use for a
+demo.
+
+### 1. Node 22 or later
+
+Vite 8 needs at least Node 20.19 and the Capacitor CLI needs 22. Check with
+`node --version`. Debian and Ubuntu still ship Node 18, which will fail the
+build, so install a current version in your home directory:
 
 ```bash
-nvm install 22 && nvm use 22
+# with nvm, if you have it
+nvm install 24 && nvm use 24
 ```
 
-Then:
+```bash
+# without nvm, no root needed — downloads into ~/.local and puts it first on PATH
+mkdir -p ~/.local/node && cd ~/.local/node
+curl -LO https://nodejs.org/dist/v24.22.0/node-v24.22.0-linux-x64.tar.xz
+tar -xJf node-v24.22.0-linux-x64.tar.xz
+ln -sfn ~/.local/node/node-v24.22.0-linux-x64 ~/.local/node/current
+ln -sfn ~/.local/node/current/bin/node ~/.local/bin/node
+ln -sfn ~/.local/node/current/bin/npm  ~/.local/bin/npm
+ln -sfn ~/.local/node/current/bin/npx  ~/.local/bin/npx
+node --version   # v24.22.0
+```
+
+(`~/.local/bin` is already ahead of `/usr/bin` on most systems. To undo it,
+delete those three symlinks.)
+
+### 2. Start it
 
 ```bash
 git clone https://github.com/lindangulopez/kuluri-site.git
 cd kuluri-site/app
 npm install
-npm run dev          # open http://localhost:5173
+npm run dev          # http://localhost:5173
 ```
 
-At `http://localhost:5173`, choose **Farm** to open the farmer dashboard, or **Worker** to open the worker app (best in a phone-sized window).
+Choose **Farm** for the farmer dashboard, or **Worker** for the worker app —
+best in a phone-sized window. The screen-by-screen guide is in
+[`app/README.md`](app/README.md).
 
 ```bash
 npm run build        # production build in app/dist
-npm run preview      # serve the build locally
+npm run preview      # serve that build locally
 ```
+
+If `npm run build` fails with `UNLOADABLE_DEPENDENCY` on `@vue/devtools-api`,
+you are on a commit from before the alias in `app/vite.config.js` was made
+relative — pull `main`.
+
+### 3. Optional services
+
+Copy `app/.env.example` to `app/.env.local` and fill in only what you need.
+Nothing here is required for a demo.
+
+| Variable | What it turns on |
+| --- | --- |
+| `VITE_PRIVY_APP_ID` | Real Privy login and wallets instead of mock auth |
+| `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` | Persisting users and chat history (schema in [`docs/database.md`](docs/database.md)) |
+| `VITE_API_BASE` | Sends service calls to a backend instead of local mock data |
+| `VITE_CHAIN_ID`, `VITE_FACTORY_ADDRESS`, `VITE_FORWARDER_ADDRESS` | The anchoring contracts |
+
+`.env.local` is git-ignored. Never commit keys, and never put
+`DEPLOYER_PRIVATE_KEY` anywhere the frontend can read it — it belongs to the
+relayer and is used server-side only.
+
+**Note**: `.env.example` still names Gnosis Chiado (chain 10200) while the
+deployed contracts are on Polygon Amoy (chain 80002). Use the Amoy values from
+[`contracts/README.md`](contracts/README.md).
 
 ### Android
 
-You need [Android Studio](https://developer.android.com/studio) with an Android SDK. The app targets API 36, and the minimum is API 24.
+You need [Android Studio](https://developer.android.com/studio) with an Android
+SDK. The app targets API 36, and the minimum is API 24.
 
 ```bash
 cd app
 npm run android:sync   # build the web app and copy it into android/
-npm run android:open   # open the project in Android Studio, then Run ▶ on a device or emulator
+npm run android:open   # open in Android Studio, then Run on a device or emulator
 ```
+
+### The contracts
+
+The anchoring contracts are already deployed on the Polygon Amoy testnet, so you
+only need this if you want to change or redeploy them.
+
+```bash
+cd contracts
+npm install
+npx hardhat test              # the unit tests
+npm run deploy:amoy           # needs DEPLOYER_PRIVATE_KEY and testnet funds
+```
+
+Addresses, the gasless relayer design and the faucet links are in
+[`contracts/README.md`](contracts/README.md). The app does not call the
+contracts yet — see [DATA.md](DATA.md) § 4 for exactly what is live and what is
+still simulated.
 
 ### Refreshing the data (optional)
 
