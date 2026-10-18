@@ -1,8 +1,11 @@
 <script setup>
+import { QPage } from 'quasar'
 import { computed } from 'vue'
 import KpiCard from '../../components/KpiCard.vue'
 import SimulatedNote from '../../components/SimulatedNote.vue'
 import { state, teamStats, fairRecord, matchWorkers, fmtShort } from '../../data/store.js'
+
+defineProps({ embedded: Boolean }) // shown inside a TabbedPage
 
 const openJobs = computed(() => state.jobs.filter((j) => j.status === 'Open'))
 const matches = computed(() => openJobs.value.reduce((a, j) => a + matchWorkers(j).length, 0))
@@ -13,14 +16,13 @@ const todo = computed(() => [
   teamStats.value.pending && { icon: 'o_pending_actions', color: 'warning', text: `${teamStats.value.pending} work records waiting for worker confirmation`, to: '/farm/team' },
   teamStats.value.disputed && { icon: 'o_report', color: 'negative', text: `${teamStats.value.disputed} record disputed by a worker – please review`, to: '/farm/team' },
   teamStats.value.contractIssues && { icon: 'o_description', color: 'warning', text: `${teamStats.value.contractIssues} contracts missing or ending soon`, to: '/farm/team' },
-  { icon: 'o_assignment', color: 'primary', text: '1 buyer request open (BUYER-027)', to: '/farm/requests' },
 ].filter(Boolean))
 </script>
 
 <template>
-  <q-page class="page">
+  <component :is="embedded ? 'div' : QPage" class="page">
     <div class="page-header">
-      <h1 class="page-title">Overview</h1>
+      <h1 class="page-title">Dashboard</h1>
       <div class="text-muted q-mt-xs">Autumn 2026 · maize harvest and winter sowing</div>
     </div>
     <SimulatedNote />
@@ -48,7 +50,7 @@ const todo = computed(() => [
         <div class="text-subtitle1 text-weight-bold q-mt-lg q-mb-sm">Open jobs</div>
         <div class="card">
           <q-list separator>
-            <q-item v-for="j in openJobs" :key="j.id" clickable to="/farm/find">
+            <q-item v-for="j in openJobs" :key="j.id" clickable :to="{ path: '/farm/candidates', query: { job: j.id } }">
               <q-item-section avatar><q-avatar rounded class="bg-sage-soft text-primary" icon="o_grass" /></q-item-section>
               <q-item-section>
                 <q-item-label class="text-weight-bold">{{ j.title }}</q-item-label>
@@ -80,5 +82,5 @@ const todo = computed(() => [
         </div>
       </div>
     </div>
-  </q-page>
+  </component>
 </template>

@@ -1,8 +1,11 @@
 <script setup>
+import { QPage } from 'quasar'
 import { computed, ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { t, lang } from '../../data/i18n.js'
 import { state, fingerprint } from '../../data/store.js'
+
+defineProps({ embedded: Boolean }) // shown inside a TabbedPage
 
 const $q = useQuasar()
 const w = state.week
@@ -28,7 +31,7 @@ function sendDispute() {
 </script>
 
 <template>
-  <q-page class="q-pa-md">
+  <component :is="embedded ? 'div' : QPage" class="q-pa-md">
     <div class="row items-center q-mb-sm">
       <q-btn flat dense round icon="arrow_back" class="q-mr-sm" @click="$router.push('/worker/earnings')" />
       <div class="text-subtitle1 text-weight-bold">{{ t('confirmWeek') }}</div>
@@ -84,5 +87,5 @@ function sendDispute() {
         </q-card-actions>
       </q-card>
     </q-dialog>
-  </q-page>
+  </component>
 </template>

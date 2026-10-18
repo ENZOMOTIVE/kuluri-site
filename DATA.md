@@ -66,11 +66,25 @@ the regular workers' hours.
 agreements and confirmations. The dataset contains none of these.
 
 **Real cryptography**: every confirmed agreement and week of work gets a SHA-256
-fingerprint. If a record changes, the fingerprint no longer matches.
+fingerprint, computed in the app. If a record changes, the fingerprint no longer
+matches.
 
-**Simulated in this prototype**: writing those fingerprints to a blockchain. The
-Confirm screen says so on screen. Only salted hashes, never personal data, would
-go on a chain.
+**Real, deployed contracts**: `KuluriForwarder` and `KuluriAgreementFactory` are
+written, unit-tested (`contracts/test/`) and deployed to the **Polygon Amoy
+testnet** (chain 80002) at
+[`0x96A8A0A5…fbfDa`](https://amoy.polygonscan.com/address/0x96A8A0A52cb44b637d2b3F6ED5E815e1EfFfbfDa)
+and
+[`0x134EdfA5…7cAA`](https://amoy.polygonscan.com/address/0x134EdfA525ECe891653001f0b2A252fA16957cAA).
+Users never pay gas and need no crypto knowledge: Kuluri's relayer submits the
+transaction and Privy handles wallets and signing. Only salted hashes, never
+personal data, go on chain.
+
+**Not yet connected**: the app does not call those contracts. Anchoring from the
+Confirm screen is still simulated, and the screen says so. Wiring the UI to the
+deployed factory is the next step, not a claim we make today.
+
+**Note**: `app/.env.example` still names Gnosis Chiado (chain 10200) while the
+deployed contracts are on Polygon Amoy (chain 80002). Amoy is the live one.
 
 No real personal data is used anywhere, and none was sent to any AI tool.
 

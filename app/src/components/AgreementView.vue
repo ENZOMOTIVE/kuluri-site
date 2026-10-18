@@ -9,6 +9,7 @@ import { chats } from '../data/chats.js'
 import { shortHash } from '../data/store.js'
 import { buildAgreementPdf } from '../utils/agreementPdf.js'
 import { sharePdf } from '../utils/share.js'
+import { useBiometric } from '../composables/useBiometric.js'
 
 const props = defineProps({
   agreement: { type: Object, required: true },
@@ -18,6 +19,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['change', 'edit', 'removed'])
 const $q = useQuasar()
+const { confirmWithDevice } = useBiometric()
 const a = computed(() => props.agreement)
 const chat = computed(() => chats.find((c) => c.id === a.value.chatId))
 const intent = computed(() => intentLabel(a.value))
@@ -57,12 +59,30 @@ const ask = (title, message, okLabel, color = 'primary') => $q.dialog({
   ok: { unelevated: true, noCaps: true, color, label: okLabel },
 })
 
-// Worker
-function workerAgree() {
-  ask(props.tr('iAgree'), props.tr('agreeConfirm'), props.tr('iAgree')).onOk(async () => {
+const busy = ref(false)
+
+// Worker — requires device PIN / biometric before signing
+async function workerAgree() {
+  const confirmed = await confirmWithDevice(
+    `Signing agreement ${a.value.id} — ${a.value.terms.job}`
+  )
+  if (!confirmed) return
+
+  busy.value = true
+  try {
     await workerAgrees(a.value)
-    $q.notify({ type: 'positive', icon: 'verified', message: props.tr('agreedToast') })
-  })
+    $q.notify({ type: 'positive', icon: 'verified', message: props.tr('agreedToast'), timeout: 2500 })
+    // Offer PDF immediately after signing
+    $q.notify({
+      icon: 'o_picture_as_pdf',
+      message: 'Agreement signed. Download your certificate?',
+      color: 'dark',
+      timeout: 6000,
+      actions: [{ label: 'Download', color: 'lime', noCaps: true, handler: () => pdf() }],
+    })
+  } finally {
+    busy.value = false
+  }
 }
 // Farm
 function send() {
@@ -81,7 +101,6 @@ function doCancel() {
 }
 function doDelete() { ask(props.tr('deleteDraft'), `${a.value.id}?`, props.tr('deleteDraft'), 'negative').onOk(() => { removeDraft(a.value); emit('removed') }) }
 
-const busy = ref(false)
 async function pdf() {
   busy.value = true
   try {

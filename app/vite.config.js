@@ -10,6 +10,13 @@ export default defineConfig({
     vue({ template: { transformAssetUrls } }),
     quasar(),
   ],
+  resolve: {
+    // @vue/devtools-api is an optional peer dep not installed in production;
+    // stub it so Privy/viem don't generate a bare browser import for it.
+    alias: {
+      '@vue/devtools-api': '/Users/apple/Documents/GitHub/kuluri-site/app/src/stubs/devtools-api.js',
+    },
+  },
   build: {
     assetsInlineLimit: process.env.PREVIEW ? 100_000_000 : 4096,
     ...(process.env.PREVIEW ? { rolldownOptions: { output: { inlineDynamicImports: true } } } : {}),
