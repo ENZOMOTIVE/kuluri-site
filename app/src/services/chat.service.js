@@ -2,7 +2,7 @@ import { supabase } from './supabase.js'
 
 export const chatService = {
   // Get or create a chat between farm and worker for a job
-  async getOrCreate(farmId, workerPrivyDid, jobId, jobTitle) {
+  async getOrCreate(farmId, workerPrivyDid, jobId, jobTitle, workerName) {
     // Try to find existing chat
     const { data: existing } = await supabase
       .from('chats')
@@ -18,7 +18,7 @@ export const chatService = {
     const id = `C-${Date.now()}`
     const { data, error } = await supabase
       .from('chats')
-      .insert({ id, farm_id: farmId, worker_privy_did: workerPrivyDid, job_id: jobId, job_title: jobTitle })
+      .insert({ id, farm_id: farmId, worker_privy_did: workerPrivyDid, job_id: jobId, job_title: jobTitle, worker_name: workerName ?? null })
       .select()
       .single()
     if (error) throw error

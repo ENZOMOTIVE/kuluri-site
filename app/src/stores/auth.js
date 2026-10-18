@@ -29,11 +29,15 @@ export const useAuthStore = defineStore('auth', () => {
     if (!user.value?.id) return
     const linked = user.value.linked_accounts ?? user.value.linkedAccounts ?? []
     const emailAcc = linked.find((a) => a.type === 'email' || a.type === 'google_oauth')
+    const googleAcc = linked.find((a) => a.type === 'google_oauth')
+    const nameFromGoogle = googleAcc?.name ?? user.value.google?.name ?? null
+    const emailAddr = emailAcc?.address ?? user.value.email?.address ?? null
     await userService.upsert({
       privyDid: user.value.id,
       role: overrideRole ?? role.value,
       walletAddress: wallet.value?.address ?? null,
-      email: emailAcc?.address ?? user.value.email?.address ?? null,
+      email: emailAddr,
+      displayName: nameFromGoogle ?? (emailAddr ? emailAddr.split('@')[0] : null),
     })
   }
 
