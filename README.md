@@ -83,7 +83,7 @@ Three findings from that data shaped the product: the dataset records 9,517 hour
 ## Agreements, fingerprints and blockchain
 
 - Each confirmed agreement or week of work gets a SHA-256 fingerprint. If anyone changes the record, the fingerprint no longer matches.
-- Writing fingerprints to a blockchain is **simulated** in this prototype. Only salted hashes, never personal data, will go on the chain.
+- The anchoring contracts are **deployed on the Polygon Amoy testnet** (chain 80002, addresses and tests in [`contracts/`](contracts/README.md)); users pay no gas and need no crypto knowledge. The app does not call them yet, so anchoring from the Confirm screen is still **simulated** and says so on screen. Only salted hashes, never personal data, go on the chain. See [DATA.md](DATA.md) § 4.
 - An agreement in Kuluri records the agreed terms and the intention to work together. **It is not an employment contract, and Kuluri does not guarantee that either party respects it.** See the [terms of use](TERMS.md), section 3.
 
 ## Contribute
