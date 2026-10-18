@@ -26,7 +26,7 @@ onMounted(async () => {
   // Convert DB rows to the same shape as mock workers in store.js
   realWorkers.value = rows.map((r) => ({
     id: r.privy_did,
-    name: r.email ? r.email.split('@')[0] : 'Registered worker',
+    name: r.display_name ?? (r.email ? r.email.split('@')[0] : 'Registered worker'),
     base: r.location_country ? `Based in ${r.location_country}` : 'Location not set',
     distanceKm: null,
     languages: r.languages ?? [],
@@ -65,7 +65,7 @@ async function invite(w) {
   if (w.isRealUser && auth.walletAddress) {
     try {
       const j = job.value
-      const chat = await chatService.getOrCreate(farm.id, w.id, j.id, j.title)
+      const chat = await chatService.getOrCreate(farm.id, w.id, j.id, j.title, w.name)
       const intro = `Hi ${w.name}, we'd like to invite you for: ${j.title}. ` +
         `Period: ${fmtShort(j.start)} – ${fmtShort(j.end)}, ` +
         `€${j.payPerHour.toFixed(2)}/h, ${j.hoursPerWeek}h/week` +

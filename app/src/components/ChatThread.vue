@@ -1,6 +1,6 @@
 <script setup>
 // One conversation. `me` = 'worker' | 'farm'. Each side reads messages in `viewLang` when a translation exists.
-import { nextTick, onMounted, reactive, ref, watch } from 'vue'
+import { nextTick, onMounted, reactive, ref, watch, computed } from 'vue'
 import { sendMessage, LANG_NAME } from '../data/chats.js'
 import { agreements, statusOf, statusColor } from '../data/agreements.js'
 
@@ -13,6 +13,9 @@ const props = defineProps({
   langName: { type: Function, default: (l) => LANG_NAME[l] ?? l },
   agreementTo: { type: Function, default: null }, // (agreementId) => route for the agreement card button
   statusText: { type: Function, default: (a) => statusOf(a) },
+  // When provided, send goes here (Supabase) instead of in-memory; extra messages to display on top of chat.messages
+  onSend: { type: Function, default: null },
+  extraMessages: { type: Array, default: () => [] },
 })
 
 const draft = ref('')
@@ -28,23 +31,46 @@ const time = (iso) => new Date(iso).toLocaleString('en-GB', { day: '2-digit', mo
 function scrollDown() {
   nextTick(() => { if (scroller.value) scroller.value.scrollTop = scroller.value.scrollHeight })
 }
-function send() {
+async function send() {
   const text = draft.value.trim()
   if (!text) return
-  sendMessage(props.chat, props.me, text, props.writeLang)
   draft.value = ''
+  if (props.onSend) {
+    await props.onSend(text)
+  } else {
+    sendMessage(props.chat, props.me, text, props.writeLang)
+  }
   scrollDown()
 }
 
-onMounted(() => { props.chat.unread[props.me] = 0; scrollDown() })
-watch(() => props.chat.id, () => { props.chat.unread[props.me] = 0; scrollDown() })
-watch(() => props.chat.messages.length, () => { props.chat.unread[props.me] = 0; scrollDown() })
+// All messages: in-memory seeded + Supabase real ones merged by time
+const allMessages = computed(() => {
+  if (!props.extraMessages.length) return props.chat.messages
+  const seeded = props.chat.messages.map((m) => ({ ...m, _src: 'seed' }))
+  const real = props.extraMessages.map((m) => ({
+    time: m.created_at,
+    from: m.sender_role,
+    lang: m.lang ?? 'en',
+    text: m.text,
+    tr: {},
+    type: 'text',
+    _src: 'real',
+    _id: m.id,
+  }))
+  // Merge: show seeded mock messages only if no real messages exist yet (avoid duplication)
+  if (real.length) return real.sort((a, b) => a.time.localeCompare(b.time))
+  return seeded
+})
+
+onMounted(() => { if (props.chat.unread?.[props.me] != null) props.chat.unread[props.me] = 0; scrollDown() })
+watch(() => props.chat.id, () => { if (props.chat.unread?.[props.me] != null) props.chat.unread[props.me] = 0; scrollDown() })
+watch(() => allMessages.value.length, () => { scrollDown() })
 </script>
 
 <template>
   <div class="thread">
     <div ref="scroller" class="messages">
-      <template v-for="(m, i) in chat.messages" :key="i">
+      <template v-for="(m, i) in allMessages" :key="m._id ?? i">
       <!-- system events (agreement accepted / withdrawn / cancelled) -->
       <div v-if="m.type === 'event'" class="event"><q-icon name="o_handshake" size="14px" class="q-mr-xs" />{{ labels['ev_' + m.event] || m.text }} · {{ time(m.time) }}</div>
       <!-- agreement card -->

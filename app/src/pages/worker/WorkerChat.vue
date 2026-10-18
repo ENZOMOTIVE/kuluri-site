@@ -80,7 +80,7 @@ function report() {
         <q-btn flat round dense icon="o_flag" color="negative" @click="report" :aria-label="t('report')" />
       </div>
       <div class="q-px-md q-py-xs text-caption text-muted bg-surface-2"><q-icon name="o_paid" class="q-mr-xs" />{{ t('free') }}</div>
-      <ChatThread class="col" :chat="chat" me="worker" :view-lang="lang" :write-lang="lang" :labels="labels" :lang-name="langName" :agreement-to="(id) => `/worker/job/${agreements.find((a) => a.id === id)?.jobId ?? 'J-01'}?tab=agreement`" :status-text="statusText" />
+      <ChatThread class="col" :chat="chat" me="worker" :view-lang="lang" :write-lang="lang" :labels="labels" :lang-name="langName" :on-send="realChatId || route.query.id ? sendReal : null" :extra-messages="realMessages" :agreement-to="(id) => `/worker/job/${agreements.find((a) => a.id === id)?.jobId ?? 'J-01'}?tab=agreement`" :status-text="statusText" />
     </template>
     <div v-else class="q-pa-lg text-center text-muted">{{ t('noChats') }}</div>
   </q-page>

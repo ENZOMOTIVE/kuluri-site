@@ -16,7 +16,7 @@ export const farm = {
   region: 'Milano (IT) · NUTS3 ITC4C',
   areaHa: profile.holding.uaa_ha,
   parcels: profile.parcels,
-  crops: [...new Set(profile.parcels.map((p) => cropName(p.crop)))],
+  crops: [...new Set(profile.parcels.map((p) => cropName(p.crop))), 'Olives'],
   organic: profile.holding.organic === 1,
   certificate: cert,
   yearly: profile.yearly,
@@ -42,7 +42,7 @@ export async function fingerprint(obj) {
 export const shortHash = (h) => (h ? `${h.slice(0, 8)}…${h.slice(-4)}` : '')
 
 export const SKILLS = ['Combine harvester', 'Tractor driving', 'Grain handling', 'Sowing', 'Spraying (certified)', 'Hand harvest', 'Machinery repair', 'Irrigation', 'Forklift', 'Sorting & packing']
-export const LANGS = ['Italian', 'English', 'Romanian', 'Polish', 'Bulgarian', 'Albanian', 'Spanish', 'Arabic', 'Punjabi']
+export const LANGS = ['Italian', 'English', 'Romanian', 'Polish', 'Bulgarian', 'Albanian', 'Spanish', 'Greek', 'Arabic', 'Punjabi']
 
 // ---- Simulated worker pool -------------------------------------------------------------
 // Matching uses skills, availability, languages and distance only. Never nationality, age or gender.

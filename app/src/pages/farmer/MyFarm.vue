@@ -1,6 +1,6 @@
 <script setup>
 // Team: the farm's workers, their contracts and confirmations. Click a worker for their CV and contract.
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useQuasar } from 'quasar'
 import KpiCard from '../../components/KpiCard.vue'
 import SimulatedNote from '../../components/SimulatedNote.vue'
@@ -8,6 +8,8 @@ import WorkerCvDialog from '../../components/WorkerCvDialog.vue'
 import { buildTeamExport, buildTeamPdf, downloadJson } from '../../utils/teamExport.js'
 import { sharePdf } from '../../utils/share.js'
 import { state, teamStats, farm } from '../../data/store.js'
+import { userService } from '../../services/user.service.js'
+import { agreements } from '../../data/agreements.js'
 
 const $q = useQuasar()
 
@@ -26,6 +28,37 @@ const confColor = { Confirmed: 'primary', Pending: 'warning', Disputed: 'negativ
 const confIcon = { Confirmed: 'verified', Pending: 'o_schedule', Disputed: 'o_report', 'Not started': 'o_event' }
 const filter = ref('')
 const selected = ref(null) // team member whose CV + agreement is open
+
+// Load real registered workers from Supabase and merge into team list
+const realTeamMembers = ref([])
+onMounted(async () => {
+  const rows = await userService.getWorkers().catch(() => [])
+  realTeamMembers.value = rows.map((r) => {
+    const ag = agreements.find((a) => a.workerId === r.privy_did && !['withdrawn', 'cancelled'].includes(a.state))
+    const name = r.display_name ?? (r.email ? r.email.split('@')[0] : 'Worker')
+    return {
+      id: r.privy_did,
+      name,
+      type: 'Seasonal',
+      role: r.skills?.[0] ?? 'Farm worker',
+      period: r.availability_start && r.availability_end
+        ? `${new Date(r.availability_start).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })} – ${new Date(r.availability_end).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}`
+        : 'TBC',
+      hours: 0,
+      contract: ag ? (ag.state === 'agreed' ? 'Agreed' : ag.state === 'sent' ? 'Pending signature' : 'Draft') : 'In Kuluri',
+      confirmation: ag?.state === 'agreed' ? 'Confirmed' : 'Not started',
+      source: 'registered',
+      isRealUser: true,
+    }
+  })
+})
+
+// Merge mock team + real registered workers (avoid duplicates by id)
+const team = computed(() => {
+  const mockIds = new Set(state.team.map((m) => m.id))
+  const realOnly = realTeamMembers.value.filter((m) => !mockIds.has(m.id))
+  return [...state.team, ...realOnly]
+})
 
 // ---- Export the team (e.g. for a tax consultant): PDF report or JSON data
 const showExport = ref(false)
@@ -73,7 +106,7 @@ function remind() {
           <div class="col-6 col-md-3"><KpiCard label="Pending / disputed" :value="`${teamStats.pending} / ${teamStats.disputed}`" sub="disputes are anonymous" icon="o_pending_actions" color="warning" /></div>
           <div class="col-6 col-md-3"><KpiCard label="Contract issues" :value="teamStats.contractIssues" sub="missing or ending soon" icon="o_description" color="negative" /></div>
         </div>
-        <q-table flat bordered class="rounded cursor-pointer" :rows="state.team" :columns="columns" row-key="id" :filter="filter" :pagination="{ rowsPerPage: 0 }" hide-bottom @row-click="(_, row) => (selected = row)">
+        <q-table flat bordered class="rounded cursor-pointer" :rows="team" :columns="columns" row-key="id" :filter="filter" :pagination="{ rowsPerPage: 0 }" hide-bottom @row-click="(_, row) => (selected = row)">
           <template #top>
             <div class="text-subtitle1 text-weight-bold">Team 2026</div>
             <q-space />
@@ -95,7 +128,7 @@ function remind() {
           <q-card style="width: 480px; max-width: 95vw" class="rounded">
             <q-card-section>
               <div class="text-h6 text-weight-bold">Export team</div>
-              <div class="text-caption text-muted">All {{ state.team.length }} team members with their records – for example to share with your tax consultant.</div>
+              <div class="text-caption text-muted">All {{ team.length }} team members with their records – for example to share with your tax consultant.</div>
             </q-card-section>
             <q-card-section class="q-pt-none column q-gutter-sm">
               <div class="text-subtitle2 text-weight-bold">Format</div>
