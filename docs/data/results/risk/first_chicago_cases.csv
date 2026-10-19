@@ -1,0 +1,4 @@
+case,weight,year_profitable_without_grants,paying_farms_y5,revenue_y5_eur,profit_y5_eur,cumulative_profit_y5_eur,lowest_cumulative_eur,year_of_lowest_cumulative
+Bear,0.3,,1803,56878,-27628,-119672,-119672,5
+Base,0.5,4.0,4588,154088,77465,77669,-19804,3
+Bull,0.2,4.0,7342,234728,155686,217412,-3503,3

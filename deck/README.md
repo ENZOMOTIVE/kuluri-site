@@ -10,3 +10,6 @@
 The data behind the deck's claims, and the full AI-use declaration, are in
 [`../DATA.md`](../DATA.md). The business-model figures are an illustrative
 5-year model, not measured, and the slide says so.
+
+The full 22-slide Canva deck with backup slides, the jury Q&A and the business
+model behind it are in [`../docs/`](../docs/README.md).
