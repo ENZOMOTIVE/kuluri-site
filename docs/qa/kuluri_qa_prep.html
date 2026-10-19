@@ -1,0 +1,408 @@
+<title>Kuluri Q&amp;A Prep</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: single reading column, sticky section nav, slide-keyed Q&A blocks that mirror the backup order */
+:root {
+  --bg: #f5eedf;
+  --surface: #ece3d1;
+  --fg: #173c2b;
+  --muted: #5d6b5f;
+  --accent: #c65d3b;
+  --line: #d9cdb6;
+  --chip: #173c2b;
+  --chip-fg: #f5eedf;
+  --display: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14231b; --surface: #1c3126; --fg: #efe7d6; --muted: #a9b5a8;
+    --accent: #e08262; --line: #2e4637; --chip: #efe7d6; --chip-fg: #14231b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14231b; --surface: #1c3126; --fg: #efe7d6; --muted: #a9b5a8;
+  --accent: #e08262; --line: #2e4637; --chip: #efe7d6; --chip-fg: #14231b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 820px; margin: 0 auto;
+  padding-block: 40px 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 44px;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2.1rem, 6vw, 3rem); }
+h2 { font-size: 1.85rem; }
+h3 { font-size: 1.3rem; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 62ch; }
+.eyebrow { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+header { display: flex; flex-direction: column; gap: 12px; }
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  padding-block: 10px; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .92rem;
+}
+nav a { color: var(--fg); text-decoration: none; font-weight: 600; }
+nav a:hover, nav a:focus-visible { color: var(--accent); }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+section { display: flex; flex-direction: column; gap: 18px; }
+.rule { color: var(--muted); font-size: .95rem; }
+.qa { display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+.qa-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.slide {
+  font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+  background: var(--chip); color: var(--chip-fg); padding: 2px 9px; border-radius: 3px;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.pair { display: grid; grid-template-columns: 4.5rem 1fr; gap: 4px 12px; }
+.pair dt { font-weight: 700; color: var(--muted); font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; padding-top: 3px; }
+.pair dd { margin: 0; min-width: 0; }
+.say { font-style: italic; }
+.nums { color: var(--muted); font-size: .93rem; }
+.callout { background: var(--surface); padding: 16px 18px; border-left: 3px solid var(--accent); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .95rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+td.n, th.n { text-align: right; }
+.src { display: flex; flex-direction: column; gap: 22px; }
+.src ul { margin: 6px 0 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 6px; }
+.src li { min-width: 0; overflow-wrap: anywhere; }
+.flag { color: var(--accent); font-weight: 700; font-size: .85rem; }
+.copyrow { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+button {
+  font: inherit; font-weight: 600; background: var(--fg); color: var(--bg);
+  border: 0; padding: 9px 16px; border-radius: 3px; cursor: pointer;
+}
+#copy-status { color: var(--muted); font-size: .9rem; }
+@media (max-width: 480px) { .pair { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">EU Agri Hackathon · Challenge 3 · Mentorship &amp; jury Q&amp;A</span>
+    <h1>Kuluri Q&amp;A Prep</h1>
+    <p class="lede">One page to prepare the 2-minute Q&amp;A. Each answer points to the backup slide to jump to, gives a line to say, and the numbers behind it. Every answer comes back to the product: <strong>Find · Agree · Hold</strong>.</p>
+  </header>
+
+  <nav aria-label="Sections">
+    <a href="#rule">Golden rule</a>
+    <a href="#backup">After the pitch</a>
+    <a href="#tough">Tough questions</a>
+    <a href="#numbers">Key numbers</a>
+    <a href="#sources">Sources</a>
+  </nav>
+
+  <section id="rule">
+    <h2>Golden rule</h2>
+    <div class="callout">
+      <p><strong>Answer in two sentences, then bridge back.</strong> Whatever the question, end with the product: <span class="say">"Find, agree, hold — that's Kuluri. The rest is how it pays for itself."</span></p>
+    </div>
+    <p class="rule">Deck numbers below are the current Canva order (pitch 1–10, live demo 11, team slide 12, backup 13–22).</p>
+  </section>
+
+  <section id="backup">
+    <h2>After the pitch, by priority</h2>
+    <p class="rule">Same order as the deck: the most likely questions come first, so you can keep clicking forward if there is time.</p>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 12</span><h3>Why us</h3></div>
+      <dl class="pair">
+        <dt>When</dt><dd>Right after the closing slide, on purpose. It stays on screen while the jury thinks of questions.</dd>
+        <dt>Say</dt><dd class="say">"…No harvest lost for lack of hands. And this is the team that will make it happen. Happy to take your questions."</dd>
+        <dt>Asked</dt><dd>"Why are you the right team?" → each person: role in one line + the experience behind it <span class="flag">to fill in tomorrow</span></dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 13</span><h3>Next 12 months</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"What happens between now and the pilot?"</dd>
+        <dt>Say</dt><dd class="say">"We test with Maria this harvest, apply for the grant and sign the pilot co-op in spring, train its members over the summer, and run our first full harvest in October 2027."</dd>
+        <dt>Data</dt><dd class="nums">Nov 2026–Feb 2027 test · Mar–Jun 2027 grant + co-op · Jul–Sep 2027 onboarding · Oct 2027 first full harvest. Dates are our plan; confirm with the team.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 14</span><h3>How Hold works</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"Why blockchain? What about privacy?"</dd>
+        <dt>Say</dt><dd class="say">"Maria and Nikos accept the terms in the app. We store a fingerprint of the agreement, not their personal data, so both see the same version and any change shows. When needed, they export it for ERGANI or a CAP check."</dd>
+        <dt>Data</dt><dd class="nums">No crypto for users · no personal data on the chain · ≈ €0 per agreement vs €0.50–2 per e-signature.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 15</span><h3>Challenge 3: data control</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"How does this answer Challenge 3? Who controls the data?"</dd>
+        <dt>Say</dt><dd class="say">"Farmers and workers own their records. Nothing is shared without consent, records go with them if they leave, and partners only see anonymised totals."</dd>
+        <dt>Data</dt><dd class="nums">39% of EU farmers share no data digitally with external partners (Challenge 3 brief).</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 16</span><h3>Competition: find · agree · hold</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"Isn't this Agro-U? Or the government's ERGANI app?"</dd>
+        <dt>Say</dt><dd class="say">"Agro-U helps farmers find workers and handles the paperwork. ERGANI files short contracts for the state. Kuluri adds the third step: a shared record both sides keep, that can't be quietly changed, for the whole season. We complement ERGANI; we don't replace it."</dd>
+        <dt>Data</dt><dd class="nums">ERGANI app (July 2026): contracts up to 2 days, no matching. Agro-U: Thessaloniki, founded 2020, matching + hiring paperwork. Farm-work voucher (ergósimo): still a paper voucher paid at the post office.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 17</span><h3>How we estimated the numbers</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"Where do your numbers come from? Are they realistic?"</dd>
+        <dt>Say</dt><dd class="say">"Bottom-up, from public data and benchmarks. Our base case is +€78k by year 5. Weighting bad and good scenarios we expect about +€46k, and in 10,000 simulations Kuluri is profitable in year 5 99% of the time."</dd>
+        <dt>Data</dt><dd class="nums">Adoption: Rogers curve (16% by Y3). First season free, then 70% of farms renew at €25. Co-ops: €5 × 315 members (average Cretan olive co-op, Kotsios &amp; Pappa 2022) = €1,575/yr. First Chicago (bear 30 / base 50 / bull 20) → +€46k. Monte Carlo: 99% profitable in Y5, 68% recover all early losses by Y5. NPV at 40%: +€16k.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 18</span><h3>Costs and risks</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"What does it cost to run? What's your biggest risk?"</dd>
+        <dt>Say</dt><dd class="say">"Year 1 costs about €6,500 because the founders build it. The real risk is adoption, so we co-design in the villages and go through cooperatives, who bring their members with them."</dd>
+        <dt>Data</dt><dd class="nums">Y1 ≈ €6.5k (company + accountant €2.5k, legal + GDPR €1.5k, tech + marketing €2.5k). Y5 costs ≈ €77k, mostly people (3% card fees included).</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 19</span><h3>Everyone in the chain wins</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"Who else benefits apart from farmers and workers?"</dd>
+        <dt>Say</dt><dd class="say">"Co-ops get full crews on every member farm. Buyers get proof of fair labour for their supply chain, and the administration gets simpler checks. But it starts with Maria and Nikos."</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 20</span><h3>Who advertises on Kuluri</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"Who pays for ads? Won't it feel like spam?"</dd>
+        <dt>Say</dt><dd class="say">"Ads are a future option, not part of our numbers. If we add them, only harvest businesses: olive mills, farm stores, transport, rooms that sit empty in winter. No loans, no gambling."</dd>
+        <dt>Data</dt><dd class="nums">€0 from ads in every scenario. The plan stands on season passes and co-op plans alone; ads would be upside.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 21</span><h3>Risk check: bear, base and bull</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"What if farmers don't adopt it as fast as you think?"</dd>
+        <dt>Say</dt><dd class="say">"That's our bear case: half the adoption and fewer renewals. We'd lose about €120k over five years, so we'd cut costs early. Weighted across the three cases we still expect +€46k."</dd>
+        <dt>Data</dt><dd class="nums">Cumulative by Y5: bear −€120k (30%) · base +€78k (50%) · bull +€217k (20%). Bear: adoption × 0.5, 55% renew, 30% of co-ops, costs +15%. Bull: adoption × 1.4, 80% renew, 130% of co-ops.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 22</span><h3>If we win: bigger market, bigger profit</h3></div>
+      <dl class="pair">
+        <dt>Asked</dt><dd>"What would you do with more money?"</dd>
+        <dt>Say</dt><dd class="say">"A grant isn't profit; we'd invest it in the team and in going Greece-wide. Its return shows up afterwards: 2.4× the farms and almost 2× the revenue by year 5."</dd>
+        <dt>Data</dt><dd class="nums">€500k EU grant over Y2–Y3 (ESF+ social-innovation size, €200k–1M). Crete Y1 → Greece from Y3; co-ops at the Greek average of 183 members (≈200k members / 1,094 co-ops). Lowest point −€24k in Y4, +€91k cumulative by Y5 (vs +€78k), 22k farms vs 9k, Y5 revenue €294k vs €154k.</dd>
+      </dl>
+    </article>
+  </section>
+
+<section id="tough">
+    <h2>Tough questions on the main pitch</h2>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 7 → 14</span><h3>"Why blockchain?"</h3></div>
+      <dl class="pair">
+        <dt>Say</dt><dd class="say">"Hold means both sides see the same agreement and nobody can quietly change it. We store a fingerprint of the agreement, not personal data, and nobody needs crypto."</dd>
+        <dt>Data</dt><dd class="nums">Record cost ≈ €0 per agreement vs €0.50–2 per e-signature.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 3</span><h3>"How does this connect to the CAP?"</h3></div>
+      <dl class="pair">
+        <dt>Say</dt><dd class="say">"Since 2025, CAP payments depend on respecting labour rules: social conditionality. Today farmers prove it on paper and controls are rare. Kuluri gives them the proof as they work."</dd>
+        <dt>Data</dt><dd class="nums">Art. 14, Regulation (EU) 2021/2115: voluntary from 2023, mandatory from 2025. Enforcement so far is light (e.g. ~227 farmers sanctioned in Spain in 2024, ~3% cuts). Don't overclaim: it doesn't cover everything, such as minimum wage.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 10</span><h3>"Is €25 a season the right price?"</h3></div>
+      <dl class="pair">
+        <dt>Say</dt><dd class="say">"It's less than 1% of a small farm's oil income, and one season pass covers every agreement. Below about €17 the model doesn't recover its early losses by year 5, so €25 leaves us a margin."</dd>
+        <dt>Data</dt><dd class="nums">Cumulative by Y5: €15 → −€4k · €20 → +€37k · €25 → +€78k · €30 → +€119k. 2,880 season passes cover Y5 costs.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 10</span><h3>"What happens when the grant ends?"</h3></div>
+      <dl class="pair">
+        <dt>Say</dt><dd class="say">"Year 3 is our tight year, before most farms renew. We keep the year-1 surplus as a reserve and are profitable without grants from year 4."</dd>
+        <dt>Data</dt><dd class="nums">Base cumulative: +13.5 → +8.8 → −19.8 → +0.2 → +77.7 (€k, Y1–Y5).</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">SLIDE 9</span><h3>"Why would a co-op pay, if farmers already do?"</h3></div>
+      <dl class="pair">
+        <dt>Say</dt><dd class="say">"They buy something different. A farmer pays €25 for their own records; the co-op pays €5 per member for the aggregated, anonymised view across all its farms: crews, gaps, labour proof for buyers. Who uses the data, pays."</dd>
+        <dt>Data</dt><dd class="nums">Average Cretan olive co-op: 315 members → €1,575/yr. First year free. 25 co-ops paying by Y5 → €39k.</dd>
+      </dl>
+    </article>
+
+    <article class="qa">
+      <div class="qa-head"><span class="slide">NO SLIDE</span><h3>"Are you a recruitment agency? What's your legal form?"</h3></div>
+      <dl class="pair">
+        <dt>Say</dt><dd class="say">"No. Kuluri is a technology platform; farmers hire workers directly. We are set up as a Social Cooperative Enterprise under Greek law, with a European Cooperative Society as the path to scale."</dd>
+        <dt>Data</dt><dd class="nums">Κοιν.Σ.Επ., Law 4430/2016 · SCE, Regulation (EC) 1435/2003.</dd>
+      </dl>
+    </article>
+  </section>
+
+  <section id="numbers">
+    <h2>Key numbers</h2>
+    <p class="rule">Cumulative profit after costs (€k). All figures are our model's estimates, not results. Prices: €25 per farm per season (first season free), €5 per co-op member per year (first year free).</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Case</th><th class="n">Y1</th><th class="n">Y2</th><th class="n">Y3</th><th class="n">Y4</th><th class="n">Y5</th><th>Takeaway</th></tr></thead>
+        <tbody>
+          <tr><td>Bear · 30%</td><td class="n">12.5</td><td class="n">0.1</td><td class="n">−50.8</td><td class="n">−92.0</td><td class="n">−119.7</td><td>Cut costs early</td></tr>
+          <tr><td><strong>Base · 50%</strong></td><td class="n">13.5</td><td class="n">8.8</td><td class="n">−19.8</td><td class="n">0.2</td><td class="n"><strong>77.7</strong></td><td>Profitable without grants from Y4</td></tr>
+          <tr><td>Bull · 20%</td><td class="n">13.5</td><td class="n">12.0</td><td class="n">−3.5</td><td class="n">61.7</td><td class="n">217.4</td><td>Faster adoption, more renewals</td></tr>
+          <tr><td>€500k EU grant</td><td class="n">13.5</td><td class="n">−12.4</td><td class="n">−7.6</td><td class="n">−24.3</td><td class="n"><strong>91.2</strong></td><td>Greece from Y3, 22k farms</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Base case, Y5</th><th class="n">€k</th></tr></thead>
+        <tbody>
+          <tr><td>Season passes (4,588 paying farms × €25)</td><td class="n">114.7</td></tr>
+          <tr><td>Co-op plans (25 co-ops × 315 members × €5)</td><td class="n">39.4</td></tr>
+          <tr><td>Ads</td><td class="n">0</td></tr>
+          <tr><td><strong>Total revenue</strong> · costs €76.6k · profit €77.5k</td><td class="n"><strong>154.1</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <p><strong>Our own assumptions (say so if asked):</strong> 30% of Crete's ~95k olive families hire outside workers; 70% of farms renew after the free season; co-op uptake (2 → 10 → 25 paying in Y3–Y5); grant probabilities. The 95k figure comes from a secondary source we could not trace to an official census. Full model: <code>docs/analysis/kuluri_business_model.ipynb</code> in the kuluri-site repo.</p>
+    </div>
+  </section>
+
+  <section id="sources" class="src">
+    <div class="copyrow">
+      <h2>Sources</h2>
+      <button type="button" id="copy-btn">Copy source list</button>
+      <span id="copy-status" role="status"></span>
+    </div>
+
+    <div>
+      <h3>Problem and market</h3>
+      <ul>
+        <li>Crete short of ~10,000 harvest workers (2023): <a href="https://www.ot.gr/2023/10/30/english-edition/olive-oil-workers-from-all-over-greece-in-crete-to-harvestthe-olives">OT.gr</a></li>
+        <li>Crete ≈ a quarter of Greece's olive area: <a href="https://www.mdpi.com/2077-0472/13/12/2194">MDPI Agriculture 13(12):2194</a></li>
+        <li>Challenge 3 brief (39% figure) and hackathon prize: <a href="https://data.europa.eu/en/news-events/events/eu-agri-hackathon-2026">data.europa.eu</a></li>
+        <li>State of digitalisation in EU agriculture: <a href="https://publications.jrc.ec.europa.eu/repository/handle/JRC141259">JRC141259</a></li>
+        <li>Olive oil producer prices in Crete: <a href="https://www.argophilia.com/news/cretan-olive-oil-prices-2026/247343/">Argophilia</a> <span class="flag">news source</span></li>
+        <li>~95k olive families in Crete <span class="flag">secondary source, not verified against a census</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>CAP social conditionality</h3>
+      <ul>
+        <li><a href="https://newmedit.ciheam.org/bup/wp-content/uploads/2025/06/03-The-social-conditionality.pdf">CIHEAM: The social conditionality</a></li>
+        <li><a href="https://pl.boell.org/en/2023/10/19/cap-social-conditionality-game-changer-farm-workers">Heinrich Böll Stiftung: a game changer for farm workers?</a></li>
+        <li><a href="https://www.desmog.com/2025/09/29/revealed-eu-farm-subsidy-bankrolls-widespread-labour-abuse/">DeSmog: enforcement investigation</a></li>
+        <li><a href="https://www.journalismfund.eu/feeding-europe-failing-workers">Journalismfund: Feeding Europe, failing workers</a></li>
+        <li><a href="https://agriland.ie/farming-news/cap-proposals-fail-to-make-agri-sector-more-attractive-effat">Agriland: EFFAT on the next CAP</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Competitors and real cases</h3>
+      <ul>
+        <li>Agro-U: <a href="https://grow.google/intl/europe/story/agro-u/">Google Grow</a> · <a href="https://wsa-global.org/winner/agro-u/">World Summit Awards</a> · <a href="https://www.cbinsights.com/company/agro-u/">CB Insights</a></li>
+        <li>ERGANI app for instant hiring (July 2026): <a href="https://www.ot.gr/2026/07/31/english-edition/greece-launches-ergani-app-for-instant-digital-hiring/">OT.gr</a> · Digital work card: <a href="https://www.tovima.com/society/digital-work-card-system-rolled-out-by-end-of-2026/">To Vima</a></li>
+        <li>Farm-work voucher reform: <a href="https://www.powergame.gr/asfalisi/709193/tsakloglou-schedio-gia-anamorfosi-tou-ergosimou/">Powergame.gr</a></li>
+        <li>Sunjob, Spain (600 jobs formalised): <a href="https://www.onlinemarketplaces.com/articles/agricultural-job-portal-sunjob-has-formalized-600-jobs-since-may-2018/">Online Marketplaces</a></li>
+        <li>gaiasense, Greek farmers adopting digital tools via co-ops: <a href="https://agritechobservatory.review.fao.org/en/gaiasense">FAO Agritech Observatory</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Business model benchmarks</h3>
+      <ul>
+        <li>Diffusion of innovations (adopter categories): <a href="https://en.wikipedia.org/wiki/Diffusion_of_innovations">Rogers</a></li>
+        <li>Cretan olive co-ops: 21–1,350 members, average 315: <a href="https://aer.web.auth.gr/wp-content/uploads/2023/06/4.-KOTSIOS.pdf">Kotsios &amp; Pappa (2022)</a></li>
+        <li>1,094 agricultural co-ops in Greece: <a href="https://www.c-gaia.gr/en/cap-and-agricultural-cooperatives-coopincap-information-shot-8/">COOPinCAP (2025)</a> · ~200k members: <a href="https://doi.org/10.3390/su16167202">Sustainability 16(16):7202 (2024)</a></li>
+        <li>Farm software prices: <a href="https://www.capterra.com/p/217531/365FarmNet/pricing/">365FarmNet</a> · <a href="https://www.capterra.com/p/147234/Agroptima/">Agroptima</a></li>
+        <li>Software engineer salary in Greece: <a href="https://lifeindexed.com/salary/europe/greece/software-engineer/2024/">Life Indexed</a> <span class="flag">modelled estimate</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Funding</h3>
+      <ul>
+        <li>ESF+ social innovation call (€200k–1M per project): <a href="https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/esf/wp-call/2022/call-fiche_esf-2022-ncp_en.pdf">Call fiche ESF-2022</a></li>
+        <li>EIT Food Seedbed: <a href="https://www.eitfood.eu/open-calls/seedbed-2026-2028-call-for-venture-builders">EIT Food</a> · <a href="https://www.startuplithuania.com/?p=12992">Startup Lithuania (€7k + €10k)</a></li>
+        <li>EIC Accelerator (grant up to €2.5M, ~3% success): <a href="https://www.euacc.ai/programmes/eic-accelerator">EUACC</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Model files (kuluri-site repo, docs/)</h3>
+      <ul>
+        <li><code>analysis/kuluri_business_model.ipynb</code>: the model, risk analysis and charts</li>
+        <li><code>data/results/model/</code>: base case year by year, unit economics, price sensitivity</li>
+        <li><code>data/results/risk/</code>: bear/base/bull, Monte Carlo, NPV</li>
+        <li><code>data/results/scenarios/</code>: €500k EU grant scenario</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy-btn");
+  var status = document.getElementById("copy-status");
+  function buildList() {
+    var out = [];
+    document.querySelectorAll("#sources h3").forEach(function (h) {
+      out.push(h.textContent.toUpperCase());
+      var ul = h.nextElementSibling;
+      if (!ul) return;
+      ul.querySelectorAll("li").forEach(function (li) {
+        var links = Array.prototype.map.call(li.querySelectorAll("a"), function (a) { return a.href; });
+        out.push("- " + li.textContent.replace(/\s+/g, " ").trim() + (links.length ? " (" + links.join(", ") + ")" : ""));
+      });
+      out.push("");
+    });
+    return out.join("\n");
+  }
+  btn.addEventListener("click", function () {
+    var text = buildList();
+    try {
+      navigator.clipboard.writeText(text).then(function () {
+        status.textContent = "Copied. Paste it into your team chat.";
+      }, function () { fallback(text); });
+    } catch (e) { fallback(text); }
+  });
+  function fallback(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("aria-label", "Source list");
+    ta.style.width = "100%"; ta.style.minHeight = "12rem";
+    btn.parentElement.after(ta); ta.select();
+    status.textContent = "Select all and copy the list below.";
+  }
+})();
+</script>

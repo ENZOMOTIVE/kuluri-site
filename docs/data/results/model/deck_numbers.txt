@@ -1,0 +1,9 @@
+Farmer price: €25 per season; co-ops €5 per member farm per year
+Profitable without grants from Year 4
+"Paying farms in Year 5: 4,588"
+"Year-5 revenue: €154,088; Year-5 profit: €77,465"
+"Cumulative profit by Year 5: €77,669 (lowest point €-19,804 in Year 3)"
+"First Chicago expected cumulative profit: €46,415"
+Monte Carlo: profitable in Year 5 in 99% of runs; all early losses recovered in 68%
+"NPV at 40%: €16,436"
+"EU grant scenario: €91,218 cumulative by Year 5, 22,230 farms"
